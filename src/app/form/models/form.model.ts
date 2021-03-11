@@ -1,4 +1,4 @@
-import {AbstractControl, FormArray, FormGroup} from '@angular/forms';
+import {AbstractControl, AbstractControlOptions, FormArray, FormGroup, ValidatorFn} from '@angular/forms';
 import {FieldModel} from './field.model';
 import {GroupModel} from './group.model';
 import {ArrayModel} from './array.model';
@@ -8,6 +8,10 @@ export interface FormState {
   submit?: boolean;
   options?: boolean;
 }
+
+export type ControlsType = (FieldModel | GroupModel | ArrayModel)[];
+
+export type  OptionTypes = ValidatorFn | ValidatorFn[] | AbstractControlOptions;
 
 export  class FormModel{
   public formGroup: FormGroup;
