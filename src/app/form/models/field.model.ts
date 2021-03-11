@@ -3,6 +3,7 @@ import {ControlTypes} from './form.model';
 import {MyErrorStateMatcher} from './error-mathers.config';
 import {ValidatorState} from './validator.model';
 import {ErrorStateMatcher} from "@angular/material/core";
+import {OptionsModel} from './options.model';
 export enum FieldTypes {
   input = '[INPUT] input field',
   textarea = '[textarea] textarea field',
