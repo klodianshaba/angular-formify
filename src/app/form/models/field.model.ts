@@ -20,7 +20,7 @@ export interface FieldState {
   readOnly?: boolean;
   none?: boolean;
 }
-export class FieldModel {
+export class FieldModel{
   formControl: FormControl | null;
   public controlName: string | null;
   // readonly controlType: ControlTypes;
