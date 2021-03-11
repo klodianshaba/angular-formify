@@ -1,4 +1,4 @@
-import {AbstractControl, FormGroup} from '@angular/forms';
+import {AbstractControl, FormArray, FormGroup} from '@angular/forms';
 import {FieldModel} from './field.model';
 import {GroupModel} from './group.model';
 import {ArrayModel} from './array.model';
@@ -41,5 +41,12 @@ export  class FormModel{
     const formGroup = new FormGroup( this.generateFormControls(control.controls) ); // recursion
     control.formGroup = formGroup;
     return  formGroup;
+  }
+  private generateFormArray(control: ArrayModel): FormArray {
+    const formArray = new FormArray( Object.entries( this.generateFormControls(control.controls)) // recursion
+      .map( ([name, value]) => ({name, value}))
+      .map( item => item.value) );
+    control.formArray = formArray;
+    return  formArray;
   }
 }
