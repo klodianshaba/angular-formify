@@ -7,3 +7,11 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
     return !!( control && control.invalid && isSubmitted );
   }
 }
+
+export class MyErrorStatePasswordMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    const data = control.parent.value;
+    return !!( control  && data.password !== data.confirmPassword && isSubmitted  );
+  }
+}
