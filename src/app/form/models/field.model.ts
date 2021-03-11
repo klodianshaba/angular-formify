@@ -1,14 +1,26 @@
 import {FormControl} from '@angular/forms';
+import {ControlTypes} from './form.model';
+import {MyErrorStateMatcher} from './error-mathers.config';
+import {ValidatorState} from './validator.model';
+import {ErrorStateMatcher} from "@angular/material/core";
+import {OptionsModel} from './options.model';
+export enum FieldTypes {
+  input = '[INPUT] input field',
+  textarea = '[textarea] textarea field',
+  select = '[SELECT] select field',
+  radio = '[RADIO] radio field',
+  inputPhone = '[RADIO] input phone field',
+}
 
 export interface FieldState {
   formControl?: FormControl;
   controlName?: string;
-  // readonly controlType?: ControlTypes;
-  // fieldType?: FieldTypes;
+  readonly controlType?: ControlTypes;
+  fieldType?: FieldTypes;
   defaultValue?: string;
-  // errorStateMatcher?: ErrorStateMatcher;
-  // validators?: FieldValidator[];
-  // options?: OptionsModel[];
+  errorStateMatcher?: ErrorStateMatcher;
+  validators?: ValidatorState[];
+  options?: OptionsModel[];
   appearance?: string;
   useTranslation?: boolean;
   prefix?: string;
@@ -23,12 +35,12 @@ export interface FieldState {
 export class FieldModel{
   formControl: FormControl | null;
   public controlName: string | null;
-  // readonly controlType: ControlTypes;
-  // fieldType: FieldTypes;
+  readonly controlType: ControlTypes;
+  fieldType: FieldTypes;
   defaultValue: string | null;
-  // errorStateMatcher: ErrorStateMatcher;
-  // validators: FieldValidator[];
-  // options: OptionsModel[];
+  errorStateMatcher: ErrorStateMatcher;
+  validators: ValidatorState[];
+  options: OptionsModel[];
   appearance: string | null;
   useTranslation: boolean;
   prefix: string | null;
@@ -43,12 +55,12 @@ export class FieldModel{
   constructor( config: FieldState ) {
     this.formControl = null;
     this.controlName = null;
-    // this.controlType = ControlTypes.formField;
-    // this.fieldType = FieldTypes.input;
+    this.controlType = ControlTypes.formField;
+    this.fieldType = FieldTypes.input;
     this.defaultValue = null;
-    // this.errorStateMatcher = new MyErrorStateMatcher();
-    // this.validators = [];
-    // this.options = null;
+    this.errorStateMatcher = new MyErrorStateMatcher();
+    this.validators = [];
+    this.options = null;
     this.appearance = null;
     this.useTranslation = true;
     this.prefix = null;

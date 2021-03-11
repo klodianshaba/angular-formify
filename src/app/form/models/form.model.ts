@@ -2,11 +2,12 @@ import {AbstractControl, AbstractControlOptions, FormArray, FormGroup, Validator
 import {FieldModel} from './field.model';
 import {GroupModel} from './group.model';
 import {ArrayModel} from './array.model';
+import {SubmitModel} from './submit.model';
 
 export interface FormState {
-  controls: boolean;
-  submit?: boolean;
-  options?: boolean;
+  controls: (FieldModel | GroupModel | ArrayModel)[];
+  submit?: SubmitModel;
+  options?: OptionTypes;
 }
 
 export enum ControlTypes {
@@ -21,16 +22,17 @@ export type  OptionTypes = ValidatorFn | ValidatorFn[] | AbstractControlOptions;
 
 export  class FormModel{
   public formGroup: FormGroup;
-  public loading: boolean;
-  public controls: any;
-  public submit: any;
-  public options: any;
+  public loading?: boolean;
+  public controls: ControlsType;
+  public submit: SubmitModel;
+  public options?: OptionTypes;
   constructor(config: FormState ) {
     this.loading = false;
-    this.controls = null;
-    this.submit = null;
-    this.options = null;
-    this.formGroup = new FormGroup({});
+    this.submit = new SubmitModel();
+    this.controls = config.controls;
+    (config.hasOwnProperty('submit')) ?  this.submit = {...this.submit, ...config.submit} : null;
+    (config.hasOwnProperty('options')) ?  this.options = config.options : null;
+    this.formGroup = new FormGroup( this.generateFormControls(this.controls) , this.options );
   }
 
   private generateFormControls(controls: ControlsType): { [controlId: string]: AbstractControl; } {

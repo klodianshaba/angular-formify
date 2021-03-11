@@ -1,4 +1,5 @@
 import {FormArray} from '@angular/forms';
+import {ControlsType, ControlTypes} from './form.model';
 
 export class ArrayModel {
   formArray: FormArray;
