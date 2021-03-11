@@ -5,9 +5,9 @@ import {ArrayModel} from './array.model';
 import {SubmitModel} from './submit.model';
 
 export interface FormState {
-  controls: boolean;
-  submit?: boolean;
-  options?: boolean;
+  controls: (FieldModel | GroupModel | ArrayModel)[];
+  submit?: SubmitModel;
+  options?: OptionTypes;
 }
 
 export enum ControlTypes {
