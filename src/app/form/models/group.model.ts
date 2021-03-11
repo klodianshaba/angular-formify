@@ -1,4 +1,7 @@
 import {FormGroup} from '@angular/forms';
+import {ControlsType} from './form.model';
+
+
 
 export class GroupModel {
   formGroup: FormGroup;

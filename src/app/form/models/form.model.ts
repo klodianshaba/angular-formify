@@ -9,6 +9,12 @@ export interface FormState {
   options?: boolean;
 }
 
+export enum ControlTypes {
+  formField = '[FORMFIELD] formField direction',
+  formGroup = '[FORMGROUP] formGroup direction',
+  formArray = '[FORMARRAY] formArray direction',
+}
+
 export type ControlsType = (FieldModel | GroupModel | ArrayModel)[];
 
 export type  OptionTypes = ValidatorFn | ValidatorFn[] | AbstractControlOptions;
