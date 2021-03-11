@@ -1,5 +1,7 @@
 import {AbstractControl, FormGroup} from '@angular/forms';
 import {FieldModel} from './field.model';
+import {GroupModel} from './group.model';
+import {ArrayModel} from './array.model';
 
 export interface FormState {
   controls: boolean;
@@ -33,5 +35,11 @@ export  class FormModel{
       }
     }
     return formControls;
+  }
+
+  private generateFormGroup(control: GroupModel ): FormGroup {
+    const formGroup = new FormGroup( this.generateFormControls(control.controls) ); // recursion
+    control.formGroup = formGroup;
+    return  formGroup;
   }
 }
