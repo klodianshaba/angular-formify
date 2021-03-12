@@ -1,4 +1,4 @@
-import {AbstractControl, AbstractControlOptions, FormArray, FormGroup, ValidatorFn} from '@angular/forms';
+import {AbstractControl, AbstractControlOptions, FormArray, FormControl, FormGroup, ValidatorFn} from '@angular/forms';
 import {FieldModel} from './field.model';
 import {GroupModel} from './group.model';
 import {ArrayModel} from './array.model';
@@ -7,7 +7,7 @@ import {SubmitModel} from './submit.model';
 export interface FormState {
   controls: (FieldModel | GroupModel | ArrayModel)[];
   submit?: SubmitModel;
-  options?: OptionTypes;
+  options?: OptionsType;
 }
 
 export enum ControlTypes {
@@ -18,14 +18,14 @@ export enum ControlTypes {
 
 export type ControlsType = (FieldModel | GroupModel | ArrayModel)[];
 
-export type  OptionTypes = ValidatorFn | ValidatorFn[] | AbstractControlOptions;
+export type  OptionsType = ValidatorFn | ValidatorFn[] | AbstractControlOptions;
 
 export  class FormModel{
   public formGroup: FormGroup;
   public loading?: boolean;
   public controls: ControlsType;
   public submit: SubmitModel;
-  public options?: OptionTypes;
+  public options?: OptionsType;
   constructor(config: FormState ) {
     this.loading = false;
     this.submit = new SubmitModel();
@@ -47,6 +47,12 @@ export  class FormModel{
       }
     }
     return formControls;
+  }
+
+  private generateFormControl(control: FieldModel ): FormControl {
+    const formControl = new FormControl(control.defaultValue , control.validators.map(validator => validator.validator ).filter(validator => validator));
+    control.formControl = formControl;
+    return  formControl;
   }
 
   private generateFormGroup(control: GroupModel ): FormGroup {
