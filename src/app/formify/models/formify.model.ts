@@ -4,7 +4,7 @@ import {GroupModel} from './group.model';
 import {ArrayModel} from './array.model';
 import {SubmitModel} from './submit.model';
 
-export interface FormState {
+export interface FormifyState {
   controls: (FieldModel | GroupModel | ArrayModel)[];
   submit?: SubmitModel;
   options?: OptionsType;
@@ -20,13 +20,13 @@ export type ControlsType = (FieldModel | GroupModel | ArrayModel)[];
 
 export type  OptionsType = ValidatorFn | ValidatorFn[] | AbstractControlOptions;
 
-export  class FormModel{
+export  class FormifyModel{
   public formGroup: FormGroup;
   public loading?: boolean;
   public controls: ControlsType;
   public submit: SubmitModel;
   public options?: OptionsType;
-  constructor(config: FormState ) {
+  constructor(config: FormifyState ) {
     this.loading = false;
     this.submit = new SubmitModel();
     this.controls = config.controls;
@@ -93,7 +93,5 @@ export  class FormModel{
         return this.iterateFindControl(control.controls, controlName);
       }
     });
-
-
   }
 }

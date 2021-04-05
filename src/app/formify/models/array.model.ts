@@ -1,5 +1,5 @@
 import {FormArray} from '@angular/forms';
-import {ControlsType, ControlTypes} from './form.model';
+import {ControlsType, ControlTypes} from './formify.model';
 
 export class ArrayModel {
   formArray: FormArray;
