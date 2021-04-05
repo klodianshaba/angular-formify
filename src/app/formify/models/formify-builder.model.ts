@@ -1,11 +1,11 @@
-import {FormModel, FormState} from './form.model';
+import {FormifyModel, FormifyState} from './formify.model';
 import {FieldModel, FieldState} from './field.model';
 import {GroupModel} from './group.model';
 import {ArrayModel} from './array.model';
 
-export class FormBuilderModel {
-  public form( config: FormState ) {
-    return new FormModel( config );
+export class FormifyBuilderModel {
+  public form( config: FormifyState ) {
+    return new FormifyModel( config );
   }
   public field( config: FieldState ) {
     return new FieldModel( config );

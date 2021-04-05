@@ -1,2 +1,2 @@
-export { FormModel } from './form.model';
-export { FormBuilderModel } from './form-builder.model';
+export { FormifyModel } from './formify.model';
+export { FormifyBuilderModel } from './formify-builder.model';

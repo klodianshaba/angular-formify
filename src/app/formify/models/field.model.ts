@@ -1,5 +1,5 @@
 import {FormControl} from '@angular/forms';
-import {ControlTypes} from './form.model';
+import {ControlTypes} from './formify.model';
 import {MyErrorStateMatcher} from './error-mathers.config';
 import {ValidatorState} from './validator.model';
 import {ErrorStateMatcher} from '@angular/material/core';

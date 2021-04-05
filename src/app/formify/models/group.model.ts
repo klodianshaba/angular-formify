@@ -1,5 +1,5 @@
 import {FormGroup} from '@angular/forms';
-import {ControlsType, ControlTypes} from './form.model';
+import {ControlsType, ControlTypes} from './formify.model';
 
 export class GroupModel {
   formGroup: FormGroup;
