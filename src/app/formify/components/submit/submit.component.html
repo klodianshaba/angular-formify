@@ -1,4 +1,3 @@
-
 <p>
   <button (click)="onHandleSubmit()" [disabled]="submit.disabled" mat-raised-button class="submit" color="{{submit.color}}" >
     <span *ngIf="!submit.loading; else loading_spinner_login"> {{submit.text}}</span>

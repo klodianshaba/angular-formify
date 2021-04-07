@@ -1,7 +1,8 @@
 import {BehaviorSubject} from 'rxjs';
+import {ThemePalette} from '@angular/material/core';
 export class SubmitModel {
   text?: any;
-  color?: string;
+  color?: ThemePalette;
   disabled?: boolean;
   loading?: boolean;
   status?: BehaviorSubject<boolean>;
