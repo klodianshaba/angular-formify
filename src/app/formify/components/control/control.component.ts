@@ -1,9 +1,6 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {ValidatorModel} from '../../models/validator.model';
-import {ControlTypes } from '../../models/formify.model';
-import {FieldModel } from '../../models/field.model';
+import {FieldModel, ValidatorModel, ControlTypes, OptionModel, ValidatorState} from '../../models';
 import {AbstractControl, FormControl, FormGroup} from '@angular/forms';
-import {OptionModel} from '../../models/option.model';
 import {ErrorStateMatcher} from '@angular/material/core';
 @Component({
   selector: 'formify-control',
@@ -23,7 +20,7 @@ export class ControlComponent implements OnChanges , OnInit {
   get errorStateMatcher(): ErrorStateMatcher {
     return this.fieldModel.errorStateMatcher;
   }
-  get validators(): ValidatorModel[] {
+  get validators(): ValidatorState[] {
     return this.fieldModel.validators;
   }
   get options(): OptionModel[] {
@@ -65,8 +62,8 @@ export class ControlComponent implements OnChanges , OnInit {
   get readOnly(): boolean {
     return  this.fieldModel.readOnly;
   }
-  public errors(control: AbstractControl): ValidatorModel[] {
-    const firstError: ValidatorModel[] = [];
+  public errors(control: AbstractControl): ValidatorState[] {
+    const firstError: ValidatorState[] = [];
     if (control.invalid) {
       for (const validator of this.validators) {
         if (control.hasError(validator.errorCode)) {
@@ -89,6 +86,6 @@ export class ControlComponent implements OnChanges , OnInit {
     }
   }
   ngOnInit(): void {}
-  ngOnChanges(changes: SimpleChanges) {}
+  ngOnChanges(changes: SimpleChanges): void {}
 }
 
