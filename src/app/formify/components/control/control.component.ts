@@ -3,7 +3,7 @@ import {ValidatorModel} from '../../models/validator.model';
 import {ControlTypes } from '../../models/formify.model';
 import {FieldModel } from '../../models/field.model';
 import {AbstractControl, FormControl, FormGroup} from '@angular/forms';
-import {OptionsModel} from '../../models/options.model';
+import {OptionModel} from '../../models/option.model';
 import {ErrorStateMatcher} from '@angular/material/core';
 @Component({
   selector: 'formify-control',
@@ -26,7 +26,7 @@ export class ControlComponent implements OnChanges , OnInit {
   get validators(): ValidatorModel[] {
     return this.fieldModel.validators;
   }
-  get options(): OptionsModel[] {
+  get options(): OptionModel[] {
     return this.fieldModel.options;
   }
   get controlType(): ControlTypes {

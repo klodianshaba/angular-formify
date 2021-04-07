@@ -3,7 +3,7 @@ import {ControlTypes} from './formify.model';
 import {MyErrorStateMatcher} from './error-mathers.config';
 import {ValidatorState} from './validator.model';
 import {ErrorStateMatcher} from '@angular/material/core';
-import {OptionsModel} from './options.model';
+import {OptionModel} from './option.model';
 export enum FieldTypes {
   input = '[INPUT] input field',
   textarea = '[textarea] textarea field',
@@ -20,7 +20,7 @@ export interface FieldState {
   defaultValue?: string;
   errorStateMatcher?: ErrorStateMatcher;
   validators?: ValidatorState[];
-  options?: OptionsModel[];
+  options?: OptionModel[];
   appearance?: string;
   useTranslation?: boolean;
   prefix?: string;
@@ -40,7 +40,7 @@ export class FieldModel{
   defaultValue: string | null;
   errorStateMatcher: ErrorStateMatcher;
   validators: ValidatorState[];
-  options: OptionsModel[];
+  options: OptionModel[];
   appearance: string | null;
   useTranslation: boolean;
   prefix: string | null;
