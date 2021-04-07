@@ -28,6 +28,8 @@ export interface FieldState {
   dropDownInPrefix?: boolean;
   type?: string;
   label?: string;
+  placeholder?: string;
+  hint?: string;
   icon?: string;
   multiple?: boolean;
   readOnly?: boolean;
@@ -44,11 +46,13 @@ export class FieldModel{
   options: OptionModel[];
   appearance: MatFormFieldAppearance;
   useTranslation: boolean;
-  prefix: string | null;
+  prefix: string;
   dropDownInPrefix: boolean;
-  type: string | null;
-  label: string | null;
-  icon: string | null;
+  type: string;
+  label: string;
+  placeholder: string;
+  hint: string;
+  icon: string;
   multiple: boolean;
   readOnly: boolean;
   none: boolean;
@@ -68,6 +72,8 @@ export class FieldModel{
     this.dropDownInPrefix = false;
     this.type = null;
     this.label = null;
+    this.placeholder = null;
+    this.hint = null;
     this.icon = null;
     this.multiple = false;
     this.readOnly = false;
