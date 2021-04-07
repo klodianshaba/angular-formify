@@ -23,6 +23,11 @@ import {ReactiveFormsModule} from '@angular/forms';
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule
+  ],
+  exports: [
+    ReactiveFormsModule,
+    SubmitComponent,
+    InputComponent
   ]
 })
 export class FormifyModule { }

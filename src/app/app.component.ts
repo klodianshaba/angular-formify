@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {FieldModel, FormifyModel} from './formify/models';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'form';
+  public formify: FormifyModel = new FormifyModel({
+    controls: [
+      new FieldModel({controlName: 'name', label: 'enter name'})
+    ]
+  });
 }

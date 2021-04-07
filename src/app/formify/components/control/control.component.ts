@@ -2,6 +2,7 @@ import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core'
 import {FieldModel, ValidatorModel, ControlTypes, OptionModel, ValidatorState} from '../../models';
 import {AbstractControl, FormControl, FormGroup} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
+import {MatFormFieldAppearance} from '@angular/material/form-field';
 @Component({
   selector: 'formify-control',
   templateUrl: './control.component.html',
@@ -41,7 +42,7 @@ export class ControlComponent implements OnChanges , OnInit {
   get label(): string {
     return this.fieldModel.label;
   }
-  get appearance(): string {
+  get appearance(): MatFormFieldAppearance {
     return this.fieldModel.appearance;
   }
   get type(): string {

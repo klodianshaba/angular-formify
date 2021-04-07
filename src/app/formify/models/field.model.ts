@@ -4,6 +4,7 @@ import {MyErrorStateMatcher} from './error-mathers.config';
 import {ValidatorState} from './validator.model';
 import {ErrorStateMatcher} from '@angular/material/core';
 import {OptionModel} from './option.model';
+import {MatFormFieldAppearance} from '@angular/material/form-field';
 export enum FieldTypes {
   input = '[INPUT] input field',
   textarea = '[textarea] textarea field',
@@ -41,7 +42,7 @@ export class FieldModel{
   errorStateMatcher: ErrorStateMatcher;
   validators: ValidatorState[];
   options: OptionModel[];
-  appearance: string | null;
+  appearance: MatFormFieldAppearance;
   useTranslation: boolean;
   prefix: string | null;
   dropDownInPrefix: boolean;
@@ -61,8 +62,8 @@ export class FieldModel{
     this.errorStateMatcher = new MyErrorStateMatcher();
     this.validators = [];
     this.options = null;
-    this.appearance = null;
-    this.useTranslation = true;
+    this.appearance = 'standard';
+    this.useTranslation = false;
     this.prefix = null;
     this.dropDownInPrefix = false;
     this.type = null;

@@ -1,6 +1,8 @@
 import {AfterContentChecked, AfterContentInit, AfterViewInit, Component, ElementRef, forwardRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild, Output, EventEmitter} from '@angular/core';
 import {ControlComponent} from '../control/control.component';
 import {ControlValueAccessor, FormBuilder, FormControl, FormGroup, NG_VALUE_ACCESSOR, NG_VALIDATORS, AbstractControl} from '@angular/forms';
+import { MatFormFieldAppearance } from '@angular/material/form-field';
+
 @Component({
   selector: 'formify-input',
   templateUrl: './input.component.html',
@@ -26,7 +28,8 @@ export class InputComponent extends ControlComponent implements ControlValueAcce
   onChange: any;
   inputForm: FormGroup;
   constructor(private formBuilder: FormBuilder) {super();}
-  onSubmit(): void {}
+  onSubmit(): void {
+  }
   writeValue(obj: any): void {
     this.inputForm.controls['control'].setValue(obj, { emitEvent: false });
   }

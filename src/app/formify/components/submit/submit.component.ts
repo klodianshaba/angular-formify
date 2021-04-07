@@ -11,7 +11,7 @@ export class SubmitComponent implements OnInit {
 
   @Input('formifyModel') formifyModel: FormifyModel;
   @Input('color') color: string = 'primary';
-  @Input('ngForm') ngForm: NgForm;
+  @Input('ngForm') ngForm: any;
   @Output('submit') submit: EventEmitter<boolean> = new  EventEmitter<any>();
   constructor() { }
 
