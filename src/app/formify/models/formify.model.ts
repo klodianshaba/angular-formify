@@ -23,12 +23,10 @@ export type  OptionsType = ValidatorFn | ValidatorFn[] | AbstractControlOptions;
 
 export  class FormifyModel{
   public formGroup: FormGroup;
-  public loading: boolean;
   public controls: ControlsType;
   public submit: SubmitModel;
   public options?: OptionsType;
   constructor(config: FormifyState ) {
-    this.loading = false;
     this.submit = new SubmitModel();
     this.controls = config.controls;
     if (config.hasOwnProperty('submit')){ this.submit = {...this.submit, ...config.submit}; }
@@ -108,5 +106,10 @@ export  class FormifyModel{
 
   public checkDisabledSubmit(): void {
     this.submit.disabled = ( this.formGroup.invalid && this.submit.status.value || this.submit.loading );
+  }
+
+  public loading(loading: boolean): void{
+    this.submit.loading = loading;
+    this.checkDisabledSubmit();
   }
 }

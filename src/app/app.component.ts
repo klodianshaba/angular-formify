@@ -23,12 +23,9 @@ export class AppComponent {
   constructor() {
   }
   onSubmit(): void{
-    this.formify.submit.loading = true;
+    this.formify.loading(true);
     setTimeout(() => {
-      this.formify.submit.loading = false;
-      this.formify.checkDisabledSubmit();
+      this.formify.loading(false);
     }, 2000);
-    this.formify.checkDisabledSubmit();
   }
-
 }

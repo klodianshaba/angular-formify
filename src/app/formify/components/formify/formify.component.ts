@@ -22,7 +22,7 @@ export class FormifyComponent implements OnInit , OnChanges {
     return this.formifyModel.controls;
   }
   get loading(): boolean {
-    return this.formifyModel.loading;
+    return this.formifyModel.submit.loading;
   }
   get SubmitModel(): SubmitModel {
     return this.formifyModel.submit;
