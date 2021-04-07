@@ -29,9 +29,9 @@ export class AppComponent {
           {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
         ]
       }),
-      new FieldModel({controlName: 'color', label: 'Color' , options: [{text: 'Primary', value: 'primary'}, {text: 'Warn', value: 'warn'}]}),
+      new FieldModel({controlName: 'color', label: 'Color' , defaultValue: 'primary', options: [{text: 'Primary', value: 'primary'}, {text: 'Warn', value: 'warn'}]}),
 
-      new FieldModel({controlName: 'toggle', label: 'Fill contact' })
+      new FieldModel({controlName: 'toggle', label: 'Fill contact', defaultValue: true })
     ],
     submit: {text: 'Save'}
   });

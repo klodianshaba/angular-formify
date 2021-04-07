@@ -22,7 +22,7 @@ export interface FieldState {
   controlName?: string;
   readonly controlType?: ControlTypes;
   fieldType?: FieldTypes;
-  defaultValue?: string;
+  defaultValue?: string | boolean;
   errorStateMatcher?: ErrorStateMatcher;
   validators?: ValidatorState[];
   options?: OptionModel[];
@@ -47,7 +47,7 @@ export class FieldModel{
   public controlName: string;
   readonly controlType: ControlTypes;
   fieldType: FieldTypes;
-  defaultValue: string;
+  defaultValue: string | boolean;
   errorStateMatcher: ErrorStateMatcher;
   validators: ValidatorState[];
   options: OptionModel[];
