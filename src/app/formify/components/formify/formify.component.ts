@@ -1,15 +1,13 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges, Output, EventEmitter, ViewChild, ElementRef} from '@angular/core';
-import {ArrayModel, FormifyModel, GroupModel, SubmitModel} from '../../models';
+import {FieldModel, ArrayModel, FormifyModel, GroupModel, SubmitModel, FieldTypes, ControlTypes} from '../../models';
 import {FormArray, FormGroup, Validators} from '@angular/forms';
-import { FieldTypes, ControlTypes} from '../../models';
-import { FieldModel } from '../../models';
 import { MatButton } from '@angular/material/button';
 @Component({
-  selector: 'formify-formify',
+  selector: 'formify',
   templateUrl: './formify.component.html',
   styleUrls: ['./formify.component.scss']
 })
-export class FormifyComponent implements OnInit {
+export class FormifyComponent implements OnInit , OnChanges {
 
   @Input('form') set onForm(form: FormifyModel) {this.formModel = form; }
   @Output('onPrefix') onPrefix: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -30,18 +28,18 @@ export class FormifyComponent implements OnInit {
     return this.formModel.submit;
   }
   constructor() {}
-  ngOnInit() {}
+  ngOnInit(): void {}
 
   ngOnChanges(changes: SimpleChanges): void {}
 
-  onSubmit() {}
+  onSubmit(): void {}
 
-  onKeyPressAddContactForm(event): void {
+  onKeyPressAddContactForm(event: KeyboardEvent): void {
     if ( event.keyCode === 13) {
       this.submitButton._elementRef.nativeElement.click();
     }
   }
-  handlePrefix(event) {
+  handlePrefix(event: boolean): void {
     this.onPrefix.emit(event);
   }
 }

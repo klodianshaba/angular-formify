@@ -139,13 +139,13 @@
     "directive-selector": [
       true,
       "attribute",
-      "app",
+      "formify",
       "camelCase"
     ],
     "component-selector": [
       true,
       "element",
-      "app",
+      "formify",
       "kebab-case"
     ]
   }
