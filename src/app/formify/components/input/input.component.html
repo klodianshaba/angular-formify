@@ -14,7 +14,7 @@
     <mat-error *ngIf="control.invalid && submitted | async">
             <span *ngFor="let error of errors(control)">
                 <ng-container *ngIf="useTranslation">
-<!--                    {{error.translationCode | translate: error.parameters}}-->
+                    {{error.translationCode | translate: error.parameters}}
                 </ng-container>
                 <ng-container *ngIf="!useTranslation">
                     {{error.description}}
