@@ -44,7 +44,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     ReactiveFormsModule,
     SubmitComponent,
     InputComponent,
-    SelectComponent
+    SelectComponent,
+    TextareaComponent
   ],
 })
 export class FormifyModule { }

@@ -79,6 +79,7 @@
     <form [formGroup]="formify.formGroup" #form="ngForm" (ngSubmit)="onSubmit()">
       <formify-input formControlName="name" [fieldModel]="formify.getControl('name')"></formify-input>
       <formify-select formControlName="language" [fieldModel]="formify.getControl('language')"></formify-select>
+      <formify-textarea formControlName="describe" [fieldModel]="formify.getControl('describe')"></formify-textarea>
       <formify-submit [submit]="formify.submit"></formify-submit>
     </form>
   </div>
