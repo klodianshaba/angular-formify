@@ -10,7 +10,7 @@ import {NgForm} from '@angular/forms';
 export class SubmitComponent implements OnInit {
 
   @Input('formifyModel') formifyModel: FormifyModel;
-  @Input('ngForm') ngForm: any;
+  @Input('ngForm') ngForm: NgForm;
   @Output('submit') submit: EventEmitter<boolean> = new  EventEmitter<any>();
   constructor() { }
   ngOnInit(): void {}

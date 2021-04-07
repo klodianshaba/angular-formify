@@ -51,7 +51,8 @@ export  class FormifyModel{
 
   private generateFormControl(control: FieldModel ): FormControl {
     const formControl = new FormControl(
-      control.defaultValue , control.validators.map(validator => validator.validator ).filter(validator => validator)
+      control.defaultValue , control.validators.map(validator => validator.validator )
+      .filter(validator => validator)
     );
     control.formControl = formControl;
     return  formControl;
