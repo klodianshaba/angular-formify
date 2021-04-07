@@ -28,7 +28,9 @@ export class AppComponent {
         validators: [
           {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
         ]
-      })
+      }),
+
+      new FieldModel({controlName: 'toggle', label: 'Fill contact'})
     ],
     submit: {text: 'Save'}
   });
