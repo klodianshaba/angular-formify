@@ -1,8 +1,8 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges, Output, EventEmitter, ViewChild, ElementRef} from '@angular/core';
-import {ArrayModel, FormModel, GroupModel, SubmitModel} from '../../models/form.model';
+import {ArrayModel, FormifyModel, GroupModel, SubmitModel} from '../../models';
 import {FormArray, FormGroup, Validators} from '@angular/forms';
-import { FieldTypes, ControlTypes} from '../../models/formify.model';
-import { FieldModel } from '../../models/field.model';
+import { FieldTypes, ControlTypes} from '../../models';
+import { FieldModel } from '../../models';
 import { MatButton } from '@angular/material/button';
 @Component({
   selector: 'formify-formify',
@@ -11,10 +11,10 @@ import { MatButton } from '@angular/material/button';
 })
 export class FormifyComponent implements OnInit {
 
-  @Input('form') set onForm(form: FormModel) {this.formModel = form; }
+  @Input('form') set onForm(form: FormifyModel) {this.formModel = form; }
   @Output('onPrefix') onPrefix: EventEmitter<boolean> = new EventEmitter<boolean>();
   @ViewChild('submitButton', {static: false}) submitButton: MatButton;
-  public formModel: FormModel;
+  public formModel: FormifyModel;
   public fieldTypes = FieldTypes;
   public controlTypes = ControlTypes;
   get formGroup(): FormGroup {
