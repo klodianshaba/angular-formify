@@ -124,7 +124,7 @@ svg.material-icons:not(:last-child) {
 }
 
 .card.highlight-card {
-  background-color: #1976d2;
+  background-color: #673ab7;
   color: white;
   font-weight: 600;
   border: none;
@@ -261,6 +261,10 @@ svg#clouds {
   z-index: -10;
   width: 1920px;
 }
+.form{
+  width: 500px;
+  max-width: 500px;
+}
 
 
 /* Responsive Styles */
@@ -269,6 +273,10 @@ svg#clouds {
   .card-container > *:not(.circle-link) ,
   .terminal {
     width: 100%;
+  }
+  .form{
+    width: 100%;
+    max-width: 100%;
   }
 
   .card:not(.highlight-card) {

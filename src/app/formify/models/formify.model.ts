@@ -3,6 +3,7 @@ import {FieldModel} from './field.model';
 import {GroupModel} from './group.model';
 import {ArrayModel} from './array.model';
 import {SubmitModel} from './submit.model';
+import {BehaviorSubject} from 'rxjs';
 
 export interface FormifyState {
   controls: (FieldModel | GroupModel | ArrayModel)[];
@@ -22,17 +23,18 @@ export type  OptionsType = ValidatorFn | ValidatorFn[] | AbstractControlOptions;
 
 export  class FormifyModel{
   public formGroup: FormGroup;
-  public loading?: boolean;
   public controls: ControlsType;
   public submit: SubmitModel;
   public options?: OptionsType;
   constructor(config: FormifyState ) {
-    this.loading = false;
     this.submit = new SubmitModel();
     this.controls = config.controls;
-    (config.hasOwnProperty('submit')) ?  this.submit = {...this.submit, ...config.submit} : null;
-    (config.hasOwnProperty('options')) ?  this.options = config.options : null;
+    if (config.hasOwnProperty('submit')){ this.submit = {...this.submit, ...config.submit}; }
+    if (config.hasOwnProperty('options')) { this.options = config.options; }
     this.formGroup = new FormGroup( this.generateFormControls(this.controls) , this.options );
+    this.formGroup.statusChanges.subscribe(status => {
+      this.checkDisabledSubmit();
+    });
   }
 
   private generateFormControls(controls: ControlsType): { [controlId: string]: AbstractControl; } {
@@ -50,8 +52,12 @@ export  class FormifyModel{
   }
 
   private generateFormControl(control: FieldModel ): FormControl {
-    const formControl = new FormControl(control.defaultValue , control.validators.map(validator => validator.validator ).filter(validator => validator));
+    const formControl = new FormControl(
+      control.defaultValue , control.validators.map(validator => validator.validator )
+      .filter(validator => validator)
+    );
     control.formControl = formControl;
+    control.submit = this.submit;
     return  formControl;
   }
 
@@ -73,11 +79,12 @@ export  class FormifyModel{
   }
   public getControl(controlName: string): FieldModel {
     const controls =  this.iterateFindControl(this.controls, controlName);
-    for (let control of controls){
+    for (const control of controls){
       if (control instanceof FieldModel){
         return  control;
       }
     }
+    return null;
   }
   private iterateFindControl(controls: ControlsType, controlName: string): ControlsType{
     return controls.filter(control => {
@@ -85,6 +92,7 @@ export  class FormifyModel{
         if (controlName === control.controlName){
           return control;
         }
+        return null;
       }
       else if ( control instanceof GroupModel){
         return this.iterateFindControl(control.controls, controlName);
@@ -92,6 +100,16 @@ export  class FormifyModel{
       else if (control instanceof ArrayModel){
         return this.iterateFindControl(control.controls, controlName);
       }
+      return null;
     });
+  }
+
+  public checkDisabledSubmit(): void {
+    this.submit.disabled = ( this.formGroup.invalid && this.submit.status.value || this.submit.loading );
+  }
+
+  public loading(loading: boolean): void{
+    this.submit.loading = loading;
+    this.checkDisabledSubmit();
   }
 }

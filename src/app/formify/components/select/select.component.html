@@ -1,1 +1,24 @@
-<p>select works!</p>
+<form [formGroup]="formGroup" #form="ngForm" [autocomplete]="autoComplete">
+  <mat-form-field [appearance]="appearance"  class="full-width">
+    <mat-label>{{(!useTranslation) ? label : label | translate}}</mat-label>
+    <span *ngIf="prefix" matPrefix  (click)="handlePrefix($event)" >
+      {{prefix}}
+      <mat-icon class="dropDownIconInPrefix" *ngIf="dropDownInPrefix" (click)="handlePrefix($event)">arrow_drop_down</mat-icon>
+      &nbsp
+    </span>
+    <mat-select formControlName="control" (selectionChange)='emitValue()' multiple="{{multiple}}" [errorStateMatcher]="errorStateMatcher"  >
+      <mat-option *ngIf="none">None</mat-option>
+      <mat-option *ngFor="let option of options" [value]="option.value">
+        {{option.text}}
+       </mat-option>
+    </mat-select>
+    <mat-icon *ngIf="icon" matSuffix [ngClass]="{'error-icon' : control.invalid && submitted | async }">{{icon}}</mat-icon>
+    <mat-hint *ngIf="hint">{{(!useTranslation) ? hint : hint | translate}}</mat-hint>
+    <mat-error *ngIf="control.invalid && submitted | async">
+      <span *ngFor="let error of errors(control)">
+        {{(!useTranslation) ? error.description : error.translationCode | translate: error.parameters}}
+      </span>
+    </mat-error>
+  </mat-form-field>
+  <button hidden #submit></button>
+</form>
