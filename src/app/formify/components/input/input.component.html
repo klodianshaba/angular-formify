@@ -1,1 +1,30 @@
 
+<form [formGroup]="inputForm" #form="ngForm">
+
+  <mat-form-field appearance="{{appearance}}"  class="full-width">
+
+    <mat-icon class="icon" *ngIf="icon" [ngClass]="{'error-icon' : control.invalid && form.submitted }"> {{icon}} </mat-icon>
+
+    <span *ngIf="prefix" matPrefix  (click)="handlePrefix($event)" >
+      {{prefix}}
+      <mat-icon class="dropDownIconInPrefix" *ngIf="dropDownInPrefix" (click)="handlePrefix($event)">arrow_drop_down</mat-icon>
+    </span>
+
+    <input matInput formControlName="control" (input)="emitValue()"  [errorStateMatcher]="errorStateMatcher" [type]="type" [placeholder]="label | translate" >
+
+    <mat-error *ngIf="control.invalid && form.submitted">
+            <span *ngFor="let error of errors(control)">
+                <ng-container *ngIf="useTranslation">
+                    {{error.translationCode | translate: error.parameters}}
+                </ng-container>
+                <ng-container *ngIf="!useTranslation">
+                    {{error.description}}
+                </ng-container>
+            </span>
+    </mat-error>
+
+  </mat-form-field>
+
+  <button #submit style="display: none" ></button>
+
+</form>

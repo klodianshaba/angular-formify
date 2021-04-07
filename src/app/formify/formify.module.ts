@@ -9,6 +9,9 @@ import {SubmitComponent} from './components/submit/submit.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [InputComponent, ControlComponent, SelectComponent, TextareaComponent, SubmitComponent, FormifyComponent, SubmitComponent],
@@ -16,7 +19,10 @@ import {MatButtonModule} from '@angular/material/button';
     CommonModule,
     MatProgressSpinnerModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule
   ]
 })
 export class FormifyModule { }
