@@ -1,5 +1,5 @@
 
-<form [formGroup]="formGroup" #form="ngForm" (ngSubmit)="onSubmit()" (keypress)="onKeyPressAddContactForm($event)"   [ngClass]="{'loading-form':loading}">
+<form [formGroup]="formGroup" #ngForm="ngForm" (ngSubmit)="onSubmit()" (keypress)="onKeyPressAddContactForm($event)"   [ngClass]="{'loading-form':loading}">
 
   <ng-template #recursiveList let-list="controls">
 
@@ -7,9 +7,9 @@
 
         <ng-container *ngSwitchCase="controlTypes.formField">
 
-          <formify-input *ngIf="control.fieldType === fieldTypes.input " [formControl]="control.formControl"  [fieldModel]="control" [submitted]="form.submitted" (onPrefix)="handlePrefix($event)"></formify-input>
+          <formify-input *ngIf="control.fieldType === fieldTypes.input " [formControl]="control.formControl"  [fieldModel]="control" [submitted]="ngForm.submitted" (onPrefix)="handlePrefix($event)"></formify-input>
 
-          <formify-select *ngIf="control.fieldType === fieldTypes.select" [formControl]="control.formControl" [fieldModel]="control"  [submitted]="form.submitted"></formify-select>
+          <formify-select *ngIf="control.fieldType === fieldTypes.select" [formControl]="control.formControl" [fieldModel]="control"  [submitted]="ngForm.submitted"></formify-select>
 
 <!--          <ams-phone-input *ngIf="control.fieldType === fieldTypes.inputPhone" [formControl]="control.formControl" [fieldModel]="control"  [submitted]="form.submitted"></ams-phone-input>-->
 
@@ -33,15 +33,6 @@
 
   <ng-container *ngTemplateOutlet="recursiveList; context: {controls:controls}"></ng-container>
 
-  <p>
-    <button #submitButton [disabled]="formGroup.invalid && form.submitted || loading" mat-raised-button class="button" color="{{SubmitModel.color}}">
-      <span *ngIf="!loading; else loading_spinner_login" [translate]="SubmitModel.text" ></span>
-      <ng-template #loading_spinner_login>
-        <mat-icon class="icon_button_login">
-          <mat-spinner [diameter]="30"  class="loading center"></mat-spinner>
-        </mat-icon>
-      </ng-template>
-    </button>
-  </p>
+  <formify-submit [formifyModel]="formifyModel" [ngForm]="ngForm"> </formify-submit>
 
 </form>

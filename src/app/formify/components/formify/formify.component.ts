@@ -9,23 +9,23 @@ import { MatButton } from '@angular/material/button';
 })
 export class FormifyComponent implements OnInit , OnChanges {
 
-  @Input('form') set onForm(form: FormifyModel) {this.formModel = form; }
+  @Input('form') set onForm(form: FormifyModel) {this.formifyModel = form; }
   @Output('onPrefix') onPrefix: EventEmitter<boolean> = new EventEmitter<boolean>();
   @ViewChild('submitButton', {static: false}) submitButton: MatButton;
-  public formModel: FormifyModel;
+  public formifyModel: FormifyModel;
   public fieldTypes = FieldTypes;
   public controlTypes = ControlTypes;
   get formGroup(): FormGroup {
-    return this.formModel.formGroup;
+    return this.formifyModel.formGroup;
   }
   get controls(): (FieldModel | GroupModel | ArrayModel)[] {
-    return this.formModel.controls;
+    return this.formifyModel.controls;
   }
   get loading(): boolean {
-    return this.formModel.loading;
+    return this.formifyModel.loading;
   }
   get SubmitModel(): SubmitModel {
-    return this.formModel.submit;
+    return this.formifyModel.submit;
   }
   constructor() {}
   ngOnInit(): void {}
