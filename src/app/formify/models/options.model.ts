@@ -1,5 +1,5 @@
 export class OptionsModel {
-  text: string;
+  text: string | null;
   value: string | number;
   constructor() {
     this.text = null;
