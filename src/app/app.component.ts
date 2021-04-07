@@ -29,17 +29,19 @@ export class AppComponent {
           {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
         ]
       }),
+      new FieldModel({controlName: 'color', label: 'Color' , options: [{text: 'Primary', value: 'primary'}, {text: 'Warn', value: 'warn'}]}),
 
-      new FieldModel({controlName: 'toggle', label: 'Fill contact'})
+      new FieldModel({controlName: 'toggle', label: 'Fill contact' })
     ],
     submit: {text: 'Save'}
   });
   constructor() {
   }
   onSubmit(): void{
+    console.log(this.formify.formGroup.value);
     this.formify.loading(true);
     setTimeout(() => {
       this.formify.loading(false);
-    }, 2000);
+    }, 1000);
   }
 }
