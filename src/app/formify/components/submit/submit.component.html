@@ -1,8 +1,6 @@
 
 <p>
-<!--  formifyModel.formGroup.invalid || formifyModel.loading-->
   <button (click)="onHandleSubmit()" [disabled]="submit.disabled" mat-raised-button class="submit" color="{{submit.color}}" >
-<!--    <span *ngIf="!submit.loading; else loading_spinner_login" [translate]="submit.text"></span>-->
     <span *ngIf="!submit.loading; else loading_spinner_login"> {{submit.text}}</span>
     <ng-template #loading_spinner_login>
       <mat-icon class="icon_button_login">

@@ -1,20 +1,14 @@
 
 <form [formGroup]="inputForm" #form="ngForm" autocomplete="{{autoComplete}}">
-
   <mat-form-field [appearance]="appearance"  class="full-width">
-
     <mat-label>{{label}}</mat-label>
-
     <span *ngIf="prefix" matPrefix  (click)="handlePrefix($event)" >
       {{prefix}}
       <mat-icon class="dropDownIconInPrefix" *ngIf="dropDownInPrefix" (click)="handlePrefix($event)">arrow_drop_down</mat-icon>
       &nbsp
     </span>
-
     <input matInput formControlName="control" (input)="emitValue()" [errorStateMatcher]="errorStateMatcher" [type]="type" [placeholder]="placeholder" >
-
     <mat-icon *ngIf="icon" matSuffix [ngClass]="{'error-icon' : control.invalid && submitted | async }">{{icon}}</mat-icon>
-
     <mat-hint *ngIf="hint">{{hint}}</mat-hint>
 <!--    [placeholder]="label | translate"-->
     <mat-error *ngIf="control.invalid && submitted | async">
@@ -27,9 +21,6 @@
                 </ng-container>
             </span>
     </mat-error>
-
   </mat-form-field>
-
   <button #submit style="display: none" ></button>
-
 </form>

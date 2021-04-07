@@ -76,9 +76,9 @@
   <!-- Terminal -->
 
   <div>
-    <form [formGroup]="formify.formGroup" #form="ngForm">
+    <form [formGroup]="formify.formGroup" #form="ngForm" (ngSubmit)="onSubmit()">
       <formify-input formControlName="name" [fieldModel]="formify.getControl('name')"></formify-input>
-      <formify-submit [submit]="formify.submit" (onSubmit)="onSubmit()"></formify-submit>
+      <formify-submit [submit]="formify.submit"></formify-submit>
     </form>
   </div>
 
