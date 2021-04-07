@@ -42,6 +42,12 @@ export class ControlComponent implements OnChanges , OnInit {
   get label(): string {
     return this.fieldModel.label;
   }
+  get placeholder(): string {
+    return this.fieldModel.placeholder;
+  }
+  get hint(): string {
+    return this.fieldModel.hint;
+  }
   get appearance(): MatFormFieldAppearance {
     return this.fieldModel.appearance;
   }

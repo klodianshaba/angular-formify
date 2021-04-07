@@ -14,7 +14,7 @@
 
     <mat-icon *ngIf="icon" matSuffix [ngClass]="{'error-icon' : control.invalid && form.submitted }">{{icon}}</mat-icon>
 
-    <mat-hint *ngIf="hint">Hint</mat-hint>
+    <mat-hint *ngIf="hint">{{hint}}</mat-hint>
 <!--    [placeholder]="label | translate"-->
     <mat-error *ngIf="control.invalid && form.submitted">
             <span *ngFor="let error of errors(control)">
