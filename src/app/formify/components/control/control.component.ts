@@ -32,7 +32,6 @@ export class ControlComponent implements ControlValueAccessor, OnInit , OnChange
       control: new FormControl(null, this.validators.map(validator => validator.validator).filter(validator => validator)),
     });
     (this.readOnly) ? this.formGroup.disable() : this.formGroup.enable();
-    console.log(this.formControl);
     this.formControl.statusChanges.subscribe(status => {
       if (status === 'INVALID') { this.checkCustomErrors(this.control); }
     });
