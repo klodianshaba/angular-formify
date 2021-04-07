@@ -5,6 +5,7 @@ import {ValidatorState} from './validator.model';
 import {ErrorStateMatcher} from '@angular/material/core';
 import {OptionModel} from './option.model';
 import {MatFormFieldAppearance} from '@angular/material/form-field';
+import {MatAutocomplete} from '@angular/material/autocomplete';
 export enum FieldTypes {
   input = '[INPUT] input field',
   textarea = '[textarea] textarea field',
@@ -30,6 +31,7 @@ export interface FieldState {
   label?: string;
   placeholder?: string;
   hint?: string;
+  autoComplete?: 'off' | 'on';
   icon?: string;
   multiple?: boolean;
   readOnly?: boolean;
@@ -52,6 +54,7 @@ export class FieldModel{
   label: string;
   placeholder: string;
   hint: string;
+  autoComplete: 'off' | 'on' ;
   icon: string;
   multiple: boolean;
   readOnly: boolean;
@@ -74,6 +77,7 @@ export class FieldModel{
     this.label = null;
     this.placeholder = null;
     this.hint = null;
+    this.autoComplete = 'on';
     this.icon = null;
     this.multiple = false;
     this.readOnly = false;

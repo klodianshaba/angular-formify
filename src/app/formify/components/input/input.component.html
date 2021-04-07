@@ -1,5 +1,5 @@
 
-<form [formGroup]="inputForm" #form="ngForm">
+<form [formGroup]="inputForm" #form="ngForm" autocomplete="{{autoComplete}}">
 
   <mat-form-field [appearance]="appearance"  class="full-width">
 
@@ -11,7 +11,7 @@
       &nbsp;
     </span>
 
-    <input matInput formControlName="control" (input)="emitValue()"  [errorStateMatcher]="errorStateMatcher" [type]="type" [placeholder]="placeholder" >
+    <input matInput formControlName="control" (input)="emitValue()" [errorStateMatcher]="errorStateMatcher" [type]="type" [placeholder]="placeholder" >
 
     <mat-icon *ngIf="icon" matSuffix [ngClass]="{'error-icon' : control.invalid && form.submitted }">{{icon}}</mat-icon>
 

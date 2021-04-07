@@ -18,6 +18,9 @@ export class ControlComponent implements OnChanges , OnInit {
   get formControl(): FormControl {
     return this.fieldModel.formControl;
   }
+  get autoComplete(): 'off' | 'on' {
+    return  this.fieldModel.autoComplete;
+  }
   get errorStateMatcher(): ErrorStateMatcher {
     return this.fieldModel.errorStateMatcher;
   }
