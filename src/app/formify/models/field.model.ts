@@ -2,7 +2,7 @@ import {FormControl} from '@angular/forms';
 import {ControlTypes} from './formify.model';
 import {MyErrorStateMatcher} from './error-mathers.config';
 import {ValidatorState} from './validator.model';
-import {ErrorStateMatcher} from '@angular/material/core';
+import {ErrorStateMatcher, ThemePalette} from '@angular/material/core';
 import {OptionModel} from './option.model';
 import {MatFormFieldAppearance} from '@angular/material/form-field';
 import {MatAutocomplete} from '@angular/material/autocomplete';
@@ -35,7 +35,7 @@ export interface FieldState {
   hint?: string;
   autoComplete?: 'off' | 'on';
   icon?: string;
-  color?: string;
+  color?: ThemePalette;
   multiple?: boolean;
   readOnly?: boolean;
   none?: boolean;
@@ -60,7 +60,7 @@ export class FieldModel{
   hint: string;
   autoComplete: 'off' | 'on' ;
   icon: string;
-  color: string;
+  color: ThemePalette;
   multiple: boolean;
   readOnly: boolean;
   none: boolean;

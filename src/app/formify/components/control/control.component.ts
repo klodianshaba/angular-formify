@@ -1,7 +1,7 @@
 import {Component, ElementRef, EventEmitter, forwardRef, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {FieldModel, ValidatorModel, ControlTypes, OptionModel, ValidatorState} from '../../models';
 import {AbstractControl, ControlValueAccessor, FormBuilder, FormControl, FormGroup, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {ErrorStateMatcher} from '@angular/material/core';
+import {ErrorStateMatcher, ThemePalette} from '@angular/material/core';
 import {MatFormFieldAppearance} from '@angular/material/form-field';
 import {BehaviorSubject} from 'rxjs';
 @Component({
@@ -104,6 +104,9 @@ export class ControlComponent implements ControlValueAccessor, OnInit , OnChange
   }
   get readOnly(): boolean {
     return  this.fieldModel.readOnly;
+  }
+  get color(): ThemePalette {
+    return  this.fieldModel.color;
   }
   public errors(control: AbstractControl): ValidatorState[] {
     const firstError: ValidatorState[] = [];

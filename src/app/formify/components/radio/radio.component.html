@@ -1,7 +1,7 @@
 <form [formGroup]="formGroup" #form="ngForm" [autocomplete]="autoComplete">
   <mat-label class="label">{{(!useTranslation) ? label : label | translate}}:</mat-label>
   <mat-radio-group formControlName="control" (change)="emitValue()">
-    <mat-radio-button *ngFor="let option of options" class="radio-button" [value]="option.value">
+    <mat-radio-button [color]="color" *ngFor="let option of options" class="radio-button" [value]="option.value">
       {{option.text}}
     </mat-radio-button>
   </mat-radio-group>
