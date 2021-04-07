@@ -35,6 +35,7 @@ export interface FieldState {
   hint?: string;
   autoComplete?: 'off' | 'on';
   icon?: string;
+  color?: string;
   multiple?: boolean;
   readOnly?: boolean;
   none?: boolean;
@@ -59,6 +60,7 @@ export class FieldModel{
   hint: string;
   autoComplete: 'off' | 'on' ;
   icon: string;
+  color: string;
   multiple: boolean;
   readOnly: boolean;
   none: boolean;
@@ -83,6 +85,7 @@ export class FieldModel{
     this.hint = null;
     this.autoComplete = 'on';
     this.icon = null;
+    this.color = 'primary';
     this.multiple = false;
     this.readOnly = false;
     this.none = false;
