@@ -16,6 +16,7 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import { HttpClientModule } from '@angular/common/http';
 import {HttpClient} from '@angular/common/http';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {MatSelectModule} from '@angular/material/select';
 export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
 }
@@ -37,11 +38,13 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         deps: [HttpClient]
       },
     }),
+    MatSelectModule,
   ],
   exports: [
     ReactiveFormsModule,
     SubmitComponent,
-    InputComponent
+    InputComponent,
+    SelectComponent
   ],
 })
 export class FormifyModule { }

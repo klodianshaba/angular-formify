@@ -16,6 +16,12 @@ export class AppComponent {
         validators: [
           {validator: Validators.required, errorCode: 'required', description: 'name is required'},
         ]
+      }),
+      new FieldModel({
+        controlName: 'language', label: 'Choose your language', placeholder: 'language', appearance: 'outline', autoComplete: 'off', options: [{text: 'Al', value: 'al'}, {text: 'EN', value: 'en'}],
+        validators: [
+          {validator: Validators.required, errorCode: 'required', description: 'name is required'},
+        ]
       })
     ],
     submit: {color: 'accent' , text: 'Save'}

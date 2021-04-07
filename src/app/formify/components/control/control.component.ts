@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, ElementRef, EventEmitter, forwardRef, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {FieldModel, ValidatorModel, ControlTypes, OptionModel, ValidatorState} from '../../models';
-import {AbstractControl, FormControl, FormGroup} from '@angular/forms';
+import {AbstractControl, ControlValueAccessor, FormBuilder, FormControl, FormGroup, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 import {MatFormFieldAppearance} from '@angular/material/form-field';
 import {BehaviorSubject} from 'rxjs';
@@ -9,11 +9,40 @@ import {BehaviorSubject} from 'rxjs';
   templateUrl: './control.component.html',
   styleUrls: ['./control.component.scss']
 })
-export class ControlComponent implements OnChanges , OnInit {
+export class ControlComponent implements ControlValueAccessor, OnInit , OnChanges {
   private _fieldModel: FieldModel = new FieldModel({controlName: null});
   @Input('fieldModel') set noFieldConfig( fieldModel: FieldModel) {this._fieldModel = fieldModel; }
   @Output('onPrefix') onPrefix: EventEmitter<boolean> = new EventEmitter<boolean>();
-  constructor() {}
+  constructor(protected formBuilder: FormBuilder) {}
+  @ViewChild('submit', {static: true}) submit: ElementRef;
+  onChange: any;
+  formGroup: FormGroup;
+  writeValue(obj: any): void {
+    this.formGroup.controls['control'].setValue(obj, { emitEvent: false });
+  }
+  registerOnChange(fn: any): void { this.onChange = fn; }
+  registerOnTouched(fn: any): void {}
+  setDisabledState?(isDisabled: boolean): void { }
+  emitValue(): void {
+    if (this.onChange) { this.onChange(this.formGroup.controls['control'].value); }
+  }
+  ngOnChanges(changes: SimpleChanges): void { }
+  ngOnInit(): void {
+    this.formGroup = this.formBuilder.group({
+      control: new FormControl(null, this.validators.map(validator => validator.validator).filter(validator => validator)),
+    });
+    (this.readOnly) ? this.formGroup.disable() : this.formGroup.enable();
+    console.log(this.formControl);
+    this.formControl.statusChanges.subscribe(status => {
+      if (status === 'INVALID') { this.checkCustomErrors(this.control); }
+    });
+    this.submitted.subscribe(status => {
+      if (status) { this.submit.nativeElement.click(); }
+    });
+  }
+  get control(): AbstractControl { return this.formGroup.get('control'); }
+  handlePrefix(event: Event): void { this.onPrefix.emit(true); }
+
   get fieldModel(): FieldModel {
     return this._fieldModel;
   }
@@ -100,7 +129,5 @@ export class ControlComponent implements OnChanges , OnInit {
       });
     }
   }
-  ngOnInit(): void {}
-  ngOnChanges(changes: SimpleChanges): void {}
 }
 
