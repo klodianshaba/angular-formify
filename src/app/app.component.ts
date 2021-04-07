@@ -18,21 +18,17 @@ export class AppComponent {
         ]
       })
     ],
-    submit: {color: 'warn' , text: 'Save'}
+    submit: {color: 'accent' , text: 'Save'}
   });
   constructor() {
-    this.formify.formGroup.statusChanges.subscribe(status => {
-      this.checkDisabledSubmit();
-    });
   }
   onSubmit(): void{
     this.formify.submit.loading = true;
     setTimeout(() => {
       this.formify.submit.loading = false;
+      this.formify.checkDisabledSubmit();
     }, 2000);
-    this.checkDisabledSubmit();
+    this.formify.checkDisabledSubmit();
   }
-  private checkDisabledSubmit(): void {
-    this.formify.submit.disabled = ( this.formify.formGroup.invalid && this.formify.submit.status.value || this.formify.submit.loading );
-  }
+
 }

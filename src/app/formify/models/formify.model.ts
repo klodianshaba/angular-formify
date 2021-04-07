@@ -34,6 +34,9 @@ export  class FormifyModel{
     if (config.hasOwnProperty('submit')){ this.submit = {...this.submit, ...config.submit}; }
     if (config.hasOwnProperty('options')) { this.options = config.options; }
     this.formGroup = new FormGroup( this.generateFormControls(this.controls) , this.options );
+    this.formGroup.statusChanges.subscribe(status => {
+      this.checkDisabledSubmit();
+    });
   }
 
   private generateFormControls(controls: ControlsType): { [controlId: string]: AbstractControl; } {
@@ -101,5 +104,9 @@ export  class FormifyModel{
       }
       return null;
     });
+  }
+
+  public checkDisabledSubmit(): void {
+    this.submit.disabled = ( this.formGroup.invalid && this.submit.status.value || this.submit.loading );
   }
 }
