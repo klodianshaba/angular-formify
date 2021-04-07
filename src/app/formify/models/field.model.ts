@@ -42,11 +42,11 @@ export interface FieldState {
   submit?: SubmitModel;
 }
 export class FieldModel{
-  formControl: FormControl | null;
-  public controlName: string | null;
+  formControl: FormControl;
+  public controlName: string;
   readonly controlType: ControlTypes;
   fieldType: FieldTypes;
-  defaultValue: string | null;
+  defaultValue: string;
   errorStateMatcher: ErrorStateMatcher;
   validators: ValidatorState[];
   options: OptionModel[];
