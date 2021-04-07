@@ -12,52 +12,31 @@ import { MatFormFieldAppearance } from '@angular/material/form-field';
 })
 export class InputComponent extends ControlComponent implements ControlValueAccessor,   OnInit , OnChanges {
   @ViewChild('submit', {static: true}) submit: ElementRef;
-  @Output('onPrefix') onPrefix: EventEmitter<boolean> = new EventEmitter<boolean>();
   onChange: any;
   inputForm: FormGroup;
-  constructor(private formBuilder: FormBuilder) {super();}
+  constructor(private formBuilder: FormBuilder) { super(); }
   writeValue(obj: any): void {
     this.inputForm.controls['control'].setValue(obj, { emitEvent: false });
   }
-  registerOnChange(fn: any): void {
-    this.onChange = fn;
-  }
-  registerOnTouched(fn: any): void {
-    // this.onChange = fn;
-  }
-  setDisabledState?(isDisabled: boolean): void {
-    // this.readOnly = isDisabled;
-  }
+  registerOnChange(fn: any): void { this.onChange = fn; }
+  registerOnTouched(fn: any): void {}
+  setDisabledState?(isDisabled: boolean): void { }
   emitValue(): void {
-    if (this.onChange) {
-      this.onChange(this.inputForm.controls['control'].value);
-    }
+    if (this.onChange) { this.onChange(this.inputForm.controls['control'].value); }
   }
-  ngOnChanges(changes: SimpleChanges): void {
-    // check if there has been any changes on the error and if it is null then clear the filterErrors
-    super.ngOnChanges(changes);
-  }
+  ngOnChanges(changes: SimpleChanges): void { super.ngOnChanges(changes); }
   ngOnInit(): void {
     this.inputForm = this.formBuilder.group({
       control: new FormControl(null, this.validators.map(validator => validator.validator).filter(validator => validator)),
     });
-
     (this.readOnly) ? this.inputForm.disable() : this.inputForm.enable();
-
     this.formControl.statusChanges.subscribe(status => {
-      if (status === 'INVALID') {
-        this.checkCustomErrors(this.control);
-      }
+      if (status === 'INVALID') { this.checkCustomErrors(this.control); }
     });
     this.submitted.subscribe(status => {
-        if (status) {
-          this.submit.nativeElement.click();
-        }
+        if (status) { this.submit.nativeElement.click(); }
     });
   }
   get control(): AbstractControl { return this.inputForm.get('control'); }
-  handlePrefix(event: Event): void {
-    this.onPrefix.emit(true);
-  }
-
+  handlePrefix(event: Event): void { this.onPrefix.emit(true); }
 }

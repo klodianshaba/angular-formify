@@ -13,6 +13,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {ReactiveFormsModule} from '@angular/forms';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import { HttpClientModule } from '@angular/common/http';
 import {HttpClient} from '@angular/common/http';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
@@ -22,6 +23,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
   declarations: [InputComponent, ControlComponent, SelectComponent, TextareaComponent, SubmitComponent, FormifyComponent, SubmitComponent],
   imports: [
     CommonModule,
+    HttpClientModule,
     MatProgressSpinnerModule,
     MatIconModule,
     MatButtonModule,
@@ -40,6 +42,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     ReactiveFormsModule,
     SubmitComponent,
     InputComponent
-  ]
+  ],
 })
 export class FormifyModule { }

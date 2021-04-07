@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {FieldModel, ValidatorModel, ControlTypes, OptionModel, ValidatorState} from '../../models';
 import {AbstractControl, FormControl, FormGroup} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
@@ -12,6 +12,7 @@ import {BehaviorSubject} from 'rxjs';
 export class ControlComponent implements OnChanges , OnInit {
   private _fieldModel: FieldModel = new FieldModel({controlName: null});
   @Input('fieldModel') set noFieldConfig( fieldModel: FieldModel) {this._fieldModel = fieldModel; }
+  @Output('onPrefix') onPrefix: EventEmitter<boolean> = new EventEmitter<boolean>();
   constructor() {}
   get fieldModel(): FieldModel {
     return this._fieldModel;
