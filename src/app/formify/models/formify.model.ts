@@ -30,8 +30,8 @@ export  class FormifyModel{
     this.loading = false;
     this.submit = new SubmitModel();
     this.controls = config.controls;
-    (config.hasOwnProperty('submit')) ?  this.submit = {...this.submit, ...config.submit} : null;
-    (config.hasOwnProperty('options')) ?  this.options = config.options : null;
+    if (config.hasOwnProperty('submit')){ this.submit = {...this.submit, ...config.submit}; }
+    if (config.hasOwnProperty('options')) { this.options = config.options; }
     this.formGroup = new FormGroup( this.generateFormControls(this.controls) , this.options );
   }
 
@@ -50,7 +50,9 @@ export  class FormifyModel{
   }
 
   private generateFormControl(control: FieldModel ): FormControl {
-    const formControl = new FormControl(control.defaultValue , control.validators.map(validator => validator.validator ).filter(validator => validator));
+    const formControl = new FormControl(
+      control.defaultValue , control.validators.map(validator => validator.validator ).filter(validator => validator)
+    );
     control.formControl = formControl;
     return  formControl;
   }
@@ -73,11 +75,12 @@ export  class FormifyModel{
   }
   public getControl(controlName: string): FieldModel {
     const controls =  this.iterateFindControl(this.controls, controlName);
-    for (let control of controls){
+    for (const control of controls){
       if (control instanceof FieldModel){
         return  control;
       }
     }
+    return null;
   }
   private iterateFindControl(controls: ControlsType, controlName: string): ControlsType{
     return controls.filter(control => {
@@ -85,6 +88,7 @@ export  class FormifyModel{
         if (controlName === control.controlName){
           return control;
         }
+        return null;
       }
       else if ( control instanceof GroupModel){
         return this.iterateFindControl(control.controls, controlName);
@@ -92,6 +96,7 @@ export  class FormifyModel{
       else if (control instanceof ArrayModel){
         return this.iterateFindControl(control.controls, controlName);
       }
+      return null;
     });
   }
 }
