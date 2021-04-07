@@ -1,5 +1,6 @@
+
 export class SubmitModel {
-  text: any;
+  text?: any;
   color?: string;
   constructor() {
     this.text = 'Submit';

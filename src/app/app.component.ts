@@ -10,7 +10,8 @@ export class AppComponent {
   title = 'form';
   public formify: FormifyModel = new FormifyModel({
     controls: [
-      new FieldModel({controlName: 'name', label: 'enter name'})
-    ]
+      new FieldModel({controlName: 'name', label: 'Enter name', appearance: 'fill', icon: 'home', prefix: '+1', placeholder: 'name'})
+    ],
+    submit: {color: 'warn' , text: 'Save'}
   });
 }

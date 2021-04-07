@@ -10,11 +10,9 @@ import {NgForm} from '@angular/forms';
 export class SubmitComponent implements OnInit {
 
   @Input('formifyModel') formifyModel: FormifyModel;
-  @Input('color') color: string = 'primary';
   @Input('ngForm') ngForm: any;
   @Output('submit') submit: EventEmitter<boolean> = new  EventEmitter<any>();
   constructor() { }
-
   ngOnInit(): void {}
   onSubmit(): void {
     this.submit.next(true);
