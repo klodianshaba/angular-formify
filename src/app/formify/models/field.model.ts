@@ -13,6 +13,7 @@ export enum FieldTypes {
   textarea = '[textarea] textarea field',
   select = '[SELECT] select field',
   radio = '[RADIO] radio field',
+  toggle = '[TOGGLE] toggle field',
   inputPhone = '[RADIO] input phone field',
 }
 
