@@ -4,9 +4,10 @@ import { InputComponent } from './components/input/input.component';
 import { ControlComponent } from './components/control/control.component';
 import { SelectComponent } from './components/select/select.component';
 import { TextareaComponent } from './components/textarea/textarea.component';
+import { SubmitComponent } from './compnents/submit/submit.component';
 
 @NgModule({
-  declarations: [InputComponent, ControlComponent, SelectComponent, TextareaComponent],
+  declarations: [InputComponent, ControlComponent, SelectComponent, TextareaComponent, SubmitComponent],
   imports: [
     CommonModule
   ]
