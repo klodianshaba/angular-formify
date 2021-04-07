@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {FormifyModel} from '../../models';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'formify-submit',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SubmitComponent implements OnInit {
 
+  @Input('formifyModel') formifyModel: FormifyModel;
+  @Input('color') color: string = 'primary';
+  @Input('ngForm') ngForm: NgForm;
+  @Output('submit') submit: EventEmitter<boolean> = new  EventEmitter<any>();
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+  onSubmit(): void {
+    this.submit.next(true);
   }
 
 }
