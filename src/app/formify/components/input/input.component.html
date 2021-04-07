@@ -8,16 +8,16 @@
     <span *ngIf="prefix" matPrefix  (click)="handlePrefix($event)" >
       {{prefix}}
       <mat-icon class="dropDownIconInPrefix" *ngIf="dropDownInPrefix" (click)="handlePrefix($event)">arrow_drop_down</mat-icon>
-      &nbsp;
+      &nbsp
     </span>
 
     <input matInput formControlName="control" (input)="emitValue()" [errorStateMatcher]="errorStateMatcher" [type]="type" [placeholder]="placeholder" >
 
-    <mat-icon *ngIf="icon" matSuffix [ngClass]="{'error-icon' : control.invalid && form.submitted }">{{icon}}</mat-icon>
+    <mat-icon *ngIf="icon" matSuffix [ngClass]="{'error-icon' : control.invalid && submitted | async }">{{icon}}</mat-icon>
 
     <mat-hint *ngIf="hint">{{hint}}</mat-hint>
 <!--    [placeholder]="label | translate"-->
-    <mat-error *ngIf="control.invalid && form.submitted">
+    <mat-error *ngIf="control.invalid && submitted | async">
             <span *ngFor="let error of errors(control)">
                 <ng-container *ngIf="useTranslation">
 <!--                    {{error.translationCode | translate: error.parameters}}-->

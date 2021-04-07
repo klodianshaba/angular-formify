@@ -6,6 +6,8 @@ import {ErrorStateMatcher} from '@angular/material/core';
 import {OptionModel} from './option.model';
 import {MatFormFieldAppearance} from '@angular/material/form-field';
 import {MatAutocomplete} from '@angular/material/autocomplete';
+import {SubmitModel} from './submit.model';
+import {BehaviorSubject} from 'rxjs';
 export enum FieldTypes {
   input = '[INPUT] input field',
   textarea = '[textarea] textarea field',
@@ -36,6 +38,7 @@ export interface FieldState {
   multiple?: boolean;
   readOnly?: boolean;
   none?: boolean;
+  submit?: SubmitModel;
 }
 export class FieldModel{
   formControl: FormControl | null;
@@ -59,6 +62,7 @@ export class FieldModel{
   multiple: boolean;
   readOnly: boolean;
   none: boolean;
+  submit: SubmitModel;
 
   constructor( config: FieldState ) {
     this.formControl = null;
@@ -82,6 +86,7 @@ export class FieldModel{
     this.multiple = false;
     this.readOnly = false;
     this.none = false;
+    this.submit = new SubmitModel();
     Object.assign(this, config);
   }
 }

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormifyModel} from '../../models';
+import {FormifyModel, SubmitModel} from '../../models';
 import {NgForm} from '@angular/forms';
 
 @Component({
@@ -8,14 +8,13 @@ import {NgForm} from '@angular/forms';
   styleUrls: ['./submit.component.scss']
 })
 export class SubmitComponent implements OnInit {
-
-  @Input('formifyModel') formifyModel: FormifyModel;
-  @Input('ngForm') ngForm: NgForm;
-  @Output('submit') submit: EventEmitter<boolean> = new  EventEmitter<any>();
+  @Input('submit') submit: SubmitModel = new SubmitModel();
+  @Input('disabled') disabled: boolean = false;
+  @Output('onSubmit') onSubmit: EventEmitter<boolean> = new EventEmitter<boolean>();
   constructor() { }
   ngOnInit(): void {}
-  onSubmit(): void {
-    this.submit.next(true);
+  onHandleSubmit(): void {
+    this.onSubmit.emit(true);
+    this.submit.status.next(true);
   }
-
 }

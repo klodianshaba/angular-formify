@@ -14,17 +14,17 @@ import { MatFormFieldAppearance } from '@angular/material/form-field';
 export class InputComponent extends ControlComponent implements ControlValueAccessor,   OnInit , OnChanges, AfterContentInit {
   @ViewChild('submit', {static: true}) submit: ElementRef;
   @Output('onPrefix') onPrefix: EventEmitter<boolean> = new EventEmitter<boolean>();
-  _submitted: boolean = false;
-  @Input()
-  public set submitted(value: boolean) {
-    this._submitted = value;
-    if (value) {
-      this.submit.nativeElement.click();
-    }
-  }
-  public get submitted(): boolean {
-    return this._submitted;
-  }
+  // _submitted: boolean = false;
+  // @Input()
+  // public set submitted(value: boolean) {
+  //   this._submitted = value;
+  //   if (value) {
+  //     this.submit.nativeElement.click();
+  //   }
+  // }
+  // public get submitted(): boolean {
+  //   return this._submitted;
+  // }
   onChange: any;
   inputForm: FormGroup;
   constructor(private formBuilder: FormBuilder) {super();}
@@ -37,7 +37,7 @@ export class InputComponent extends ControlComponent implements ControlValueAcce
     this.onChange = fn;
   }
   registerOnTouched(fn: any): void {
-    this.onChange = fn;
+    // this.onChange = fn;
   }
   setDisabledState?(isDisabled: boolean): void {
     // this.readOnly = isDisabled;
@@ -52,11 +52,11 @@ export class InputComponent extends ControlComponent implements ControlValueAcce
     super.ngOnChanges(changes);
   }
   ngAfterContentInit(): void {
-    setTimeout(() => {
-      if (this.submitted) {
-        this.submit.nativeElement.click();
-      }
-    }, 100);
+    // setTimeout(() => {
+    //   if (this.submitted) {
+    //     this.submit.nativeElement.click();
+    //   }
+    // }, 100);
   }
   ngOnInit(): void {
     this.inputForm = this.formBuilder.group({
@@ -69,6 +69,11 @@ export class InputComponent extends ControlComponent implements ControlValueAcce
       if (status === 'INVALID') {
         this.checkCustomErrors(this.control);
       }
+    });
+    this.submitted.subscribe(status => {
+        if (status) {
+          this.submit.nativeElement.click();
+        }
     });
   }
   get control(): AbstractControl { return this.inputForm.get('control'); }

@@ -3,6 +3,7 @@ import {FieldModel} from './field.model';
 import {GroupModel} from './group.model';
 import {ArrayModel} from './array.model';
 import {SubmitModel} from './submit.model';
+import {BehaviorSubject} from 'rxjs';
 
 export interface FormifyState {
   controls: (FieldModel | GroupModel | ArrayModel)[];
@@ -22,7 +23,7 @@ export type  OptionsType = ValidatorFn | ValidatorFn[] | AbstractControlOptions;
 
 export  class FormifyModel{
   public formGroup: FormGroup;
-  public loading?: boolean;
+  public loading: boolean;
   public controls: ControlsType;
   public submit: SubmitModel;
   public options?: OptionsType;
@@ -55,6 +56,7 @@ export  class FormifyModel{
       .filter(validator => validator)
     );
     control.formControl = formControl;
+    control.submit = this.submit;
     return  formControl;
   }
 

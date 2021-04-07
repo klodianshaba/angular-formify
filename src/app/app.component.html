@@ -77,8 +77,8 @@
 
   <div>
     <form [formGroup]="formify.formGroup" #form="ngForm">
-      <formify-input [formControl]="formify.getControl('name').formControl" [fieldModel]="formify.getControl('name')" [submitted]="form.submitted"></formify-input>
-      <formify-submit [formifyModel]="formify" [ngForm]="form"></formify-submit>
+      <formify-input formControlName="name" [fieldModel]="formify.getControl('name')"></formify-input>
+      <formify-submit [submit]="formify.submit" (onSubmit)="onSubmit()"></formify-submit>
     </form>
   </div>
 

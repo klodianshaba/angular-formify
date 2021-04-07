@@ -3,6 +3,7 @@ import {FieldModel, ValidatorModel, ControlTypes, OptionModel, ValidatorState} f
 import {AbstractControl, FormControl, FormGroup} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 import {MatFormFieldAppearance} from '@angular/material/form-field';
+import {BehaviorSubject} from 'rxjs';
 @Component({
   selector: 'formify-control',
   templateUrl: './control.component.html',
@@ -20,6 +21,9 @@ export class ControlComponent implements OnChanges , OnInit {
   }
   get autoComplete(): 'off' | 'on' {
     return  this.fieldModel.autoComplete;
+  }
+  get submitted(): BehaviorSubject<boolean> {
+    return this.fieldModel.submit.status;
   }
   get errorStateMatcher(): ErrorStateMatcher {
     return this.fieldModel.errorStateMatcher;

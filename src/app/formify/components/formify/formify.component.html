@@ -7,7 +7,7 @@
 
         <ng-container *ngSwitchCase="controlTypes.formField">
 
-          <formify-input *ngIf="control.fieldType === fieldTypes.input " [formControl]="control.formControl"  [fieldModel]="control" [submitted]="ngForm.submitted" (onPrefix)="handlePrefix($event)"></formify-input>
+          <formify-input *ngIf="control.fieldType === fieldTypes.input " [formControl]="control.formControl"  [fieldModel]="control" (onPrefix)="handlePrefix($event)"></formify-input>
 
 <!--          <formify-select *ngIf="control.fieldType === fieldTypes.select" [formControl]="control.formControl" [fieldModel]="control"  [submitted]="ngForm.submitted"></formify-select>-->
 

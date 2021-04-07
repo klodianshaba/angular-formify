@@ -1,11 +1,15 @@
-
+import {BehaviorSubject} from 'rxjs';
 export class SubmitModel {
   text?: any;
   color?: string;
-  status?: boolean;
+  disabled?: boolean;
+  loading?: boolean;
+  status?: BehaviorSubject<boolean>;
   constructor() {
     this.text = 'Submit';
     this.color = 'primary';
-    this.status = false;
+    this.loading = false;
+    this.disabled = false;
+    this.status = new BehaviorSubject<boolean>(false);
   }
 }
