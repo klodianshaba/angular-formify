@@ -1,1 +1,14 @@
-<p>radio works!</p>
+<form [formGroup]="formGroup" #form="ngForm" [autocomplete]="autoComplete">
+  <mat-label>{{(!useTranslation) ? label : label | translate}}</mat-label>
+  <mat-radio-group formControlName="control" (change)="emitValue()">
+    <mat-radio-button *ngFor="let option of options" class="radio-button" [value]="option.value">
+      {{option.text}}
+    </mat-radio-button>
+  </mat-radio-group>
+  <mat-error *ngIf="control.invalid && submitted | async">
+    <span *ngFor="let error of errors(control)">
+      {{(!useTranslation) ? error.description : error.translationCode | translate: error.parameters}}
+    </span>
+  </mat-error>
+  <button hidden #submit></button>
+</form>
