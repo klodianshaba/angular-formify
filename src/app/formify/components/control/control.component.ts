@@ -1,5 +1,5 @@
 import {Component, ElementRef, EventEmitter, forwardRef, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
-import {FieldModel, ValidatorModel, ControlTypes, OptionModel, ValidatorState} from '../../models';
+import {FieldModel, ValidatorModel, ControlTypes, OptionModel, ValidatorState, ControlsType} from '../../models';
 import {AbstractControl, ControlValueAccessor, FormBuilder, FormControl, FormGroup, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {ErrorStateMatcher, ThemePalette} from '@angular/material/core';
 import {MatFormFieldAppearance} from '@angular/material/form-field';
@@ -11,6 +11,7 @@ import {BehaviorSubject} from 'rxjs';
 })
 export class ControlComponent implements ControlValueAccessor, OnInit , OnChanges {
   private _fieldModel: FieldModel = new FieldModel({controlName: null});
+  private _control: ControlsType;
   @Input('fieldModel') set noFieldConfig( fieldModel: FieldModel) {this._fieldModel = fieldModel; }
   @Output('onPrefix') onPrefix: EventEmitter<boolean> = new EventEmitter<boolean>();
   constructor(protected formBuilder: FormBuilder) {}
@@ -28,6 +29,9 @@ export class ControlComponent implements ControlValueAccessor, OnInit , OnChange
   }
   ngOnChanges(changes: SimpleChanges): void { }
   ngOnInit(): void {
+    // if(){
+    //
+    // }
     this.formGroup = this.formBuilder.group({
       control: new FormControl(null, this.validators.map(validator => validator.validator).filter(validator => validator)),
     });

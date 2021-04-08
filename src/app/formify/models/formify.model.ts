@@ -5,8 +5,11 @@ import {ArrayModel} from './array.model';
 import {SubmitModel} from './submit.model';
 import {BehaviorSubject} from 'rxjs';
 
+export type ControlsType = (FieldModel | GroupModel | ArrayModel);
+export type  OptionsType = ValidatorFn | ValidatorFn[] | AbstractControlOptions;
+
 export interface FormifyState {
-  controls: (FieldModel | GroupModel | ArrayModel)[];
+  controls: ControlsType[];
   submit?: SubmitModel;
   options?: OptionsType;
 }
@@ -17,13 +20,9 @@ export enum ControlTypes {
   formArray = '[FORMARRAY] formArray direction',
 }
 
-export type ControlsType = (FieldModel | GroupModel | ArrayModel)[];
-
-export type  OptionsType = ValidatorFn | ValidatorFn[] | AbstractControlOptions;
-
 export  class FormifyModel{
   public formGroup: FormGroup;
-  public controls: ControlsType;
+  public controls: ControlsType[];
   public submit: SubmitModel;
   public options?: OptionsType;
   constructor(config: FormifyState ) {
@@ -37,7 +36,7 @@ export  class FormifyModel{
     });
   }
 
-  private generateFormControls(controls: ControlsType): { [controlId: string]: AbstractControl; } {
+  private generateFormControls(controls: ControlsType[]): { [controlId: string]: AbstractControl; } {
     const formControls: { [controlId: string]: AbstractControl; } = {};
     for (const control of controls) {
       if (control instanceof FieldModel) {
@@ -86,7 +85,7 @@ export  class FormifyModel{
     }
     return null;
   }
-  private iterateFindControl(controls: ControlsType, controlName: string): ControlsType{
+  private iterateFindControl(controls: ControlsType[], controlName: string): ControlsType[]{
     return controls.filter(control => {
       if (control instanceof FieldModel){
         if (controlName === control.controlName){
