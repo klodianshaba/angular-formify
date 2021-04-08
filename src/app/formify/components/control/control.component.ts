@@ -1,5 +1,15 @@
 import {Component, ElementRef, EventEmitter, forwardRef, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
-import {FieldModel, ValidatorModel, ControlTypes, OptionModel, ValidatorState, ControlsType, FormifyModel} from '../../models';
+import {
+  FieldModel,
+  ValidatorModel,
+  ControlTypes,
+  OptionModel,
+  ValidatorState,
+  ControlsType,
+  FormifyModel,
+  GroupModel,
+  ArrayModel
+} from '../../models';
 import {AbstractControl, ControlValueAccessor, FormBuilder, FormControl, FormGroup, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {ErrorStateMatcher, ThemePalette} from '@angular/material/core';
 import {MatFormFieldAppearance} from '@angular/material/form-field';
@@ -30,7 +40,7 @@ export class ControlComponent implements ControlValueAccessor, OnInit , OnChange
   ngOnChanges(changes: SimpleChanges): void { }
   ngOnInit(): void {
     this.formify = new FormifyModel({
-        controls: [this.fieldModel]
+        controls: [this.control]
     });
     this.formGroup = this.formify.formGroup;
     (this.readOnly) ? this.formGroup.disable() : this.formGroup.enable();
@@ -43,12 +53,15 @@ export class ControlComponent implements ControlValueAccessor, OnInit , OnChange
       }
     });
   }
+  get control(): ControlsType { return this._control; }
+
   get formControl(): AbstractControl { return this.formGroup.get(this.controlName); }
+
   handlePrefix(event: Event): void { this.onPrefix.emit(true); }
 
   get fieldModel(): FieldModel {
-    if (this._control instanceof FieldModel){
-      return this._control;
+    if (this.control instanceof FieldModel){
+      return this.control;
     }
     return null;
   }
@@ -74,7 +87,7 @@ export class ControlComponent implements ControlValueAccessor, OnInit , OnChange
     return this.fieldModel.controlType;
   }
   get controlName(): string {
-    return this.fieldModel.controlName;
+    return this.control.controlName;
   }
   get useTranslation(): boolean {
     return this.fieldModel.useTranslation;

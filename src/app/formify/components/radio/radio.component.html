@@ -5,8 +5,8 @@
       {{option.text}}
     </mat-radio-button>
   </mat-radio-group>
-  <mat-error *ngIf="control.invalid && submitted | async">
-    <span *ngFor="let error of errors(control)">
+  <mat-error *ngIf="formControl.invalid && submitted | async">
+    <span *ngFor="let error of errors(formControl)">
       {{(!useTranslation) ? error.description : error.translationCode | translate: error.parameters}}
     </span>
   </mat-error>

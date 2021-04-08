@@ -9,10 +9,10 @@
     <label>
       <input matInput [formControlName]="controlName" (input)="emitValue()" [errorStateMatcher]="errorStateMatcher" [type]="type" [placeholder]="(!useTranslation) ? placeholder : placeholder | translate">
     </label>
-    <mat-icon *ngIf="icon" matSuffix [ngClass]="{'error-icon' : control.invalid && submitted | async }">{{icon}}</mat-icon>
+    <mat-icon *ngIf="icon" matSuffix [ngClass]="{'error-icon' : formControl.invalid && submitted | async }">{{icon}}</mat-icon>
     <mat-hint *ngIf="hint">{{(!useTranslation) ? hint : hint | translate}}</mat-hint>
-    <mat-error *ngIf="control.invalid && submitted | async">
-      <span *ngFor="let error of errors(control)">
+    <mat-error *ngIf="formControl.invalid && submitted | async">
+      <span *ngFor="let error of errors(formControl)">
         {{(!useTranslation) ? error.description : error.translationCode | translate: error.parameters}}
       </span>
     </mat-error>
