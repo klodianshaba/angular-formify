@@ -10,9 +10,8 @@ import {BehaviorSubject} from 'rxjs';
   styleUrls: ['./control.component.scss']
 })
 export class ControlComponent implements ControlValueAccessor, OnInit , OnChanges {
-  private _fieldModel: FieldModel = new FieldModel({controlName: null});
-  private _control: ControlsType;
-  @Input('fieldModel') set noFieldConfig( fieldModel: FieldModel) {this._fieldModel = fieldModel; }
+  private _control: ControlsType = new FieldModel({controlName: null});
+  @Input('control') set onControlConfig( control: ControlsType) {this._control = control; }
   @Output('onPrefix') onPrefix: EventEmitter<boolean> = new EventEmitter<boolean>();
   constructor(protected formBuilder: FormBuilder) {}
   @ViewChild('submit', {static: true}) submit: ElementRef;
@@ -30,36 +29,30 @@ export class ControlComponent implements ControlValueAccessor, OnInit , OnChange
   }
   ngOnChanges(changes: SimpleChanges): void { }
   ngOnInit(): void {
-    // if(){
-    //
-    // }
-    // this.formGroup = this.formBuilder.group({
-    //   [this.controlName]: new FormControl(null, this.validators.map(validator => validator.validator).filter(validator => validator)),
-    // });
     this.formify = new FormifyModel({
         controls: [this.fieldModel]
     });
     this.formGroup = this.formify.formGroup;
-    console.log(this.formGroup);
     (this.readOnly) ? this.formGroup.disable() : this.formGroup.enable();
-    this.formControl.statusChanges.subscribe(status => {
-      if (status === 'INVALID') { this.checkCustomErrors(this.control); }
+    this.parentFormControl.statusChanges.subscribe(status => {
+      if (status === 'INVALID') { this.checkCustomErrors(this.formControl); }
     });
     this.submitted.subscribe(status => {
-      console.log('status');
       if (status) {
-        console.log('submitted');
         this.submit.nativeElement.click();
       }
     });
   }
-  get control(): AbstractControl { return this.formGroup.get(this.controlName); }
+  get formControl(): AbstractControl { return this.formGroup.get(this.controlName); }
   handlePrefix(event: Event): void { this.onPrefix.emit(true); }
 
   get fieldModel(): FieldModel {
-    return this._fieldModel;
+    if (this._control instanceof FieldModel){
+      return this._control;
+    }
+    return null;
   }
-  get formControl(): FormControl {
+  get parentFormControl(): FormControl {
     return this.fieldModel.formControl;
   }
   get autoComplete(): 'off' | 'on' {
@@ -135,8 +128,8 @@ export class ControlComponent implements ControlValueAccessor, OnInit , OnChange
     return firstError;
   }
   public checkCustomErrors(control: AbstractControl): void {
-    if (this.formControl.errors) {
-      Object.entries( this.formControl.errors).map(([name, value]) => ({name , value})).forEach( error => {
+    if (this.parentFormControl.errors) {
+      Object.entries( this.parentFormControl.errors).map(([name, value]) => ({name , value})).forEach( error => {
         this.validators.filter(item => !item.validator).forEach(validator => {
           if (validator.errorCode === error.name ) {
             control.setErrors({ [error.name]: true });

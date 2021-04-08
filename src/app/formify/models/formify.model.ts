@@ -54,22 +54,28 @@ export  class FormifyModel{
     const formControl = new FormControl(
       control.defaultValue , control.validators.map(validator => validator.validator ).filter(validator => validator)
     );
-    if (!control.formControl) {control.submit = this.submit; }
-    control.formControl = formControl;
+    if (!control.formControl) {
+      control.submit = this.submit;
+      control.formControl = formControl;
+    }
     return formControl;
   }
 
   public generateFormGroup(control: GroupModel ): FormGroup {
     const formGroup = new FormGroup( this.generateFormControls(control.controls) ); // recursion
-    control.formGroup = formGroup;
+    if (!control.formGroup) {
+      control.formGroup = formGroup;
+    }
     return  formGroup;
   }
   public generateFormArray(control: ArrayModel): FormArray {
     const formArray = new FormArray( Object.entries( this.generateFormControls(control.controls)) // recursion
       .map( ([name, value]) => ({name, value}))
       .map( item => item.value) );
-    control.formArray = formArray;
-    return  formArray;
+    if (!control.formArray) {
+      control.formArray = formArray;
+    }
+    return formArray;
   }
   public addControl(control: FieldModel): void{
     this.controls.push(control);
