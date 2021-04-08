@@ -36,7 +36,7 @@ export  class FormifyModel{
     });
   }
 
-  private generateFormControls(controls: ControlsType[]): { [controlId: string]: AbstractControl; } {
+  public generateFormControls(controls: ControlsType[]): { [controlId: string]: AbstractControl; } {
     const formControls: { [controlId: string]: AbstractControl; } = {};
     for (const control of controls) {
       if (control instanceof FieldModel) {
@@ -50,7 +50,7 @@ export  class FormifyModel{
     return formControls;
   }
 
-  private generateFormControl(control: FieldModel ): FormControl {
+  public generateFormControl(control: FieldModel ): FormControl {
     const formControl = new FormControl(
       control.defaultValue , control.validators.map(validator => validator.validator )
       .filter(validator => validator)
@@ -60,12 +60,12 @@ export  class FormifyModel{
     return  formControl;
   }
 
-  private generateFormGroup(control: GroupModel ): FormGroup {
+  public generateFormGroup(control: GroupModel ): FormGroup {
     const formGroup = new FormGroup( this.generateFormControls(control.controls) ); // recursion
     control.formGroup = formGroup;
     return  formGroup;
   }
-  private generateFormArray(control: ArrayModel): FormArray {
+  public generateFormArray(control: ArrayModel): FormArray {
     const formArray = new FormArray( Object.entries( this.generateFormControls(control.controls)) // recursion
       .map( ([name, value]) => ({name, value}))
       .map( item => item.value) );
