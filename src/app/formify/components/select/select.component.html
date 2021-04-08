@@ -6,7 +6,7 @@
       <mat-icon class="dropDownIconInPrefix" *ngIf="dropDownInPrefix" (click)="handlePrefix($event)">arrow_drop_down</mat-icon>
       &nbsp
     </span>
-    <mat-select formControlName="control" (selectionChange)='emitValue()' multiple="{{multiple}}" [errorStateMatcher]="errorStateMatcher"  >
+    <mat-select formControlName="control" (selectionChange)="emitValue()" multiple="{{multiple}}" [errorStateMatcher]="errorStateMatcher"  >
       <mat-option *ngIf="none">None</mat-option>
       <mat-option *ngFor="let option of options" [value]="option.value">
         {{option.text}}

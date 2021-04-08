@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {FieldModel, FormifyModel, SubmitModel, ValidatorModel} from './formify/models';
+import {ArrayModel, FieldModel, FormifyModel, SubmitModel, ValidatorModel} from './formify/models';
 import {Validators} from '@angular/forms';
 
 @Component({
@@ -18,7 +18,7 @@ export class AppComponent {
         ]
       }),
       new FieldModel({
-        controlName: 'language', label: 'Choose your language', placeholder: 'language', autoComplete: 'off', defaultValue: 'en',  options: [{text: 'Al', value: 'al'}, {text: 'EN', value: 'en'}],
+        controlName: 'language', label: 'Choose your language', multiple: true, placeholder: 'language', autoComplete: 'off', defaultValue: ['en'],  options: [{text: 'Al', value: 'al'}, {text: 'EN', value: 'en'}],
         validators: [
           {validator: Validators.required, errorCode: 'required', description: 'language is required'},
         ]
@@ -32,7 +32,11 @@ export class AppComponent {
       new FieldModel({controlName: 'color', label: 'Color' , defaultValue: 'primary', options: [{text: 'Primary', value: 'primary'}, {text: 'Warn', value: 'warn'}]}),
 
       new FieldModel({controlName: 'toggle', label: 'Fill contact', defaultValue: true }),
-      new FieldModel({controlName: 'checkbox', label: 'check boxes', options: [{text: 'Primary', value: false}, {text: 'Warn', value: true}] })
+      new FieldModel({controlName: 'checkbox', label: 'check boxes', defaultValue: 'primary',  options: [{text: 'Primary', value: 'primary'}, {text: 'Warn', value: 'warn'}] }),
+      new ArrayModel('checkboxes', [
+        new FieldModel({controlName: 'primary', label: 'Warn'}),
+        new FieldModel({controlName: 'warn', label: 'Warn'}),
+      ]),
     ],
     submit: {text: 'Save'}
   });
@@ -40,6 +44,7 @@ export class AppComponent {
   }
   onSubmit(): void{
     console.log(this.formify.formGroup.value);
+    console.log(this.formify.formGroup);
     this.formify.loading(true);
     setTimeout(() => {
       this.formify.loading(false);
