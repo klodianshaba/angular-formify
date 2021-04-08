@@ -15,6 +15,8 @@ import {MaterialModule} from './material.module';
 import {ToggleComponent} from './components/toggle/toggle.component';
 import {RadioComponent } from './components/radio/radio.component';
 import {CheckboxComponent} from './components/checkbox/checkbox.component';
+import { ArrayComponent } from './components/array/array.component';
+import { GroupComponent } from './components/group/group.component';
 
 export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -30,7 +32,9 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     FormifyComponent,
     ToggleComponent,
     RadioComponent,
-    CheckboxComponent
+    CheckboxComponent,
+    ArrayComponent,
+    GroupComponent
   ],
   imports: [
     CommonModule,
