@@ -31,7 +31,8 @@ export class AppComponent {
       }),
       new FieldModel({controlName: 'color', label: 'Color' , defaultValue: 'primary', options: [{text: 'Primary', value: 'primary'}, {text: 'Warn', value: 'warn'}]}),
 
-      new FieldModel({controlName: 'toggle', label: 'Fill contact', defaultValue: true })
+      new FieldModel({controlName: 'toggle', label: 'Fill contact', defaultValue: true }),
+      new FieldModel({controlName: 'checkbox', label: 'check boxes', options: [{text: 'Primary', value: false}, {text: 'Warn', value: true}] })
     ],
     submit: {text: 'Save'}
   });

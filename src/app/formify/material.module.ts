@@ -8,6 +8,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [],
@@ -23,6 +24,7 @@ import {MatRadioModule} from '@angular/material/radio';
     MatSelectModule,
     MatSlideToggleModule,
     MatRadioModule,
+    MatCheckboxModule,
   ]
 })
 export class MaterialModule { }
