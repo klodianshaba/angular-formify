@@ -1,7 +1,7 @@
 <form [formGroup]="formGroup" #form="ngForm" [autocomplete]="autoComplete">
   <mat-label class="label">{{(!useTranslation) ? label : label | translate}}:</mat-label>
 
-  <mat-checkbox formControlName="control" *ngFor="let option of options" [color]="color" (ngModelChange)="emitValue()">
+  <mat-checkbox [formControlName]="controlName" *ngFor="let option of options" [color]="color" (ngModelChange)="emitValue()">
     {{option.text}}
   </mat-checkbox>
 

@@ -1,5 +1,5 @@
 import {Component, ElementRef, EventEmitter, forwardRef, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
-import {FieldModel, ValidatorModel, ControlTypes, OptionModel, ValidatorState, ControlsType} from '../../models';
+import {FieldModel, ValidatorModel, ControlTypes, OptionModel, ValidatorState, ControlsType, FormifyModel} from '../../models';
 import {AbstractControl, ControlValueAccessor, FormBuilder, FormControl, FormGroup, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {ErrorStateMatcher, ThemePalette} from '@angular/material/core';
 import {MatFormFieldAppearance} from '@angular/material/form-field';
@@ -18,32 +18,42 @@ export class ControlComponent implements ControlValueAccessor, OnInit , OnChange
   @ViewChild('submit', {static: true}) submit: ElementRef;
   onChange: any;
   formGroup: FormGroup;
+  formify: FormifyModel;
   writeValue(obj: any): void {
-    this.formGroup.controls['control'].setValue(obj, { emitEvent: false });
+    this.formGroup.controls[this.controlName].setValue(obj, { emitEvent: false });
   }
   registerOnChange(fn: any): void { this.onChange = fn; }
   registerOnTouched(fn: any): void {}
   setDisabledState?(isDisabled: boolean): void { }
   emitValue(): void {
-    if (this.onChange) { this.onChange(this.formGroup.controls['control'].value); }
+    if (this.onChange) { this.onChange(this.formGroup.controls[this.controlName].value); }
   }
   ngOnChanges(changes: SimpleChanges): void { }
   ngOnInit(): void {
     // if(){
     //
     // }
-    this.formGroup = this.formBuilder.group({
-      control: new FormControl(null, this.validators.map(validator => validator.validator).filter(validator => validator)),
+    // this.formGroup = this.formBuilder.group({
+    //   [this.controlName]: new FormControl(null, this.validators.map(validator => validator.validator).filter(validator => validator)),
+    // });
+    this.formify = new FormifyModel({
+        controls: [this.fieldModel]
     });
+    this.formGroup = this.formify.formGroup;
+    console.log(this.formGroup);
     (this.readOnly) ? this.formGroup.disable() : this.formGroup.enable();
     this.formControl.statusChanges.subscribe(status => {
       if (status === 'INVALID') { this.checkCustomErrors(this.control); }
     });
     this.submitted.subscribe(status => {
-      if (status) { this.submit.nativeElement.click(); }
+      console.log('status');
+      if (status) {
+        console.log('submitted');
+        this.submit.nativeElement.click();
+      }
     });
   }
-  get control(): AbstractControl { return this.formGroup.get('control'); }
+  get control(): AbstractControl { return this.formGroup.get(this.controlName); }
   handlePrefix(event: Event): void { this.onPrefix.emit(true); }
 
   get fieldModel(): FieldModel {

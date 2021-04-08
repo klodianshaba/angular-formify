@@ -52,12 +52,11 @@ export  class FormifyModel{
 
   public generateFormControl(control: FieldModel ): FormControl {
     const formControl = new FormControl(
-      control.defaultValue , control.validators.map(validator => validator.validator )
-      .filter(validator => validator)
+      control.defaultValue , control.validators.map(validator => validator.validator ).filter(validator => validator)
     );
+    if (!control.formControl) {control.submit = this.submit; }
     control.formControl = formControl;
-    control.submit = this.submit;
-    return  formControl;
+    return formControl;
   }
 
   public generateFormGroup(control: GroupModel ): FormGroup {
