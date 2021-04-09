@@ -4,6 +4,7 @@ import {Validators} from '@angular/forms';
 import {NameFieldControl} from './formify/fields/name.field-control';
 import {LanguageFieldControl} from './formify/fields/language.field-control';
 import {BiographyFieldControl} from './formify/fields/biography.field-control';
+import {ColorFieldControl} from './formify/fields/color.field-control';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,7 @@ export class AppComponent {
       new NameFieldControl({}),
       new LanguageFieldControl({}),
       new BiographyFieldControl({}),
-      new FieldModel({controlName: 'color', label: 'Color' , defaultValue: 'primary', options: [{text: 'Primary', value: 'primary'}, {text: 'Warn', value: 'warn'}]}),
+      new ColorFieldControl({}),
 
       new FieldModel({controlName: 'toggle', label: 'Fill contact', defaultValue: true }),
 
