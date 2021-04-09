@@ -7,7 +7,8 @@ export class PasswordFieldControl extends FieldModel{
       controlName: 'password',
       icon: 'vpn_key',
       type: 'password',
-      label: 'Password',
+      label: 'Enter password',
+      placeholder: 'password',
       validators: [
         {validator: Validators.required, errorCode: 'required', description: 'Password is required'},
         {validator: Validators.minLength(8), errorCode: 'minlength', description: 'Minimum 8 characters are required', parameters: {value: 8}},

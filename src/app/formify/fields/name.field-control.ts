@@ -7,6 +7,7 @@ export class NameFieldControl extends FieldModel {
       controlName: 'name',
       icon: 'assignment',
       label: 'Enter your name',
+      placeholder: 'name',
       autoComplete: 'off',
       validators: [
         new ValidatorModel({validator: Validators.required, errorCode: 'required', description: 'Name is required'}),
