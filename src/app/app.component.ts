@@ -33,7 +33,7 @@ export class AppComponent {
 
       new FieldModel({controlName: 'toggle', label: 'Fill contact', defaultValue: true }),
 
-      new ArrayModel('array', [
+      new ArrayModel({controlName: 'array', controls: [
         new GroupModel('contact1', [
           new FieldModel({
             controlName: 'phone', label: 'number phone', placeholder: 'phone', autoComplete: 'off',
@@ -62,7 +62,7 @@ export class AppComponent {
             ]
           }),
         ]),
-      ]),
+      ]}),
 
       new GroupModel('contact', [
         new FieldModel({

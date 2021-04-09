@@ -15,6 +15,6 @@ export class FormifyBuilderModel {
   }
   public array( config: ArrayModel ) {
     this.field({controlName :  'f'});
-    return new ArrayModel( config.controlName ,  config.controls );
+    return new ArrayModel( config );
   }
 }

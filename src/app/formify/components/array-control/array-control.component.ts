@@ -8,7 +8,7 @@ import {ArrayModel, FieldModel, FormifyModel} from '../../models';
   styleUrls: ['./array-control.component.scss']
 })
 export class ArrayControlComponent implements OnInit, OnChanges {
-  private _arrayModel: ArrayModel = new ArrayModel('', []);
+  private _arrayModel: ArrayModel = new ArrayModel({controlName: '', controls: []});
   @Input('arrayModel') set onArrayConfig( arrayModel: ArrayModel) {this._arrayModel = arrayModel; }
   formGroup: FormGroup;
   get arrayModel(): ArrayModel{

@@ -2,6 +2,13 @@ import {FormArray} from '@angular/forms';
 import {ControlsType, ControlTypes} from './formify.model';
 import {BehaviorSubject} from 'rxjs';
 
+export interface ArrayState {
+  controlName: string;
+  controls: ControlsType;
+  readonly controlType?: ControlTypes;
+  label?: string;
+}
+
 export class ArrayModel {
   formArray: FormArray;
   controlName: string;
@@ -9,12 +16,13 @@ export class ArrayModel {
   readonly controlType?: ControlTypes;
   change: BehaviorSubject<any>;
   label: string;
-  constructor( controlName: string , controls: ControlsType ) {
+  constructor( config: ArrayState ) {
     this.formArray = null;
-    this.controlName = controlName;
+    this.controlName = '';
     this.controlType = ControlTypes.formArray;
-    this.controls = controls;
+    this.controls = [];
     this.change = new BehaviorSubject<any>(null);
     this.label = '';
+    Object.assign(this, config);
   }
 }
