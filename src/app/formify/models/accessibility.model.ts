@@ -5,6 +5,8 @@ import {ControlsType} from './formify.model';
 
 export class FormifyAccessibilityModel {
   public controls: ControlsType;
+  constructor() {
+  }
   public get(path: string): FieldModel | null{
     const controls =  this.iterateFindControl(this.controls, path);
     for (const control of controls){

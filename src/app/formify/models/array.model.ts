@@ -1,6 +1,7 @@
 import {FormArray} from '@angular/forms';
 import {ControlsType, ControlTypes} from './formify.model';
 import {BehaviorSubject} from 'rxjs';
+import {FormifyAccessibilityModel} from './accessibility.model';
 
 export interface ArrayState {
   controlName: string;
@@ -9,7 +10,7 @@ export interface ArrayState {
   label?: string;
 }
 
-export class ArrayModel {
+export class ArrayModel extends FormifyAccessibilityModel{
   formArray: FormArray;
   controlName: string;
   controls: ControlsType;
@@ -17,6 +18,7 @@ export class ArrayModel {
   change: BehaviorSubject<any>;
   label: string;
   constructor( config: ArrayState ) {
+    super();
     this.formArray = null;
     this.controlName = '';
     this.controlType = ControlTypes.formArray;

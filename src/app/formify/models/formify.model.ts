@@ -22,7 +22,6 @@ export type ControlsType = (FieldModel | GroupModel | ArrayModel)[];
 
 export type  OptionsType = ValidatorFn | ValidatorFn[] | AbstractControlOptions;
 
-
 export  class FormifyModel extends FormifyAccessibilityModel{
   public formGroup: FormGroup;
   public controls: ControlsType;
