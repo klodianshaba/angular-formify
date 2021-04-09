@@ -37,7 +37,20 @@
         <formify-textarea formControlName="describe" [fieldModel]="formify.field('describe')"></formify-textarea>
         <formify-toggle formControlName="toggle" [fieldModel]="formify.field('toggle')"></formify-toggle>
         <formify-radio formControlName="color" [fieldModel]="formify.field('color')"></formify-radio>
-        <formify-array-control [arrayModel]="formify.array('array')"></formify-array-control>
+
+<!--        <formify-array #array [arrayModel]="formify.array('array')">-->
+<!--          <div [formArrayName]="array.arrayModel.controlName" *ngFor="let item of array.arrayModel['controls']; let i = index;">-->
+<!--          <formify-group [formGroupName]="i" [groupModel]="item">-->
+<!--            <div style="display: flex;">-->
+<!--              <formify-input formControlName="phone" [fieldModel]="item.field('phone')"></formify-input>-->
+<!--              <formify-input formControlName="address" [fieldModel]="item.field('address')"></formify-input>-->
+<!--            </div>-->
+<!--          </formify-group>-->
+<!--          </div>-->
+<!--        </formify-array>-->
+
+        <formify-address [arrayModel]="formify.array('array')"></formify-address>
+
         <formify-group #group formGroupName="contact" [groupModel]="formify.group('contact')">
           <formify-input formControlName="phone" [fieldModel]="group.groupModel.field('phone')"></formify-input>
           <formify-input formControlName="address" [fieldModel]="group.groupModel.field('address')"></formify-input>

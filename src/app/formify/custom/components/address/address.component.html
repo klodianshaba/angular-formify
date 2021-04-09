@@ -1,0 +1,15 @@
+
+<form [formGroup]="formGroup" #form="ngForm">
+  <div [formArrayName]="arrayModel.controlName" *ngFor="let item of arrayModel['controls']; let i = index;">
+    <div [formGroupName]="i">
+      <div style="display: flex;">
+        <formify-input formControlName="phone" [fieldModel]="item.field('phone')"></formify-input>
+        <formify-input formControlName="address" [fieldModel]="item.field('address')"></formify-input>
+      </div>
+    </div>
+  </div>
+  <button hidden #submit></button>
+</form>
+
+
+

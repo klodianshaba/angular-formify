@@ -19,6 +19,7 @@ import { GroupControlComponent } from './components/group-control/group-control.
 export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
 }
+
 @NgModule({
   declarations: [
     ControlComponent,

@@ -9,31 +9,17 @@ import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 })
 export class GroupControlComponent implements OnInit, OnChanges {
   private _groupModel: GroupModel = new GroupModel({controlName: '' , controls: []});
-  @Input('groupModel') set onArrayConfig( groupModel: GroupModel) {this._groupModel = groupModel; }
+  @Input('groupModel') set onArrayConfig( groupModel: GroupModel | any) {this._groupModel = groupModel; }
   formGroup: FormGroup;
   get groupModel(): GroupModel{
     return this._groupModel;
   }
-  private field =   new FieldModel({
-    controlName: 'addresss', label: 'your address', placeholder: 'address', autoComplete: 'off',
-    validators: [
-      {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
-    ]
-  });
   constructor(protected formBuilder: FormBuilder) { }
   ngOnChanges(changes: SimpleChanges): void {}
   ngOnInit(): void {
     this.formGroup = this.groupModel.formGroup;
     this.formGroup.statusChanges.subscribe(status => {
-      console.log(status);
       this.groupModel.change.next(this.formGroup.value);
     });
-    console.log(this.groupModel);
-  }
-  get modelFormGroup(): FormGroup{
-    return this.formGroup.get(this.groupModel.controlName) as FormGroup;
-  }
-  addfield(): void {
-    this.groupModel.addField(this.field);
   }
 }
