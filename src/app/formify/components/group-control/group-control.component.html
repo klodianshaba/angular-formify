@@ -1,1 +1,11 @@
-<p>group-control works!</p>
+
+<form [formGroup]="formGroup" #form="ngForm">
+
+<!--  <input formControlName="phone">-->
+<!--  <input formControlName="address">-->
+
+  <formify-input formControlName="phone" [fieldModel]="groupModel.get('phone')"></formify-input>
+  <formify-input formControlName="address" [fieldModel]="groupModel.get('address')"></formify-input>
+
+  <button hidden #submit></button>
+</form>

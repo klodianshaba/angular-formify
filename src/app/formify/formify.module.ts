@@ -54,7 +54,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     TextareaComponent,
     ToggleComponent,
     RadioComponent,
-    ArrayControlComponent
+    ArrayControlComponent,
+    GroupControlComponent
   ],
 })
 export class FormifyModule { }
