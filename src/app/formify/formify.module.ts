@@ -14,6 +14,7 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {MaterialModule} from './material.module';
 import {ToggleComponent} from './components/toggle/toggle.component';
 import {RadioComponent } from './components/radio/radio.component';
+import { ArrayControlComponent } from './components/array-control/array-control.component';
 export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
 }
@@ -27,7 +28,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     SubmitComponent,
     FormifyComponent,
     ToggleComponent,
-    RadioComponent
+    RadioComponent,
+    ArrayControlComponent
   ],
   imports: [
     CommonModule,
