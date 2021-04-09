@@ -1,5 +1,5 @@
 import { Component, forwardRef, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {ControlComponent} from '../control/control.component';
+import {FieldControlComponent} from '../field-control/field-control.component';
 import { FormBuilder, NG_VALUE_ACCESSOR} from '@angular/forms';
 @Component({
   selector: 'formify-input',
@@ -9,7 +9,7 @@ import { FormBuilder, NG_VALUE_ACCESSOR} from '@angular/forms';
     {provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => InputComponent) , multi: true}
   ]
 })
-export class InputComponent extends ControlComponent implements OnInit , OnChanges {
+export class InputComponent extends FieldControlComponent implements OnInit , OnChanges {
   constructor(protected formBuilder: FormBuilder) { super(formBuilder); }
   ngOnChanges(changes: SimpleChanges): void {super.ngOnChanges(changes); }
   ngOnInit(): void {super.ngOnInit(); }

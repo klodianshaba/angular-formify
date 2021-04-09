@@ -1,6 +1,6 @@
 import {Component, forwardRef, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {ControlComponent} from '../control/control.component';
 import {FormBuilder, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {FieldControlComponent} from '../field-control/field-control.component';
 
 @Component({
   selector: 'formify-toggle',
@@ -8,7 +8,7 @@ import {FormBuilder, NG_VALUE_ACCESSOR} from '@angular/forms';
   styleUrls: ['./toggle.component.scss'],
   providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => ToggleComponent) , multi: true }]
 })
-export class ToggleComponent extends ControlComponent implements OnInit , OnChanges {
+export class ToggleComponent extends FieldControlComponent implements OnInit , OnChanges {
   constructor(protected formBuilder: FormBuilder) { super(formBuilder); }
   ngOnChanges(changes: SimpleChanges): void {super.ngOnChanges(changes); }
   ngOnInit(): void {super.ngOnInit(); }

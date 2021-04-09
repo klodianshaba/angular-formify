@@ -1,15 +1,75 @@
-import {FormGroup} from '@angular/forms';
+import {FormArray, FormGroup} from '@angular/forms';
 import {ControlsType, ControlTypes} from './formify.model';
+import {BehaviorSubject} from 'rxjs';
+import {FieldModel} from './field.model';
+import {FormifyAccessibility} from './accessibility.abstract';
+import {ArrayModel, ArrayState} from './array.model';
+import {FormifyGenerate} from './formify.generate';
+import {FormifyManipulation} from './manipulation.abstract';
+import {SubmitModel} from './submit.model';
 
-export class GroupModel {
-  formGroup: FormGroup;
+export interface GroupState {
   controlName: string;
-  readonly controlType?: ControlTypes;
   controls: ControlsType;
-  constructor( controlName: string , controls: ControlsType ) {
-    this.formGroup = null;
-    this.controlName = controlName;
+  label?: string;
+}
+
+export class GroupModel extends FormifyGenerate implements FormifyAccessibility , FormifyManipulation{
+  controlName: string;
+  controls: ControlsType;
+  readonly controlType: ControlTypes;
+  change: BehaviorSubject<any>;
+  label: string;
+  public submit: SubmitModel;
+  constructor( config: GroupState ) {
+    super();
+    this.controlName = '';
     this.controlType = ControlTypes.formGroup;
-    this.controls = controls;
+    this.controls = [];
+    this.change = new BehaviorSubject<any>(null);
+    this.label = '';
+    Object.assign(this, config);
+  }
+  get(path: string): FieldModel | GroupModel | ArrayModel | null {
+    for (const control of this.controls){
+      if (path === control.controlName){
+        return control;
+      }
+    }
+    return null;
+  }
+  field(path: string): FieldModel | null {
+    const control = this.get(path);
+    if (control instanceof FieldModel) {
+      return control;
+    }
+    return null;
+  }
+  group(path: string): GroupModel | null {
+    const control = this.get(path);
+    if (control instanceof GroupModel) {
+      return control;
+    }
+    return null;
+  }
+  array(path: string): ArrayModel | null {
+    const control = this.get(path);
+    if (control instanceof ArrayModel) {
+      return control;
+    }
+    return null;
+  }
+
+  addField(field: FieldModel): void {
+    this.controls.push(field);
+    this.formGroup.addControl(field.controlName, this.generateFormControl(field));
+  }
+  addGroup(group: GroupModel): void {
+    this.controls.push(group);
+    this.formGroup.addControl(group.controlName, this.generateFormGroup(group));
+  }
+  addArray(array: ArrayModel): void {
+    this.controls.push(array);
+    this.formGroup.addControl(array.controlName, this.generateFormArray(array));
   }
 }

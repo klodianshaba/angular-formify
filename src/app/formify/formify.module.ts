@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import {CommonModule } from '@angular/common';
 import {InputComponent } from './components/input/input.component';
-import {ControlComponent } from './components/control/control.component';
+import {FieldControlComponent} from './components/field-control/field-control.component';
 import {SelectComponent } from './components/select/select.component';
 import {TextareaComponent } from './components/textarea/textarea.component';
 import {FormifyComponent } from './components/formify/formify.component';
@@ -14,12 +14,17 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {MaterialModule} from './material.module';
 import {ToggleComponent} from './components/toggle/toggle.component';
 import {RadioComponent } from './components/radio/radio.component';
+import { ArrayControlComponent } from './components/array-control/array-control.component';
+import { GroupControlComponent } from './components/group-control/group-control.component';
 export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
 }
+
 @NgModule({
   declarations: [
-    ControlComponent,
+    FieldControlComponent,
+    ArrayControlComponent,
+    GroupControlComponent,
     SubmitComponent,
     InputComponent,
     SelectComponent,
@@ -27,7 +32,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     SubmitComponent,
     FormifyComponent,
     ToggleComponent,
-    RadioComponent
+    RadioComponent,
   ],
   imports: [
     CommonModule,
@@ -44,12 +49,15 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
   ],
   exports: [
     ReactiveFormsModule,
+    FieldControlComponent,
+    ArrayControlComponent,
+    GroupControlComponent,
     SubmitComponent,
     InputComponent,
     SelectComponent,
     TextareaComponent,
     ToggleComponent,
-    RadioComponent
+    RadioComponent,
   ],
 })
 export class FormifyModule { }

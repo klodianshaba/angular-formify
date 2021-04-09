@@ -33,16 +33,8 @@ export class AppComponent {
 
       new FieldModel({controlName: 'toggle', label: 'Fill contact', defaultValue: true }),
 
-      new ArrayModel('array', [
-        new GroupModel('contact', [
-          new GroupModel('password', [
-            new FieldModel({
-              controlName: 'first', label: 'number phone', placeholder: 'phone', autoComplete: 'off',
-              validators: [
-                {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
-              ]
-            }),
-          ]),
+      new ArrayModel({controlName: 'array', controls: [
+        new GroupModel({ controlName: 'contact1', controls: [
           new FieldModel({
             controlName: 'phone', label: 'number phone', placeholder: 'phone', autoComplete: 'off',
             validators: [
@@ -55,8 +47,8 @@ export class AppComponent {
               {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
             ]
           }),
-        ]),
-        new GroupModel('contact', [
+        ]}),
+        new GroupModel({ controlName: 'contact2', controls: [
           new FieldModel({
             controlName: 'phone', label: 'number phone', placeholder: 'phone', autoComplete: 'off',
             validators: [
@@ -69,10 +61,10 @@ export class AppComponent {
               {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
             ]
           }),
-        ]),
-      ]),
+        ]}),
+      ]}),
 
-      new GroupModel('contact', [
+      new GroupModel({ controlName: 'contact', controls: [
         new FieldModel({
           controlName: 'phone', label: 'number phone', placeholder: 'phone', autoComplete: 'off',
           validators: [
@@ -85,12 +77,12 @@ export class AppComponent {
             {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
           ]
         }),
-      ]),
+      ]}),
     ],
-    submit: {text: 'Save'}
+    submit: {text: 'Save it'}
   });
   constructor() {
-    console.log(this.formify.get('contact'));
+    // console.log(this.formify.get('contact'));
     console.log(this.formify);
   }
   onSubmit(): void{
