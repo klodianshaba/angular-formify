@@ -34,7 +34,7 @@ export class AppComponent {
       new FieldModel({controlName: 'toggle', label: 'Fill contact', defaultValue: true }),
 
       new ArrayModel({controlName: 'array', controls: [
-        new GroupModel('contact1', [
+        new GroupModel({ controlName: 'contact1', controls: [
           new FieldModel({
             controlName: 'phone', label: 'number phone', placeholder: 'phone', autoComplete: 'off',
             validators: [
@@ -47,8 +47,8 @@ export class AppComponent {
               {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
             ]
           }),
-        ]),
-        new GroupModel('contact2', [
+        ]}),
+        new GroupModel({ controlName: 'contact2', controls: [
           new FieldModel({
             controlName: 'phone', label: 'number phone', placeholder: 'phone', autoComplete: 'off',
             validators: [
@@ -61,10 +61,10 @@ export class AppComponent {
               {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
             ]
           }),
-        ]),
+        ]}),
       ]}),
 
-      new GroupModel('contact', [
+      new GroupModel({ controlName: 'contact', controls: [
         new FieldModel({
           controlName: 'phone', label: 'number phone', placeholder: 'phone', autoComplete: 'off',
           validators: [
@@ -77,7 +77,7 @@ export class AppComponent {
             {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
           ]
         }),
-      ]),
+      ]}),
     ],
     submit: {text: 'Save'}
   });

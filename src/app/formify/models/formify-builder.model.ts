@@ -11,7 +11,7 @@ export class FormifyBuilderModel {
     return new FieldModel( config );
   }
   public group( config: GroupModel ) {
-    return new GroupModel( config.controlName ,  config.controls );
+    return new GroupModel( config );
   }
   public array( config: ArrayModel ) {
     this.field({controlName :  'f'});

@@ -8,7 +8,7 @@ import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
   styleUrls: ['./group-control.component.scss']
 })
 export class GroupControlComponent implements OnInit, OnChanges {
-  private _groupModel: GroupModel = new GroupModel('', []);
+  private _groupModel: GroupModel = new GroupModel({controlName: '' , controls: []});
   @Input('groupModel') set onArrayConfig( groupModel: GroupModel) {this._groupModel = groupModel; }
   formGroup: FormGroup;
   get groupModel(): GroupModel{
