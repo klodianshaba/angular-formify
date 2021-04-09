@@ -34,7 +34,7 @@
       <form [formGroup]="formify.formGroup" #form="ngForm" (ngSubmit)="onSubmit()">
         <formify-input formControlName="name" [fieldModel]="formify.field('name')"></formify-input>
         <formify-select formControlName="language" [fieldModel]="formify.field('language')"></formify-select>
-        <formify-textarea formControlName="describe" [fieldModel]="formify.field('describe')"></formify-textarea>
+        <formify-textarea formControlName="biography" [fieldModel]="formify.field('biography')"></formify-textarea>
         <formify-toggle formControlName="toggle" [fieldModel]="formify.field('toggle')"></formify-toggle>
         <formify-radio formControlName="color" [fieldModel]="formify.field('color')"></formify-radio>
 

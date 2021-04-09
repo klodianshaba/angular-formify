@@ -3,6 +3,7 @@ import {ArrayModel, FieldModel, FormifyModel, GroupModel, SubmitModel, Validator
 import {Validators} from '@angular/forms';
 import {NameFieldControl} from './formify/fields/name.field-control';
 import {LanguageFieldControl} from './formify/fields/language.field-control';
+import {BiographyFieldControl} from './formify/fields/biography.field-control';
 
 @Component({
   selector: 'app-root',
@@ -13,14 +14,9 @@ export class AppComponent {
   title = 'form';
   public formify: FormifyModel = new FormifyModel({
     controls: [
-      new NameFieldControl(),
-      new LanguageFieldControl(),
-      new FieldModel({
-        controlName: 'describe', label: 'Describe your identity', placeholder: 'language', autoComplete: 'off',
-        validators: [
-          {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
-        ]
-      }),
+      new NameFieldControl({}),
+      new LanguageFieldControl({}),
+      new BiographyFieldControl({}),
       new FieldModel({controlName: 'color', label: 'Color' , defaultValue: 'primary', options: [{text: 'Primary', value: 'primary'}, {text: 'Warn', value: 'warn'}]}),
 
       new FieldModel({controlName: 'toggle', label: 'Fill contact', defaultValue: true }),
