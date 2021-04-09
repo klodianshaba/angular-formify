@@ -3,7 +3,7 @@ import {ArrayModel, GroupModel} from '../../models';
 import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
-  selector: 'formify-group-control',
+  selector: 'formify-group',
   templateUrl: './group-control.component.html',
   styleUrls: ['./group-control.component.scss']
 })

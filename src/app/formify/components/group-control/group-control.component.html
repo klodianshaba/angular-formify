@@ -4,8 +4,6 @@
 <!--  <input formControlName="phone">-->
 <!--  <input formControlName="address">-->
 
-  <formify-input formControlName="phone" [fieldModel]="groupModel.get('phone')"></formify-input>
-  <formify-input formControlName="address" [fieldModel]="groupModel.get('address')"></formify-input>
-
+  <ng-content></ng-content>
   <button hidden #submit></button>
 </form>

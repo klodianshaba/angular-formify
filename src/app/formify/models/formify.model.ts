@@ -3,6 +3,7 @@ import {FieldModel} from './field.model';
 import {GroupModel} from './group.model';
 import {ArrayModel} from './array.model';
 import {SubmitModel} from './submit.model';
+import {FormifyAccessibilityModel} from './accessibility.model';
 import {BehaviorSubject} from 'rxjs';
 
 export interface FormifyState {
@@ -21,12 +22,14 @@ export type ControlsType = (FieldModel | GroupModel | ArrayModel)[];
 
 export type  OptionsType = ValidatorFn | ValidatorFn[] | AbstractControlOptions;
 
-export  class FormifyModel{
+
+export  class FormifyModel extends FormifyAccessibilityModel{
   public formGroup: FormGroup;
   public controls: ControlsType;
   public submit: SubmitModel;
   public options?: OptionsType;
   constructor( config: FormifyState ) {
+    super();
     this.submit = new SubmitModel();
     this.controls = config.controls;
     if (config.hasOwnProperty('submit')){ this.submit = {...this.submit, ...config.submit}; }
@@ -50,7 +53,6 @@ export  class FormifyModel{
     }
     return formControls;
   }
-
   private generateFormControl(control: FieldModel ): FormControl {
     const formControl = new FormControl(
       control.defaultValue , control.validators.map(validator => validator.validator )
@@ -91,49 +93,6 @@ export  class FormifyModel{
     this.controls.push(control);
     this.formGroup.addControl(control.controlName, this.generateFormControl(control));
   }
-  public get(path: string): FieldModel | null{
-    const controls =  this.iterateFindControl(this.controls, path);
-    for (const control of controls){
-      if (control instanceof FieldModel){
-        return  control;
-      }
-    }
-    return null;
-  }
-  public getArray(path: string): ArrayModel | null{
-    for (const control of this.controls){
-      if (control instanceof ArrayModel){
-        return  control;
-      }
-    }
-    return null;
-  }
-  public getGroup(path: string): GroupModel | null{
-    for (const control of this.controls){
-      if (control instanceof GroupModel){
-        return  control;
-      }
-    }
-    return null;
-  }
-  private iterateFindControl(controls: ControlsType, controlName: string): ControlsType{
-    return controls.filter(control => {
-      if (control instanceof FieldModel){
-        if (controlName === control.controlName){
-          return control;
-        }
-        return null;
-      }
-      else if ( control instanceof GroupModel){
-        return this.iterateFindControl(control.controls, controlName);
-      }
-      else if (control instanceof ArrayModel){
-        return this.iterateFindControl(control.controls, controlName);
-      }
-      return null;
-    });
-  }
-
   public checkDisabledSubmit(): void {
     this.submit.disabled = ( this.formGroup.invalid && this.submit.status.value || this.submit.loading );
   }

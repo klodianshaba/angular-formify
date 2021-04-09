@@ -6,4 +6,4 @@ export * from './group.model';
 export * from './option.model';
 export * from './submit.model';
 export * from './validator.model';
-
+export * from './accessibility.model';

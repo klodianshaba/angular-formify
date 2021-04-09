@@ -38,7 +38,10 @@
         <formify-toggle formControlName="toggle" [fieldModel]="formify.get('toggle')"></formify-toggle>
         <formify-radio formControlName="color" [fieldModel]="formify.get('color')"></formify-radio>
         <formify-array-control [arrayModel]="formify.getArray('array')"></formify-array-control>
-        <formify-group-control [groupModel]="formify.getGroup('contact')"></formify-group-control>
+        <formify-group #group formGroupName="contact" [groupModel]="formify.getGroup('contact')">
+          <formify-input formControlName="phone" [fieldModel]="group.groupModel.get('phone')"></formify-input>
+          <formify-input formControlName="address" [fieldModel]="group.groupModel.get('address')"></formify-input>
+        </formify-group>
 <!--        <div formGroupName="contact">-->
 <!--          <formify-input formControlName="phone" [fieldModel]="formify.get('contact.phone')"></formify-input>-->
 <!--        </div>-->
