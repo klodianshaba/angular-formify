@@ -3,7 +3,7 @@ import {FieldModel} from './field.model';
 import {GroupModel} from './group.model';
 import {ArrayModel} from './array.model';
 import {SubmitModel} from './submit.model';
-import {FormifyAccessibilityModel} from './accessibility.model';
+import {FormifyAccessibility} from './accessibility.abstract';
 import {BehaviorSubject} from 'rxjs';
 
 export interface FormifyState {
@@ -22,13 +22,12 @@ export type ControlsType = (FieldModel | GroupModel | ArrayModel)[];
 
 export type  OptionsType = ValidatorFn | ValidatorFn[] | AbstractControlOptions;
 
-export  class FormifyModel extends FormifyAccessibilityModel{
+export  class FormifyModel implements FormifyAccessibility{
   public formGroup: FormGroup;
   public controls: ControlsType;
   public submit: SubmitModel;
   public options?: OptionsType;
   constructor( config: FormifyState ) {
-    super();
     this.submit = new SubmitModel();
     this.controls = config.controls;
     if (config.hasOwnProperty('submit')){ this.submit = {...this.submit, ...config.submit}; }
@@ -81,6 +80,37 @@ export  class FormifyModel extends FormifyAccessibilityModel{
     });
     return formArray;
   }
+
+  get(path: string): FieldModel | GroupModel | ArrayModel | null {
+    for (const control of this.controls){
+      if (path === control.controlName){
+        return control;
+      }
+    }
+    return null;
+  }
+  field(path: string): FieldModel | null {
+    const control = this.get(path);
+    if (control instanceof FieldModel) {
+      return control;
+    }
+    return null;
+  }
+  group(path: string): GroupModel | null {
+    const control = this.get(path);
+    if (control instanceof GroupModel) {
+      return control;
+    }
+    return null;
+  }
+  array(path: string): ArrayModel | null {
+    const control = this.get(path);
+    if (control instanceof ArrayModel) {
+      return control;
+    }
+    return null;
+  }
+
   public addControl(control: FieldModel): void{
     this.controls.push(control);
     this.formGroup.addControl(control.controlName, this.generateFormControl(control));

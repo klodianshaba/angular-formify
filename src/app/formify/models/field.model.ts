@@ -20,7 +20,6 @@ export enum FieldTypes {
 export interface FieldState {
   formControl?: FormControl;
   controlName?: string;
-  readonly controlType?: ControlTypes;
   fieldType?: FieldTypes;
   defaultValue?: string | boolean;
   errorStateMatcher?: ErrorStateMatcher;

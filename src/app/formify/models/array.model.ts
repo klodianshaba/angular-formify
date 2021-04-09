@@ -1,24 +1,24 @@
 import {FormArray} from '@angular/forms';
 import {ControlsType, ControlTypes} from './formify.model';
 import {BehaviorSubject} from 'rxjs';
-import {FormifyAccessibilityModel} from './accessibility.model';
+import {FormifyAccessibility} from './accessibility.abstract';
+import {FieldModel} from './field.model';
+import {GroupModel} from './group.model';
 
 export interface ArrayState {
   controlName: string;
   controls: ControlsType;
-  readonly controlType?: ControlTypes;
   label?: string;
 }
 
-export class ArrayModel extends FormifyAccessibilityModel{
+export class ArrayModel implements FormifyAccessibility{
   formArray: FormArray;
   controlName: string;
   controls: ControlsType;
-  readonly controlType?: ControlTypes;
+  readonly controlType: ControlTypes;
   change: BehaviorSubject<any>;
   label: string;
   constructor( config: ArrayState ) {
-    super();
     this.formArray = null;
     this.controlName = '';
     this.controlType = ControlTypes.formArray;
@@ -26,5 +26,34 @@ export class ArrayModel extends FormifyAccessibilityModel{
     this.change = new BehaviorSubject<any>(null);
     this.label = '';
     Object.assign(this, config);
+  }
+  get(path: string): FieldModel | GroupModel | ArrayModel | null {
+    for (const control of this.controls){
+      if (path === control.controlName){
+        return control;
+      }
+    }
+    return null;
+  }
+  field(path: string): FieldModel | null {
+    const control = this.get(path);
+    if (control instanceof FieldModel) {
+      return control;
+    }
+    return null;
+  }
+  group(path: string): GroupModel | null {
+    const control = this.get(path);
+    if (control instanceof GroupModel) {
+      return control;
+    }
+    return null;
+  }
+  array(path: string): ArrayModel | null {
+    const control = this.get(path);
+    if (control instanceof ArrayModel) {
+      return control;
+    }
+    return null;
   }
 }
