@@ -77,8 +77,8 @@ export  class FormifyModel{
     this.controls.push(control);
     this.formGroup.addControl(control.controlName, this.generateFormControl(control));
   }
-  public getControl(controlName: string): FieldModel {
-    const controls =  this.iterateFindControl(this.controls, controlName);
+  public get(path: string): FieldModel | null{
+    const controls =  this.iterateFindControl(this.controls, path);
     for (const control of controls){
       if (control instanceof FieldModel){
         return  control;

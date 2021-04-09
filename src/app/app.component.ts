@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {FieldModel, FormifyModel, SubmitModel, ValidatorModel} from './formify/models';
+import {ArrayModel, FieldModel, FormifyModel, GroupModel, SubmitModel, ValidatorModel} from './formify/models';
 import {Validators} from '@angular/forms';
 
 @Component({
@@ -31,11 +31,67 @@ export class AppComponent {
       }),
       new FieldModel({controlName: 'color', label: 'Color' , defaultValue: 'primary', options: [{text: 'Primary', value: 'primary'}, {text: 'Warn', value: 'warn'}]}),
 
-      new FieldModel({controlName: 'toggle', label: 'Fill contact', defaultValue: true })
+      new FieldModel({controlName: 'toggle', label: 'Fill contact', defaultValue: true }),
+
+      new ArrayModel('array', [
+        new GroupModel('contact', [
+          new GroupModel('password', [
+            new FieldModel({
+              controlName: 'first', label: 'number phone', placeholder: 'phone', autoComplete: 'off',
+              validators: [
+                {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
+              ]
+            }),
+          ]),
+          new FieldModel({
+            controlName: 'phone', label: 'number phone', placeholder: 'phone', autoComplete: 'off',
+            validators: [
+              {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
+            ]
+          }),
+          new FieldModel({
+            controlName: 'address', label: 'your address', placeholder: 'address', autoComplete: 'off',
+            validators: [
+              {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
+            ]
+          }),
+        ]),
+        new GroupModel('contact', [
+          new FieldModel({
+            controlName: 'phone', label: 'number phone', placeholder: 'phone', autoComplete: 'off',
+            validators: [
+              {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
+            ]
+          }),
+          new FieldModel({
+            controlName: 'address', label: 'your address', placeholder: 'address', autoComplete: 'off',
+            validators: [
+              {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
+            ]
+          }),
+        ]),
+      ]),
+
+      new GroupModel('contact', [
+        new FieldModel({
+          controlName: 'phone', label: 'number phone', placeholder: 'phone', autoComplete: 'off',
+          validators: [
+            {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
+          ]
+        }),
+        new FieldModel({
+          controlName: 'address', label: 'your address', placeholder: 'address', autoComplete: 'off',
+          validators: [
+            {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
+          ]
+        }),
+      ]),
     ],
     submit: {text: 'Save'}
   });
   constructor() {
+    console.log(this.formify.get('contact'));
+    console.log(this.formify);
   }
   onSubmit(): void{
     console.log(this.formify.formGroup.value);

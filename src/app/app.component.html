@@ -32,11 +32,14 @@
     </a>
     <div class="form">
       <form [formGroup]="formify.formGroup" #form="ngForm" (ngSubmit)="onSubmit()">
-        <formify-input formControlName="name" [fieldModel]="formify.getControl('name')"></formify-input>
-        <formify-select formControlName="language" [fieldModel]="formify.getControl('language')"></formify-select>
-        <formify-textarea formControlName="describe" [fieldModel]="formify.getControl('describe')"></formify-textarea>
-        <formify-toggle formControlName="toggle" [fieldModel]="formify.getControl('toggle')"></formify-toggle>
-        <formify-radio formControlName="color" [fieldModel]="formify.getControl('color')"></formify-radio>
+        <formify-input formControlName="name" [fieldModel]="formify.get('name')"></formify-input>
+        <formify-select formControlName="language" [fieldModel]="formify.get('language')"></formify-select>
+        <formify-textarea formControlName="describe" [fieldModel]="formify.get('describe')"></formify-textarea>
+        <formify-toggle formControlName="toggle" [fieldModel]="formify.get('toggle')"></formify-toggle>
+        <formify-radio formControlName="color" [fieldModel]="formify.get('color')"></formify-radio>
+<!--        <div formGroupName="contact">-->
+<!--          <formify-input formControlName="phone" [fieldModel]="formify.get('contact.phone')"></formify-input>-->
+<!--        </div>-->
         <formify-submit [submit]="formify.submit"></formify-submit>
       </form>
     </div>
