@@ -5,6 +5,7 @@ import {ArrayModel} from './array.model';
 import {SubmitModel} from './submit.model';
 import {FormifyAccessibility} from './accessibility.abstract';
 import {BehaviorSubject} from 'rxjs';
+import {FormifyManipulation} from './manipulation.abstract';
 
 export interface FormifyState {
   controls: (FieldModel | GroupModel | ArrayModel)[];
@@ -22,7 +23,7 @@ export type ControlsType = (FieldModel | GroupModel | ArrayModel)[];
 
 export type  OptionsType = ValidatorFn | ValidatorFn[] | AbstractControlOptions;
 
-export  class FormifyModel implements FormifyAccessibility{
+export  class FormifyModel implements FormifyAccessibility, FormifyManipulation{
   public formGroup: FormGroup;
   public controls: ControlsType;
   public submit: SubmitModel;
@@ -111,10 +112,19 @@ export  class FormifyModel implements FormifyAccessibility{
     return null;
   }
 
-  public addControl(control: FieldModel): void{
-    this.controls.push(control);
-    this.formGroup.addControl(control.controlName, this.generateFormControl(control));
+  addField(field: FieldModel): void {
+    this.controls.push(field);
+    this.formGroup.addControl(field.controlName, this.generateFormControl(field));
   }
+  addGroup(group: GroupModel): void {
+    this.controls.push(group);
+    this.formGroup.addControl(group.controlName, this.generateFormGroup(group));
+  }
+  addArray(array: ArrayModel): void {
+    this.controls.push(array);
+    this.formGroup.addControl(array.controlName, this.generateFormArray(array));
+  }
+
   public checkDisabledSubmit(): void {
     this.submit.disabled = ( this.formGroup.invalid && this.submit.status.value || this.submit.loading );
   }
