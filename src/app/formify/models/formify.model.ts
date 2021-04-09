@@ -26,7 +26,7 @@ export  class FormifyModel{
   public controls: ControlsType;
   public submit: SubmitModel;
   public options?: OptionsType;
-  constructor(config: FormifyState ) {
+  constructor( config: FormifyState ) {
     this.submit = new SubmitModel();
     this.controls = config.controls;
     if (config.hasOwnProperty('submit')){ this.submit = {...this.submit, ...config.submit}; }
@@ -70,7 +70,15 @@ export  class FormifyModel{
     const formArray = new FormArray( Object.entries( this.generateFormControls(control.controls)) // recursion
       .map( ([name, value]) => ({name, value}))
       .map( item => item.value) );
-    control.formArray = formArray;
+    if (!control.formArray){
+      control.formArray = formArray;
+      control.change.subscribe(change => {
+        if (change){
+          this.formGroup.patchValue(change);
+        }
+      });
+    }
+
     return  formArray;
   }
   public addControl(control: FieldModel): void{
@@ -81,6 +89,14 @@ export  class FormifyModel{
     const controls =  this.iterateFindControl(this.controls, path);
     for (const control of controls){
       if (control instanceof FieldModel){
+        return  control;
+      }
+    }
+    return null;
+  }
+  public getArray(path: string): ArrayModel | null{
+    for (const control of this.controls){
+      if (control instanceof ArrayModel){
         return  control;
       }
     }

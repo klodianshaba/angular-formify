@@ -34,15 +34,7 @@ export class AppComponent {
       new FieldModel({controlName: 'toggle', label: 'Fill contact', defaultValue: true }),
 
       new ArrayModel('array', [
-        new GroupModel('contact', [
-          new GroupModel('password', [
-            new FieldModel({
-              controlName: 'first', label: 'number phone', placeholder: 'phone', autoComplete: 'off',
-              validators: [
-                {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
-              ]
-            }),
-          ]),
+        new GroupModel('contact1', [
           new FieldModel({
             controlName: 'phone', label: 'number phone', placeholder: 'phone', autoComplete: 'off',
             validators: [
@@ -56,7 +48,7 @@ export class AppComponent {
             ]
           }),
         ]),
-        new GroupModel('contact', [
+        new GroupModel('contact2', [
           new FieldModel({
             controlName: 'phone', label: 'number phone', placeholder: 'phone', autoComplete: 'off',
             validators: [
@@ -72,25 +64,25 @@ export class AppComponent {
         ]),
       ]),
 
-      new GroupModel('contact', [
-        new FieldModel({
-          controlName: 'phone', label: 'number phone', placeholder: 'phone', autoComplete: 'off',
-          validators: [
-            {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
-          ]
-        }),
-        new FieldModel({
-          controlName: 'address', label: 'your address', placeholder: 'address', autoComplete: 'off',
-          validators: [
-            {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
-          ]
-        }),
-      ]),
+      // new GroupModel('contact', [
+      //   new FieldModel({
+      //     controlName: 'phone', label: 'number phone', placeholder: 'phone', autoComplete: 'off',
+      //     validators: [
+      //       {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
+      //     ]
+      //   }),
+      //   new FieldModel({
+      //     controlName: 'address', label: 'your address', placeholder: 'address', autoComplete: 'off',
+      //     validators: [
+      //       {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
+      //     ]
+      //   }),
+      // ]),
     ],
     submit: {text: 'Save'}
   });
   constructor() {
-    console.log(this.formify.get('contact'));
+    // console.log(this.formify.get('contact'));
     console.log(this.formify);
   }
   onSubmit(): void{
