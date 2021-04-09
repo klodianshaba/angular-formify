@@ -1,11 +1,10 @@
 
 
 <form [formGroup]="formGroup" #form="ngForm">
-
   <div [formArrayName]="arrayModel.controlName" *ngFor="let item of formArray['controls']; let i = index;">
     <div [formGroupName]="i">
-     <input formControlName="phone" (input)="emitValue()">
-     <input formControlName="address" (input)="emitValue()">
+     <input formControlName="phone">
+     <input formControlName="address">
     </div>
   </div>
   <button hidden #submit></button>

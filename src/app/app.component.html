@@ -37,7 +37,7 @@
         <formify-textarea formControlName="describe" [fieldModel]="formify.get('describe')"></formify-textarea>
         <formify-toggle formControlName="toggle" [fieldModel]="formify.get('toggle')"></formify-toggle>
         <formify-radio formControlName="color" [fieldModel]="formify.get('color')"></formify-radio>
-        <formify-array-control formArrayName="array" [arrayModel]="formify.getArray('array')"></formify-array-control>
+        <formify-array-control [arrayModel]="formify.getArray('array')"></formify-array-control>
 <!--        <div formGroupName="contact">-->
 <!--          <formify-input formControlName="phone" [fieldModel]="formify.get('contact.phone')"></formify-input>-->
 <!--        </div>-->

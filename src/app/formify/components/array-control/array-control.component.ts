@@ -11,26 +11,20 @@ export class ArrayControlComponent implements OnInit, OnChanges {
   private _arrayModel: ArrayModel = new ArrayModel('', []);
   @Input('arrayModel') set onArrayConfig( arrayModel: ArrayModel) {this._arrayModel = arrayModel; }
   formGroup: FormGroup;
-  formify: FormifyModel;
   get arrayModel(): ArrayModel{
     return this._arrayModel;
   }
   constructor(protected formBuilder: FormBuilder) { }
   ngOnChanges(changes: SimpleChanges): void {}
   ngOnInit(): void {
-    this.formify = new FormifyModel({
-      controls: [this.arrayModel]
+    this.formGroup = new FormGroup( {[this.arrayModel.controlName]: this.arrayModel.formArray});
+    this.formGroup.statusChanges.subscribe(status => {
+      console.log(status);
+      this.arrayModel.change.next(this.formGroup.value);
     });
-    this.formGroup = this.formify.formGroup;
-
-    // console.log(this.formify);
-    // console.log(this.arrayModel);
+    console.log(this.arrayModel);
   }
   get formArray(): FormArray{
     return this.formGroup.get(this.arrayModel.controlName) as FormArray;
   }
-  emitValue(): void{
-    this.arrayModel.change.next(this.formGroup.value);
-  }
-
 }

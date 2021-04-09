@@ -64,21 +64,27 @@ export  class FormifyModel{
   private generateFormGroup(control: GroupModel ): FormGroup {
     const formGroup = new FormGroup( this.generateFormControls(control.controls) ); // recursion
     control.formGroup = formGroup;
+    control.change.subscribe(change => {
+      if (change){
+        console.log('group_change');
+        console.log(change);
+        this.formGroup.patchValue(change);
+      }
+    });
     return  formGroup;
   }
   private generateFormArray(control: ArrayModel): FormArray {
     const formArray = new FormArray( Object.entries( this.generateFormControls(control.controls)) // recursion
       .map( ([name, value]) => ({name, value}))
-      .map( item => item.value) );
-    if (!control.formArray){
-      control.formArray = formArray;
-      control.change.subscribe(change => {
-        if (change){
-          this.formGroup.patchValue(change);
+      .map( item => item.value)
+    );
+    control.formArray = formArray;
+    control.change.subscribe(change => {
+      if (change){
+        console.log('array_change');
+        this.formGroup.patchValue(change);
         }
-      });
-    }
-
+    });
     return  formArray;
   }
   public addControl(control: FieldModel): void{
