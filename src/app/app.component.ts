@@ -12,7 +12,7 @@ export class AppComponent {
   public formify: FormifyModel = new FormifyModel({
     controls: [
       new FieldModel({
-        controlName: 'name', label: 'Enter name', icon: 'home', placeholder: 'name' , autoComplete: 'off',
+        controlName: 'name', label: 'Enter name', icon: 'home', placeholder: 'name' , autoComplete: 'off', defaultValue: 'eric',
         validators: [
           new ValidatorModel( {validator: Validators.required, errorCode: 'required', description: 'name is required'}),
         ]
@@ -81,10 +81,7 @@ export class AppComponent {
     ],
     submit: {text: 'Save it'}
   });
-  constructor() {
-    // console.log(this.formify.get('contact'));
-    console.log(this.formify);
-  }
+  constructor() {}
   onSubmit(): void{
     console.log(this.formify.formGroup.value);
     this.formify.loading(true);
