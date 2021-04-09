@@ -65,7 +65,7 @@ export  class FormifyModel{
     const formGroup = new FormGroup( this.generateFormControls(control.controls) ); // recursion
     control.formGroup = formGroup;
     control.change.subscribe(change => {
-      if (change){
+      if (change) {
         console.log('group_change');
         console.log(change);
         this.formGroup.patchValue(change);
@@ -103,6 +103,14 @@ export  class FormifyModel{
   public getArray(path: string): ArrayModel | null{
     for (const control of this.controls){
       if (control instanceof ArrayModel){
+        return  control;
+      }
+    }
+    return null;
+  }
+  public getGroup(path: string): GroupModel | null{
+    for (const control of this.controls){
+      if (control instanceof GroupModel){
         return  control;
       }
     }

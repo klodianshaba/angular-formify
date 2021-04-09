@@ -64,20 +64,20 @@ export class AppComponent {
         ]),
       ]),
 
-      // new GroupModel('contact', [
-      //   new FieldModel({
-      //     controlName: 'phone', label: 'number phone', placeholder: 'phone', autoComplete: 'off',
-      //     validators: [
-      //       {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
-      //     ]
-      //   }),
-      //   new FieldModel({
-      //     controlName: 'address', label: 'your address', placeholder: 'address', autoComplete: 'off',
-      //     validators: [
-      //       {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
-      //     ]
-      //   }),
-      // ]),
+      new GroupModel('contact', [
+        new FieldModel({
+          controlName: 'phone', label: 'number phone', placeholder: 'phone', autoComplete: 'off',
+          validators: [
+            {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
+          ]
+        }),
+        new FieldModel({
+          controlName: 'address', label: 'your address', placeholder: 'address', autoComplete: 'off',
+          validators: [
+            {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
+          ]
+        }),
+      ]),
     ],
     submit: {text: 'Save'}
   });
