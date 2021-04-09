@@ -4,6 +4,9 @@ import {BehaviorSubject} from 'rxjs';
 import {FieldModel} from './field.model';
 import {FormifyAccessibility} from './accessibility.abstract';
 import {ArrayModel, ArrayState} from './array.model';
+import {FormifyGenerate} from './formify.generate';
+import {FormifyManipulation} from './manipulation.abstract';
+import {SubmitModel} from './submit.model';
 
 export interface GroupState {
   controlName: string;
@@ -11,15 +14,15 @@ export interface GroupState {
   label?: string;
 }
 
-export class GroupModel implements FormifyAccessibility{
-  formGroup: FormGroup;
+export class GroupModel extends FormifyGenerate implements FormifyAccessibility , FormifyManipulation{
   controlName: string;
   controls: ControlsType;
   readonly controlType: ControlTypes;
   change: BehaviorSubject<any>;
   label: string;
+  public submit: SubmitModel;
   constructor( config: GroupState ) {
-    this.formGroup = null;
+    super();
     this.controlName = '';
     this.controlType = ControlTypes.formGroup;
     this.controls = [];
@@ -55,5 +58,18 @@ export class GroupModel implements FormifyAccessibility{
       return control;
     }
     return null;
+  }
+
+  addField(field: FieldModel): void {
+    this.controls.push(field);
+    this.formGroup.addControl(field.controlName, this.generateFormControl(field));
+  }
+  addGroup(group: GroupModel): void {
+    this.controls.push(group);
+    this.formGroup.addControl(group.controlName, this.generateFormGroup(group));
+  }
+  addArray(array: ArrayModel): void {
+    this.controls.push(array);
+    this.formGroup.addControl(array.controlName, this.generateFormArray(array));
   }
 }

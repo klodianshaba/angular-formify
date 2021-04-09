@@ -1,6 +1,6 @@
 import {Component, OnInit, SimpleChanges, OnChanges, Input} from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
-import {ArrayModel, FieldModel, FormifyModel} from '../../models';
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {ArrayModel, FieldModel, FormifyModel, GroupModel} from '../../models';
 
 @Component({
   selector: 'formify-array-control',
@@ -14,6 +14,20 @@ export class ArrayControlComponent implements OnInit, OnChanges {
   get arrayModel(): ArrayModel{
     return this._arrayModel;
   }
+  private group = new GroupModel({ controlName: 'contact', controls: [
+      new FieldModel({
+        controlName: 'phone', label: 'number phone', placeholder: 'phone', autoComplete: 'off',
+        validators: [
+          {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
+        ]
+      }),
+      new FieldModel({
+        controlName: 'address', label: 'your address', placeholder: 'address', autoComplete: 'off',
+        validators: [
+          {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
+        ]
+      }),
+    ]});
   constructor(protected formBuilder: FormBuilder) { }
   ngOnChanges(changes: SimpleChanges): void {}
   ngOnInit(): void {
@@ -25,6 +39,10 @@ export class ArrayControlComponent implements OnInit, OnChanges {
     console.log(this.arrayModel);
   }
   get formArray(): FormArray{
+    // return this.formGroup.get(this.arrayModel.controlName) as FormArray;
     return this.formGroup.get(this.arrayModel.controlName) as FormArray;
+  }
+  addGroup(): void {
+    this.arrayModel.addGroup(this.group);
   }
 }

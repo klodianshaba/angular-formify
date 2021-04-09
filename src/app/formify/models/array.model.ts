@@ -1,9 +1,12 @@
 import {FormArray} from '@angular/forms';
-import {ControlsType, ControlTypes} from './formify.model';
+import {ControlsType, ControlTypes, FormifyModel} from './formify.model';
 import {BehaviorSubject} from 'rxjs';
 import {FormifyAccessibility} from './accessibility.abstract';
 import {FieldModel} from './field.model';
 import {GroupModel} from './group.model';
+import {FormifyManipulation} from './manipulation.abstract';
+import {FormifyGenerate} from './formify.generate';
+import {SubmitModel} from './submit.model';
 
 export interface ArrayState {
   controlName: string;
@@ -11,14 +14,16 @@ export interface ArrayState {
   label?: string;
 }
 
-export class ArrayModel implements FormifyAccessibility{
+export class ArrayModel extends FormifyGenerate implements FormifyAccessibility, FormifyManipulation{
   formArray: FormArray;
   controlName: string;
   controls: ControlsType;
   readonly controlType: ControlTypes;
   change: BehaviorSubject<any>;
   label: string;
+  public submit: SubmitModel;
   constructor( config: ArrayState ) {
+    super();
     this.formArray = null;
     this.controlName = '';
     this.controlType = ControlTypes.formArray;
@@ -55,5 +60,17 @@ export class ArrayModel implements FormifyAccessibility{
       return control;
     }
     return null;
+  }
+  addField(field: FieldModel): void {
+    this.controls.push(field);
+    this.formArray.push(this.generateFormControl(field));
+  }
+  addGroup(group: GroupModel): void {
+    this.controls.push(group);
+    this.formArray.push( this.generateFormGroup(group));
+  }
+  addArray(array: ArrayModel): void {
+    this.controls.push(array);
+    this.formArray.push( this.generateFormArray(array));
   }
 }

@@ -79,7 +79,7 @@ export class AppComponent {
         }),
       ]}),
     ],
-    submit: {text: 'Save'}
+    submit: {text: 'Save it'}
   });
   constructor() {
     // console.log(this.formify.get('contact'));

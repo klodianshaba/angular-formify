@@ -1,10 +1,13 @@
 
 
 <form [formGroup]="formGroup" #form="ngForm">
-  <div [formArrayName]="arrayModel.controlName" *ngFor="let item of formArray['controls']; let i = index;">
-    <div [formGroupName]="i">
-     <input formControlName="phone">
-     <input formControlName="address">
+  <a href="javascript:" (click)="addGroup()"> Add group </a>
+  <div [formArrayName]="arrayModel.controlName" *ngFor="let item of arrayModel['controls']; let i = index;">
+    <div [formGroupName]="i" style="display: flex;">
+      <formify-input formControlName="phone" [fieldModel]="item.field('phone')"></formify-input>
+      <formify-input formControlName="address" [fieldModel]="item.field('address')"></formify-input>
+<!--     <input formControlName="phone">-->
+<!--     <input formControlName="address">-->
     </div>
   </div>
   <button hidden #submit></button>

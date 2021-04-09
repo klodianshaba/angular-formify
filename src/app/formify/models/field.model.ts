@@ -8,6 +8,9 @@ import {MatFormFieldAppearance} from '@angular/material/form-field';
 import {MatAutocomplete} from '@angular/material/autocomplete';
 import {SubmitModel} from './submit.model';
 import {BehaviorSubject} from 'rxjs';
+import {FormifyAccessibility} from './accessibility.abstract';
+import {GroupModel} from './group.model';
+import {ArrayModel} from './array.model';
 export enum FieldTypes {
   input = '[INPUT] input field',
   textarea = '[textarea] textarea field',
@@ -17,7 +20,7 @@ export enum FieldTypes {
   inputPhone = '[RADIO] input phone field',
 }
 
-export interface FieldState {
+export interface FieldState{
   formControl?: FormControl;
   controlName?: string;
   fieldType?: FieldTypes;
@@ -41,7 +44,7 @@ export interface FieldState {
   none?: boolean;
   submit?: SubmitModel;
 }
-export class FieldModel{
+export class FieldModel extends FormifyAccessibility{
   formControl: FormControl;
   public controlName: string;
   readonly controlType: ControlTypes;
@@ -67,6 +70,7 @@ export class FieldModel{
   submit: SubmitModel;
 
   constructor( config: FieldState ) {
+    super();
     this.formControl = null;
     this.controlName = null;
     this.controlType = ControlTypes.formField;
@@ -91,5 +95,17 @@ export class FieldModel{
     this.none = false;
     this.submit = new SubmitModel();
     Object.assign(this, config);
+  }
+  field(path: string): FieldModel | null {
+   return null;
+  }
+  group(path: string): GroupModel | null {
+    return null;
+  }
+  array(path: string): ArrayModel | null {
+    return null;
+  }
+  get(path: string): FieldModel | GroupModel | ArrayModel | null {
+    return null;
   }
 }

@@ -1,6 +1,6 @@
 import {Component, Input, OnInit, SimpleChanges, OnChanges} from '@angular/core';
-import {ArrayModel, GroupModel} from '../../models';
-import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
+import {ArrayModel, FieldModel, GroupModel} from '../../models';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'formify-group',
@@ -14,6 +14,12 @@ export class GroupControlComponent implements OnInit, OnChanges {
   get groupModel(): GroupModel{
     return this._groupModel;
   }
+  private field =   new FieldModel({
+    controlName: 'addresss', label: 'your address', placeholder: 'address', autoComplete: 'off',
+    validators: [
+      {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
+    ]
+  });
   constructor(protected formBuilder: FormBuilder) { }
   ngOnChanges(changes: SimpleChanges): void {}
   ngOnInit(): void {
@@ -22,9 +28,12 @@ export class GroupControlComponent implements OnInit, OnChanges {
       console.log(status);
       this.groupModel.change.next(this.formGroup.value);
     });
-    console.log(this.formGroup);
+    console.log(this.groupModel);
   }
   get modelFormGroup(): FormGroup{
     return this.formGroup.get(this.groupModel.controlName) as FormGroup;
+  }
+  addfield(): void {
+    this.groupModel.addField(this.field);
   }
 }

@@ -6,6 +6,7 @@ import {SubmitModel} from './submit.model';
 import {FormifyAccessibility} from './accessibility.abstract';
 import {BehaviorSubject} from 'rxjs';
 import {FormifyManipulation} from './manipulation.abstract';
+import {FormifyGenerate} from './formify.generate';
 
 export interface FormifyState {
   controls: (FieldModel | GroupModel | ArrayModel)[];
@@ -23,12 +24,11 @@ export type ControlsType = (FieldModel | GroupModel | ArrayModel)[];
 
 export type  OptionsType = ValidatorFn | ValidatorFn[] | AbstractControlOptions;
 
-export  class FormifyModel implements FormifyAccessibility, FormifyManipulation{
-  public formGroup: FormGroup;
+export  class FormifyModel extends FormifyGenerate implements FormifyAccessibility, FormifyManipulation{
   public controls: ControlsType;
-  public submit: SubmitModel;
   public options?: OptionsType;
   constructor( config: FormifyState ) {
+    super();
     this.submit = new SubmitModel();
     this.controls = config.controls;
     if (config.hasOwnProperty('submit')){ this.submit = {...this.submit, ...config.submit}; }
@@ -38,50 +38,6 @@ export  class FormifyModel implements FormifyAccessibility, FormifyManipulation{
       this.checkDisabledSubmit();
     });
   }
-
-  private generateFormControls(controls: ControlsType): { [controlId: string]: AbstractControl; } {
-    const formControls: { [controlId: string]: AbstractControl; } = {};
-    for (const control of controls) {
-      if (control instanceof FieldModel) {
-        Object.assign(formControls , { [control.controlName]: this.generateFormControl(control) });
-      } else if (control instanceof GroupModel) {
-        Object.assign(formControls , { [control.controlName]: this.generateFormGroup(control) });
-      } else if (control instanceof ArrayModel) {
-        Object.assign(formControls , { [control.controlName]: this.generateFormArray(control) });
-      }
-    }
-    return formControls;
-  }
-  private generateFormControl(control: FieldModel ): FormControl {
-    const formControl = new FormControl(
-      control.defaultValue , control.validators.map(validator => validator.validator )
-      .filter(validator => validator)
-    );
-    control.formControl = formControl;
-    control.submit = this.submit;
-    return formControl;
-  }
-
-  private generateFormGroup(control: GroupModel ): FormGroup {
-    const formGroup = new FormGroup( this.generateFormControls(control.controls) ); // recursion
-    control.formGroup = formGroup;
-    control.change.subscribe(change => {
-      if (change) { this.formGroup.patchValue(change); }
-    });
-    return formGroup;
-  }
-  private generateFormArray(control: ArrayModel): FormArray {
-    const formArray = new FormArray( Object.entries( this.generateFormControls(control.controls)) // recursion
-      .map( ([name, value]) => ({name, value}))
-      .map( item => item.value)
-    );
-    control.formArray = formArray;
-    control.change.subscribe(change => {
-      if (change){ this.formGroup.patchValue(change); }
-    });
-    return formArray;
-  }
-
   get(path: string): FieldModel | GroupModel | ArrayModel | null {
     for (const control of this.controls){
       if (path === control.controlName){
