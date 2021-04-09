@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import {CommonModule } from '@angular/common';
 import {InputComponent } from './components/input/input.component';
-import {ControlComponent } from './components/control/control.component';
+import {FieldControlComponent} from './components/field-control/field-control.component';
 import {SelectComponent } from './components/select/select.component';
 import {TextareaComponent } from './components/textarea/textarea.component';
 import {FormifyComponent } from './components/formify/formify.component';
@@ -22,7 +22,9 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
 
 @NgModule({
   declarations: [
-    ControlComponent,
+    FieldControlComponent,
+    ArrayControlComponent,
+    GroupControlComponent,
     SubmitComponent,
     InputComponent,
     SelectComponent,
@@ -31,8 +33,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     FormifyComponent,
     ToggleComponent,
     RadioComponent,
-    ArrayControlComponent,
-    GroupControlComponent
   ],
   imports: [
     CommonModule,
@@ -49,14 +49,15 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
   ],
   exports: [
     ReactiveFormsModule,
+    FieldControlComponent,
+    ArrayControlComponent,
+    GroupControlComponent,
     SubmitComponent,
     InputComponent,
     SelectComponent,
     TextareaComponent,
     ToggleComponent,
     RadioComponent,
-    ArrayControlComponent,
-    GroupControlComponent
   ],
 })
 export class FormifyModule { }

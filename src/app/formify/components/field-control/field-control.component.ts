@@ -5,11 +5,11 @@ import {ErrorStateMatcher, ThemePalette} from '@angular/material/core';
 import {MatFormFieldAppearance} from '@angular/material/form-field';
 import {BehaviorSubject} from 'rxjs';
 @Component({
-  selector: 'formify-control',
-  templateUrl: './control.component.html',
-  styleUrls: ['./control.component.scss']
+  selector: 'formify-field',
+  templateUrl: './field-control.component.html',
+  styleUrls: ['./field-control.component.scss']
 })
-export class ControlComponent implements ControlValueAccessor, OnInit , OnChanges {
+export class FieldControlComponent implements ControlValueAccessor, OnInit , OnChanges {
   private _fieldModel: FieldModel = new FieldModel({controlName: null});
   @Input('fieldModel') set noFieldConfig( fieldModel: FieldModel) {this._fieldModel = fieldModel; }
   @Output('onPrefix') onPrefix: EventEmitter<boolean> = new EventEmitter<boolean>();
