@@ -1,5 +1,5 @@
 import {AbstractControl, AbstractControlOptions, FormArray, FormControl, FormGroup, ValidatorFn} from '@angular/forms';
-import {FieldModel} from './field.model';
+import {FieldModel, FieldState} from './field.model';
 import {GroupModel} from './group.model';
 import {ArrayModel} from './array.model';
 import {SubmitModel} from './submit.model';
@@ -7,6 +7,7 @@ import {FormifyAccessibility} from './accessibility.abstract';
 import {BehaviorSubject} from 'rxjs';
 import {FormifyManipulation} from './manipulation.abstract';
 import {FormifyGenerate} from './formify.generate';
+import {ThemePalette} from '@angular/material/core';
 
 export interface FormifyState {
   controls: (FieldModel | GroupModel | ArrayModel)[];
@@ -27,6 +28,7 @@ export type  OptionsType = ValidatorFn | ValidatorFn[] | AbstractControlOptions;
 export  class FormifyModel extends FormifyGenerate implements FormifyAccessibility{
   public controls: ControlsType;
   public options?: OptionsType;
+  public color: ThemePalette;
   constructor( config: FormifyState ) {
     super();
     this.submit = new SubmitModel();
@@ -92,11 +94,25 @@ export  class FormifyModel extends FormifyGenerate implements FormifyAccessibili
     this.submit.loading = loading;
     this.checkDisabledSubmit();
   }
+  public reset(): void{
+    this.formGroup.reset();
+  }
   public unSubscribe(): void {
     this.$unSubscribe.next();
     this.$unSubscribe.complete();
   }
-  public reset(): void{
-    this.formGroup.reset();
+  updateSubmit(overwrite: SubmitModel): void{
+    Object.assign(this.submit , overwrite);
+  }
+  updateFields(overwrite: FieldState): void{ this.overwriteFields(overwrite, this.controls); }
+
+  private overwriteFields(overwrite: FieldState, controls: (FieldModel | GroupModel | ArrayModel)[]): void{
+    controls.forEach(control => {
+      if (control instanceof FieldModel){
+         Object.assign(control , overwrite);
+      }else{
+        this.overwriteFields(overwrite , control.controls); // recursion
+      }
+    });
   }
 }

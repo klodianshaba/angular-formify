@@ -70,7 +70,27 @@ export class AppComponent {
     ],
     submit: {text: 'Save it'}
   });
-  constructor() {}
+  constructor() {
+    this.initColor();
+    this.formify.formGroup.get('toggle').valueChanges.subscribe(toggle => {
+     if (toggle){
+       this.formify.addControl( new ColorFieldControl());
+       this.initColor();
+     }else{
+       console.log('sdf');
+       this.formify.removeControl('color');
+      }
+    });
+
+    console.log(this.formify);
+  }
+  initColor(): void{
+    this.formify.formGroup.get('color').valueChanges.subscribe(color => {
+      this.formify.updateFields({color});
+      this.formify.updateSubmit({color});
+    });
+  }
+
   onSubmit(): void{
     console.log(this.formify.formGroup.value);
     this.formify.loading(true);
