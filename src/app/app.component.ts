@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
-import {ArrayModel, FieldModel, FormifyModel, GroupModel, SubmitModel, ValidatorModel} from './formify/models';
+import {Component} from '@angular/core';
+import {ArrayModel, FieldModel, FieldTypes, FormifyModel, GroupModel} from './formify/models';
 import {Validators} from '@angular/forms';
 import {NameFieldControl} from './formify/fields/name.field-control';
 import {LanguageFieldControl} from './formify/fields/language.field-control';
 import {BiographyFieldControl} from './formify/fields/biography.field-control';
 import {ColorFieldControl} from './formify/fields/color.field-control';
 import {ToggleFieldControl} from './formify/fields/toggle.field-control';
+import {AddressGroupControl} from './formify/groups/address.group-control';
 
 @Component({
   selector: 'app-root',
@@ -23,34 +24,7 @@ export class AppComponent {
       new ToggleFieldControl(),
 
       new ArrayModel({controlName: 'array', controls: [
-        new GroupModel({ controlName: 'contact1', controls: [
-          new FieldModel({
-            controlName: 'phone', prefix: '+355', type: 'tel', label: 'number phone', placeholder: 'phone', autoComplete: 'off',
-            validators: [
-              {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
-            ]
-          }),
-          new FieldModel({
-            controlName: 'address', label: 'your address', placeholder: 'address', autoComplete: 'off',
-            validators: [
-              {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
-            ]
-          }),
-        ]}),
-        new GroupModel({ controlName: 'contact2', controls: [
-          new FieldModel({
-            controlName: 'phone', prefix: '+355' , label: 'number phone', placeholder: 'phone', autoComplete: 'off',
-            validators: [
-              {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
-            ]
-          }),
-          new FieldModel({
-            controlName: 'address', label: 'your address', placeholder: 'address', autoComplete: 'off',
-            validators: [
-              {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
-            ]
-          }),
-        ]}),
+        new AddressGroupControl(),
       ]}),
 
       new GroupModel({ controlName: 'contact', controls: [

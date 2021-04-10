@@ -1,4 +1,4 @@
-import {Component, ElementRef, EventEmitter, forwardRef, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, forwardRef, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild, AfterViewInit} from '@angular/core';
 import {FieldModel, ValidatorModel, ControlTypes, OptionModel, ValidatorState} from '../../models';
 import {AbstractControl, ControlValueAccessor, FormBuilder, FormControl, FormGroup, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {ErrorStateMatcher, ThemePalette} from '@angular/material/core';
@@ -9,12 +9,12 @@ import {BehaviorSubject} from 'rxjs';
   templateUrl: './field-control.component.html',
   styleUrls: ['./field-control.component.scss']
 })
-export class FieldControlComponent implements ControlValueAccessor, OnInit , OnChanges {
+export class FieldControlComponent implements ControlValueAccessor, OnInit , OnChanges, AfterViewInit {
   private _fieldModel: FieldModel = new FieldModel({controlName: null});
   @Input('fieldModel') set noFieldConfig( fieldModel: FieldModel) {this._fieldModel = fieldModel; }
   @Output('onPrefix') onPrefix: EventEmitter<boolean> = new EventEmitter<boolean>();
   constructor(protected formBuilder: FormBuilder) {}
-  @ViewChild('submit', {static: true}) submit: ElementRef;
+  @ViewChild('submit', {static: false}) submit: ElementRef;
   onChange: any;
   formGroup: FormGroup;
   writeValue(obj: any): void {
@@ -35,10 +35,14 @@ export class FieldControlComponent implements ControlValueAccessor, OnInit , OnC
     this.formControl.statusChanges.subscribe(status => {
       if (status === 'INVALID') { this.checkCustomErrors(this.control); }
     });
+
+  }
+  ngAfterViewInit(): void {
     this.submitted.subscribe(status => {
       if (status) { this.submit.nativeElement.click(); }
     });
   }
+
   get control(): AbstractControl { return this.formGroup.get('control'); }
   handlePrefix(event: Event): void { this.onPrefix.emit(true); }
 

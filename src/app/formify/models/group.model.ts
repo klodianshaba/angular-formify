@@ -9,8 +9,8 @@ import {FormifyManipulation} from './manipulation.abstract';
 import {SubmitModel} from './submit.model';
 
 export interface GroupState {
-  controlName: string;
-  controls: ControlsType;
+  controlName?: string;
+  controls?: ControlsType;
   label?: string;
 }
 
