@@ -100,4 +100,7 @@ export class ArrayModel extends FormifyGenerate implements FormifyAccessibility{
       this.controls.unshift(control);
     }
   }
+  public reset(): void{
+    this.formGroup.reset();
+  }
 }

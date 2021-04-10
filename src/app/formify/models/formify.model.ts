@@ -96,4 +96,7 @@ export  class FormifyModel extends FormifyGenerate implements FormifyAccessibili
     this.$unSubscribe.next();
     this.$unSubscribe.complete();
   }
+  public reset(): void{
+    this.formGroup.reset();
+  }
 }

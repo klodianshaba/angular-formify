@@ -75,4 +75,7 @@ export class GroupModel extends FormifyGenerate implements FormifyAccessibility{
     this.controls = this.controls.filter(control => control.controlName !== name);
     this.formGroup.removeControl(name);
   }
+  public reset(): void{
+    this.formGroup.reset();
+  }
 }
