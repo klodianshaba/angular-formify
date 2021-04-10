@@ -66,38 +66,38 @@ export class ArrayModel extends FormifyGenerate implements FormifyAccessibility{
   insertAt(index: number , control: FieldModel | GroupModel | ArrayModel ): void {
     if (control instanceof FieldModel){
       this.controls.splice(index, 0, control);
-      this.formArray.insert( index, control.formControl);
+      this.formArray.insert( index, this.generateFormControl(control));
     } else if ( control instanceof  GroupModel){
       this.controls.splice(index, 0 , control);
-      this.formArray.insert( index, control.formGroup);
+      this.formArray.insert( index, this.generateFormGroup(control));
     } else if (control instanceof ArrayModel){
       this.controls.splice(index, 0 , control);
-      this.formArray.insert( index, control.formArray);
+      this.formArray.insert( index, this.generateFormArray(control));
     }
   }
 
   push(control: FieldModel | GroupModel | ArrayModel ): void{
     if (control instanceof FieldModel){
+      this.formArray.push(this.generateFormControl(control));
       this.controls.push(control);
-      this.formArray.push(control.formControl);
     } else if ( control instanceof  GroupModel){
+      this.formArray.push(this.generateFormGroup(control));
       this.controls.push(control);
-      this.formArray.push(control.formGroup);
     } else if (control instanceof ArrayModel){
+      this.formArray.push(this.generateFormArray(control));
       this.controls.push(control);
-      this.formArray.push(control.formArray);
     }
   }
   unshift(control: FieldModel | GroupModel | ArrayModel ): void{
     if (control instanceof FieldModel){
+      this.formArray.insert(0, this.generateFormControl(control));
       this.controls.unshift(control);
-      this.formArray.insert(0, control.formControl);
     } else if ( control instanceof  GroupModel){
+      this.formArray.insert( 0, this.generateFormGroup(control));
       this.controls.unshift(control);
-      this.formArray.insert( 0, control.formGroup);
     } else if (control instanceof ArrayModel){
+      this.formArray.insert(0, this.generateFormArray(control));
       this.controls.unshift(control);
-      this.formArray.insert(0, control.formArray);
     }
   }
 }
