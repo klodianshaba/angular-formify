@@ -108,6 +108,12 @@ export class FieldControlComponent implements ControlValueAccessor, OnInit , OnC
   get color(): ThemePalette {
     return  this.fieldModel.color;
   }
+  get hidden(): boolean {
+    return  this.fieldModel.hidden;
+  }
+  get disabled(): boolean {
+    return  this.fieldModel.disabled;
+  }
   public errors(control: AbstractControl): ValidatorState[] {
     const firstError: ValidatorState[] = [];
     if (control.invalid) {
