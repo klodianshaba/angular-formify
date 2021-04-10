@@ -71,25 +71,21 @@ export class AppComponent {
     submit: {text: 'Save it'}
   });
   constructor() {
-    this.initColor();
+    this.formify.formGroup.get('color').valueChanges.subscribe(color => {
+      this.formify.updateFields({color});
+      this.formify.updateSubmit({color});
+    });
     this.formify.formGroup.get('toggle').valueChanges.subscribe(toggle => {
      if (toggle){
-       this.formify.addControl( new ColorFieldControl());
-       this.initColor();
+       this.formify.field('color').update({hidden: false });
      }else{
-       console.log('sdf');
-       this.formify.removeControl('color');
+       this.formify.field('color').update({hidden: true });
       }
     });
 
     console.log(this.formify);
   }
-  initColor(): void{
-    this.formify.formGroup.get('color').valueChanges.subscribe(color => {
-      this.formify.updateFields({color});
-      this.formify.updateSubmit({color});
-    });
-  }
+
 
   onSubmit(): void{
     console.log(this.formify.formGroup.value);

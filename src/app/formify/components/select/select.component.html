@@ -1,4 +1,4 @@
-<form [formGroup]="formGroup" #form="ngForm" [autocomplete]="autoComplete">
+<form [formGroup]="formGroup" #form="ngForm" [autocomplete]="autoComplete" *ngIf="fieldModel && !hidden">
   <mat-form-field [appearance]="appearance"  class="full-width">
     <mat-label>{{(!useTranslation) ? label : label | translate}}</mat-label>
     <span *ngIf="prefix" matPrefix  (click)="handlePrefix($event)" >
