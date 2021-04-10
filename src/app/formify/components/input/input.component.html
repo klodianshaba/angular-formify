@@ -1,10 +1,10 @@
-<form [formGroup]="formGroup" #form="ngForm" [autocomplete]="autoComplete">
+<form [formGroup]="formGroup" #form="ngForm" [autocomplete]="autoComplete" *ngIf="fieldModel && !hidden">
   <mat-form-field [appearance]="appearance"  class="full-width">
     <mat-label>{{(!useTranslation) ? label : label | translate}}</mat-label>
     <span *ngIf="prefix" matPrefix  (click)="handlePrefix($event)" >
       {{prefix}}
       <mat-icon class="dropDownIconInPrefix" *ngIf="dropDownInPrefix" (click)="handlePrefix($event)">arrow_drop_down</mat-icon>
-      &nbsp
+      &nbsp;
     </span>
     <label>
       <input matInput formControlName="control" (input)="emitValue()" [errorStateMatcher]="errorStateMatcher" [type]="type" [placeholder]="(!useTranslation) ? placeholder : placeholder | translate">

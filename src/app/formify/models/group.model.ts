@@ -9,12 +9,12 @@ import {FormifyManipulation} from './manipulation.abstract';
 import {SubmitModel} from './submit.model';
 
 export interface GroupState {
-  controlName: string;
-  controls: ControlsType;
+  controlName?: string;
+  controls?: ControlsType;
   label?: string;
 }
 
-export class GroupModel extends FormifyGenerate implements FormifyAccessibility , FormifyManipulation{
+export class GroupModel extends FormifyGenerate implements FormifyAccessibility{
   controlName: string;
   controls: ControlsType;
   readonly controlType: ControlTypes;
@@ -59,17 +59,23 @@ export class GroupModel extends FormifyGenerate implements FormifyAccessibility 
     }
     return null;
   }
-
-  addField(field: FieldModel): void {
-    this.controls.push(field);
-    this.formGroup.addControl(field.controlName, this.generateFormControl(field));
+  addControl(control: FieldModel | GroupModel | ArrayModel): void{
+    if (control instanceof FieldModel){
+      this.controls.push(control);
+      this.formGroup.addControl(control.controlName, this.generateFormControl(control));
+    } else if ( control instanceof  GroupModel){
+      this.controls.push(control);
+      this.formGroup.addControl(control.controlName, this.generateFormGroup(control));
+    } else if (control instanceof ArrayModel){
+      this.controls.push(control);
+      this.formGroup.addControl(control.controlName, this.generateFormArray(control));
+    }
   }
-  addGroup(group: GroupModel): void {
-    this.controls.push(group);
-    this.formGroup.addControl(group.controlName, this.generateFormGroup(group));
+  removeControl(name: string): void {
+    this.controls = this.controls.filter(control => control.controlName !== name);
+    this.formGroup.removeControl(name);
   }
-  addArray(array: ArrayModel): void {
-    this.controls.push(array);
-    this.formGroup.addControl(array.controlName, this.generateFormArray(array));
+  public reset(): void{
+    this.formGroup.reset();
   }
 }

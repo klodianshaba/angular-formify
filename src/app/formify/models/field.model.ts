@@ -42,6 +42,8 @@ export interface FieldState{
   multiple?: boolean;
   readOnly?: boolean;
   none?: boolean;
+  hidden?: boolean;
+  disabled?: boolean;
   submit?: SubmitModel;
 }
 export class FieldModel extends FormifyAccessibility{
@@ -67,6 +69,8 @@ export class FieldModel extends FormifyAccessibility{
   multiple: boolean;
   readOnly: boolean;
   none: boolean;
+  hidden: boolean;
+  disabled: boolean;
   submit: SubmitModel;
 
   constructor( config: FieldState ) {
@@ -93,8 +97,13 @@ export class FieldModel extends FormifyAccessibility{
     this.multiple = false;
     this.readOnly = false;
     this.none = false;
+    this.hidden = false;
+    this.disabled = false;
     this.submit = new SubmitModel();
     Object.assign(this, config);
+  }
+  update(overwrite: FieldState): void {
+    Object.assign(this, overwrite);
   }
   field(path: string): FieldModel | null {
    return null;

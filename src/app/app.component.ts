@@ -1,6 +1,12 @@
-import { Component } from '@angular/core';
-import {ArrayModel, FieldModel, FormifyModel, GroupModel, SubmitModel, ValidatorModel} from './formify/models';
+import {Component} from '@angular/core';
+import {ArrayModel, FieldModel, FieldTypes, FormifyModel, GroupModel} from './formify/models';
 import {Validators} from '@angular/forms';
+import {NameFieldControl} from './formify/fields/name.field-control';
+import {LanguageFieldControl} from './formify/fields/language.field-control';
+import {BiographyFieldControl} from './formify/fields/biography.field-control';
+import {ColorFieldControl} from './formify/fields/color.field-control';
+import {ToggleFieldControl} from './formify/fields/toggle.field-control';
+import {AddressGroupControl} from './formify/groups/address.group-control';
 
 @Component({
   selector: 'app-root',
@@ -11,57 +17,14 @@ export class AppComponent {
   title = 'form';
   public formify: FormifyModel = new FormifyModel({
     controls: [
-      new FieldModel({
-        controlName: 'name', label: 'Enter name', icon: 'home', placeholder: 'name' , autoComplete: 'off',
-        validators: [
-          new ValidatorModel( {validator: Validators.required, errorCode: 'required', description: 'name is required'}),
-        ]
-      }),
-      new FieldModel({
-        controlName: 'language', label: 'Choose your language', placeholder: 'language', autoComplete: 'off', defaultValue: 'en',  options: [{text: 'Al', value: 'al'}, {text: 'EN', value: 'en'}],
-        validators: [
-          {validator: Validators.required, errorCode: 'required', description: 'language is required'},
-        ]
-      }),
-      new FieldModel({
-        controlName: 'describe', label: 'Describe your identity', placeholder: 'language', autoComplete: 'off',
-        validators: [
-          {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
-        ]
-      }),
-      new FieldModel({controlName: 'color', label: 'Color' , defaultValue: 'primary', options: [{text: 'Primary', value: 'primary'}, {text: 'Warn', value: 'warn'}]}),
-
-      new FieldModel({controlName: 'toggle', label: 'Fill contact', defaultValue: true }),
+      new NameFieldControl({}),
+      new LanguageFieldControl({}),
+      new BiographyFieldControl({}),
+      new ColorFieldControl({}),
+      new ToggleFieldControl(),
 
       new ArrayModel({controlName: 'array', controls: [
-        new GroupModel({ controlName: 'contact1', controls: [
-          new FieldModel({
-            controlName: 'phone', label: 'number phone', placeholder: 'phone', autoComplete: 'off',
-            validators: [
-              {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
-            ]
-          }),
-          new FieldModel({
-            controlName: 'address', label: 'your address', placeholder: 'address', autoComplete: 'off',
-            validators: [
-              {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
-            ]
-          }),
-        ]}),
-        new GroupModel({ controlName: 'contact2', controls: [
-          new FieldModel({
-            controlName: 'phone', label: 'number phone', placeholder: 'phone', autoComplete: 'off',
-            validators: [
-              {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
-            ]
-          }),
-          new FieldModel({
-            controlName: 'address', label: 'your address', placeholder: 'address', autoComplete: 'off',
-            validators: [
-              {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
-            ]
-          }),
-        ]}),
+        new AddressGroupControl(),
       ]}),
 
       new GroupModel({ controlName: 'contact', controls: [
@@ -82,9 +45,22 @@ export class AppComponent {
     submit: {text: 'Save it'}
   });
   constructor() {
-    // console.log(this.formify.get('contact'));
+    this.formify.formGroup.get('color').valueChanges.subscribe(color => {
+      this.formify.updateFields({color});
+      this.formify.updateSubmit({color});
+    });
+    this.formify.formGroup.get('toggle').valueChanges.subscribe(toggle => {
+     if (toggle){
+       this.formify.field('color').update({hidden: false });
+     }else{
+       this.formify.field('color').update({hidden: true });
+      }
+    });
+
     console.log(this.formify);
   }
+
+
   onSubmit(): void{
     console.log(this.formify.formGroup.value);
     this.formify.loading(true);

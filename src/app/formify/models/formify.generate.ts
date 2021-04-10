@@ -4,10 +4,13 @@ import {GroupModel} from './group.model';
 import {ArrayModel} from './array.model';
 import {ControlsType} from './formify.model';
 import {SubmitModel} from './submit.model';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 export class FormifyGenerate {
   public formGroup: FormGroup;
   public submit: SubmitModel;
+  public $unSubscribe: Subject<boolean> = new Subject<boolean>();
   constructor() {
     this.formGroup = null;
   }
@@ -38,8 +41,8 @@ export class FormifyGenerate {
     const formGroup = new FormGroup( this.generateFormControls(control.controls) ); // recursion
     control.formGroup = formGroup;
     control.submit = this.submit;
-    control.change.subscribe(change => {
-      if (change) { this.formGroup.patchValue(change); }
+    control.change.pipe(takeUntil(this.$unSubscribe)).subscribe(change => {
+      if (change) {this.formGroup.patchValue(change); }
     });
     return formGroup;
   }
@@ -50,8 +53,8 @@ export class FormifyGenerate {
     );
     control.formArray = formArray;
     control.submit = this.submit;
-    control.change.subscribe(change => {
-      if (change){ this.formGroup.patchValue(change); }
+    control.change.pipe(takeUntil(this.$unSubscribe)).subscribe(change => {
+      if (change){this.formGroup.patchValue(change); }
     });
     return formArray;
   }
