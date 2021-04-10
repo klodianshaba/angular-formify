@@ -89,4 +89,8 @@ export  class FormifyModel extends FormifyGenerate implements FormifyAccessibili
     this.submit.loading = loading;
     this.checkDisabledSubmit();
   }
+  public unSubscribe(): void {
+    this.$unSubscribe.next();
+    this.$unSubscribe.complete();
+  }
 }

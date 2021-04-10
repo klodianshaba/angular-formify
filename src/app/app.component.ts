@@ -5,6 +5,7 @@ import {NameFieldControl} from './formify/fields/name.field-control';
 import {LanguageFieldControl} from './formify/fields/language.field-control';
 import {BiographyFieldControl} from './formify/fields/biography.field-control';
 import {ColorFieldControl} from './formify/fields/color.field-control';
+import {ToggleFieldControl} from './formify/fields/toggle.field-control';
 
 @Component({
   selector: 'app-root',
@@ -19,13 +20,12 @@ export class AppComponent {
       new LanguageFieldControl({}),
       new BiographyFieldControl({}),
       new ColorFieldControl({}),
-
-      new FieldModel({controlName: 'toggle', label: 'Fill contact', defaultValue: true }),
+      new ToggleFieldControl(),
 
       new ArrayModel({controlName: 'array', controls: [
         new GroupModel({ controlName: 'contact1', controls: [
           new FieldModel({
-            controlName: 'phone', label: 'number phone', placeholder: 'phone', autoComplete: 'off',
+            controlName: 'phone', prefix: '+355', type: 'tel', label: 'number phone', placeholder: 'phone', autoComplete: 'off',
             validators: [
               {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
             ]
@@ -39,7 +39,7 @@ export class AppComponent {
         ]}),
         new GroupModel({ controlName: 'contact2', controls: [
           new FieldModel({
-            controlName: 'phone', label: 'number phone', placeholder: 'phone', autoComplete: 'off',
+            controlName: 'phone', prefix: '+355' , label: 'number phone', placeholder: 'phone', autoComplete: 'off',
             validators: [
               {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
             ]
