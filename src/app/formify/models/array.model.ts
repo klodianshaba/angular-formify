@@ -73,4 +73,7 @@ export class ArrayModel extends FormifyGenerate implements FormifyAccessibility,
     this.controls.push(array);
     this.formArray.push( this.generateFormArray(array));
   }
+  removeField(field: FieldModel): void {}
+  removeGroup(group: GroupModel): void {}
+  removeArray(array: ArrayModel): void {}
 }

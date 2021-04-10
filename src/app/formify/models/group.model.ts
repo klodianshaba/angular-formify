@@ -72,4 +72,7 @@ export class GroupModel extends FormifyGenerate implements FormifyAccessibility 
     this.controls.push(array);
     this.formGroup.addControl(array.controlName, this.generateFormArray(array));
   }
+  removeField(field: FieldModel): void {}
+  removeGroup(group: GroupModel): void {}
+  removeArray(array: ArrayModel): void {}
 }
