@@ -108,4 +108,7 @@ export class FieldModel extends FormifyAccessibility{
   get(path: string): FieldModel | GroupModel | ArrayModel | null {
     return null;
   }
+  update(overwrite: FieldState): void {
+    Object.assign(this, overwrite);
+  }
 }
