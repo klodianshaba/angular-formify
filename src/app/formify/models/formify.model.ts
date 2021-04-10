@@ -24,7 +24,7 @@ export type ControlsType = (FieldModel | GroupModel | ArrayModel)[];
 
 export type  OptionsType = ValidatorFn | ValidatorFn[] | AbstractControlOptions;
 
-export  class FormifyModel extends FormifyGenerate implements FormifyAccessibility, FormifyManipulation{
+export  class FormifyModel extends FormifyGenerate implements FormifyAccessibility{
   public controls: ControlsType;
   public options?: OptionsType;
   constructor( config: FormifyState ) {

@@ -4,17 +4,15 @@ import {BehaviorSubject} from 'rxjs';
 import {FormifyAccessibility} from './accessibility.abstract';
 import {FieldModel} from './field.model';
 import {GroupModel} from './group.model';
-import {FormifyManipulation} from './manipulation.abstract';
 import {FormifyGenerate} from './formify.generate';
 import {SubmitModel} from './submit.model';
-
 export interface ArrayState {
   controlName: string;
   controls: ControlsType;
   label?: string;
 }
 
-export class ArrayModel extends FormifyGenerate implements FormifyAccessibility, FormifyManipulation{
+export class ArrayModel extends FormifyGenerate implements FormifyAccessibility{
   formArray: FormArray;
   controlName: string;
   controls: ControlsType;
@@ -61,19 +59,45 @@ export class ArrayModel extends FormifyGenerate implements FormifyAccessibility,
     }
     return null;
   }
-  addField(field: FieldModel): void {
-    this.controls.push(field);
-    this.formArray.push(this.generateFormControl(field));
+  removeAt(index: number): void{
+    this.controls.splice(index, 1);
+    this.formArray.removeAt(index);
   }
-  addGroup(group: GroupModel): void {
-    this.controls.push(group);
-    this.formArray.push( this.generateFormGroup(group));
+  insertAt(index: number , control: FieldModel | GroupModel | ArrayModel ): void {
+    if (control instanceof FieldModel){
+      this.controls.splice(index, 0, control);
+      this.formArray.insert( index, control.formControl);
+    } else if ( control instanceof  GroupModel){
+      this.controls.splice(index, 0 , control);
+      this.formArray.insert( index, control.formGroup);
+    } else if (control instanceof ArrayModel){
+      this.controls.splice(index, 0 , control);
+      this.formArray.insert( index, control.formArray);
+    }
   }
-  addArray(array: ArrayModel): void {
-    this.controls.push(array);
-    this.formArray.push( this.generateFormArray(array));
+
+  push(control: FieldModel | GroupModel | ArrayModel ): void{
+    if (control instanceof FieldModel){
+      this.controls.push(control);
+      this.formArray.push(control.formControl);
+    } else if ( control instanceof  GroupModel){
+      this.controls.push(control);
+      this.formArray.push(control.formGroup);
+    } else if (control instanceof ArrayModel){
+      this.controls.push(control);
+      this.formArray.push(control.formArray);
+    }
   }
-  removeField(field: FieldModel): void {}
-  removeGroup(group: GroupModel): void {}
-  removeArray(array: ArrayModel): void {}
+  unshift(control: FieldModel | GroupModel | ArrayModel ): void{
+    if (control instanceof FieldModel){
+      this.controls.unshift(control);
+      this.formArray.insert(0, control.formControl);
+    } else if ( control instanceof  GroupModel){
+      this.controls.unshift(control);
+      this.formArray.insert( 0, control.formGroup);
+    } else if (control instanceof ArrayModel){
+      this.controls.unshift(control);
+      this.formArray.insert(0, control.formArray);
+    }
+  }
 }

@@ -14,7 +14,7 @@ export interface GroupState {
   label?: string;
 }
 
-export class GroupModel extends FormifyGenerate implements FormifyAccessibility , FormifyManipulation{
+export class GroupModel extends FormifyGenerate implements FormifyAccessibility{
   controlName: string;
   controls: ControlsType;
   readonly controlType: ControlTypes;
