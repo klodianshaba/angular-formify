@@ -1,7 +1,7 @@
 
 <form [formGroup]="formGroup" #form="ngForm">
   <div>
-    Address
+    {{arrayModel.label}}
     <button mat-icon-button (click)="addAddress()"><mat-icon>add</mat-icon></button>
     <button mat-icon-button (click)="delete()"><mat-icon color="warn">delete</mat-icon></button>
   </div>

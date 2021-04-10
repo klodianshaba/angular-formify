@@ -23,7 +23,7 @@ export class AppComponent {
       new ColorFieldControl({}),
       new ToggleFieldControl(),
 
-      new ArrayModel({controlName: 'array', controls: [
+      new ArrayModel({controlName: 'array', label: 'Address:', controls: [
         new AddressGroupControl(),
       ]}),
 

@@ -3,8 +3,9 @@ import {Validators} from '@angular/forms';
 
 export class AddressGroupControl extends GroupModel {
   constructor(overwrite: GroupState  = {}) {
-    const  field: GroupModel = new GroupModel({
+    const  group: GroupModel = new GroupModel({
       controlName: 'address',
+      label: 'address:',
       controls: [
         new FieldModel({
           controlName: 'address', label: 'Enter your address', placeholder: 'address', autoComplete: 'off',
@@ -25,13 +26,13 @@ export class AddressGroupControl extends GroupModel {
           ]
         }),
         new FieldModel({
-          controlName: 'zip', label: 'Enter zip code', placeholder: 'zip code', autoComplete: 'off',
+          controlName: 'zip', label: 'Enter zip code', type: 'number' , placeholder: 'zip code', autoComplete: 'off',
           validators: [
             {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
           ]
         }),
       ]
     });
-    super(Object.assign(field , overwrite));
+    super(Object.assign(group , overwrite));
   }
 }
