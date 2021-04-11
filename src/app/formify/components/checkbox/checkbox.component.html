@@ -1,1 +1,8 @@
-<p>checkbox works!</p>
+
+<form [formGroup]="formGroup" #form="ngForm" [autocomplete]="autoComplete" *ngIf="fieldModel && !hidden">
+  <mat-checkbox class="checkbox" [formControlName]="controlName" [color]="color" (change)="emitValue()">
+    <mat-label>{{(!useTranslation) ? label : label | translate}}</mat-label>
+  </mat-checkbox>
+  <mat-icon *ngIf="icon" matSuffix [ngClass]="{'error-icon' : control.invalid && submitted | async }">{{icon}}</mat-icon>
+  <button hidden #submit></button>
+</form>

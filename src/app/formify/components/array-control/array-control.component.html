@@ -1,5 +1,5 @@
 
-<form [formGroup]="formGroup" #form="ngForm">
+<form [formGroup]="formGroup" #form="ngForm" *ngIf="arrayModel">
   <ng-content></ng-content>
   <button hidden #submit></button>
 </form>

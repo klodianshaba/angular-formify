@@ -9,7 +9,7 @@
 
           <formify-input *ngIf="control.fieldType === fieldTypes.input " [formControl]="control.formControl"  [fieldModel]="control" (onPrefix)="handlePrefix($event)"></formify-input>
 
-<!--          <formify-select *ngIf="control.fieldType === fieldTypes.select" [formControl]="control.formControl" [fieldModel]="control"  [submitted]="ngForm.submitted"></formify-select>-->
+          <formify-select *ngIf="control.fieldType === fieldTypes.select" [formControl]="control.formControl" [fieldModel]="control"></formify-select>
 
 <!--          <ams-phone-input *ngIf="control.fieldType === fieldTypes.inputPhone" [formControl]="control.formControl" [fieldModel]="control"  [submitted]="form.submitted"></ams-phone-input>-->
 
@@ -33,6 +33,6 @@
 
   <ng-container *ngTemplateOutlet="recursiveList; context: {controls:controls}"></ng-container>
 
-<!--  <formify-submit [formifyModel]="formifyModel" [ngForm]="ngForm"> </formify-submit>-->
+  <formify-submit [submit]="submit"> </formify-submit>
 
 </form>

@@ -1,14 +1,14 @@
 
-<form [formGroup]="formGroup" #form="ngForm">
+<form [formGroup]="formGroup" #form="ngForm" *ngIf="arrayModel">
   <div>
-    Address
+    <span class="label">{{arrayModel.label}}</span>
     <button mat-icon-button (click)="addAddress()"><mat-icon>add</mat-icon></button>
     <button mat-icon-button (click)="delete()"><mat-icon color="warn">delete</mat-icon></button>
   </div>
   <div [formArrayName]="arrayModel.controlName" *ngFor="let item of arrayModel['controls']; let i = index;">
     <div [formGroupName]="i">
       <div class="address-content">
-        <formify-input formControlName="address" [fieldModel]="item.field('address')"></formify-input>
+        <formify-input formControlName="street" [fieldModel]="item.field('street')"></formify-input>
         <formify-input formControlName="city" [fieldModel]="item.field('city')"></formify-input>
         <formify-select formControlName="country" [fieldModel]="item.field('country')"></formify-select>
         <formify-input formControlName="zip" [fieldModel]="item.field('zip')"></formify-input>

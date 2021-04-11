@@ -6,7 +6,6 @@ import {ControlsType} from './formify.model';
 import {SubmitModel} from './submit.model';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
-
 export class FormifyGenerate {
   public formGroup: FormGroup;
   public submit: SubmitModel;
@@ -14,7 +13,7 @@ export class FormifyGenerate {
   constructor() {
     this.formGroup = null;
   }
-  protected generateFormControls(controls: ControlsType): { [controlId: string]: AbstractControl; } {
+  protected generateFormControls(controls: ControlsType[]): { [controlId: string]: AbstractControl; } {
     const formControls: { [controlId: string]: AbstractControl; } = {};
     for (const control of controls) {
       if (control instanceof FieldModel) {
@@ -36,7 +35,6 @@ export class FormifyGenerate {
     control.submit = this.submit;
     return formControl;
   }
-
   protected generateFormGroup(control: GroupModel ): FormGroup {
     const formGroup = new FormGroup( this.generateFormControls(control.controls) ); // recursion
     control.formGroup = formGroup;

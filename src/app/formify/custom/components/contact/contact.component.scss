@@ -1,0 +1,10 @@
+::ng-deep.contact-content{
+  display: flex;
+  justify-content: space-between;
+  > * {
+    width: calc(33% - 5px);
+  }
+}
+.label{
+  line-height: 40px;
+}

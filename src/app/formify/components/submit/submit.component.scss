@@ -1,7 +1,11 @@
-.submit{
-  width: 100%;
+.submit-content{
+  padding-top: 10px;
+  .submit{
+    width: 100%;
+  }
+  .icon_button_login{
+    position: relative;
+    top:-3px;
+  }
 }
-.icon_button_login{
-  position: relative;
-  top:-3px;
-}
+

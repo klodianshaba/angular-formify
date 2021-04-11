@@ -1,0 +1,10 @@
+
+<form [formGroup]="formGroup" #form="ngForm" *ngIf="groupModel">
+  <span class="label">{{groupModel.label}}</span>
+  <div class="contact-content">
+    <formify-input formControlName="phone" [fieldModel]="groupModel.field('phone')"></formify-input>
+    <formify-input formControlName="email" [fieldModel]="groupModel.field('email')"></formify-input>
+    <formify-input formControlName="location" [fieldModel]="groupModel.field('location')"></formify-input>
+  </div>
+  <button hidden #submit></button>
+</form>

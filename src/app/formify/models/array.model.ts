@@ -1,5 +1,5 @@
 import {FormArray} from '@angular/forms';
-import {ControlsType, ControlTypes, FormifyModel} from './formify.model';
+import {ControlsType, ControlTypes} from './formify.model';
 import {BehaviorSubject} from 'rxjs';
 import {FormifyAccessibility} from './accessibility.abstract';
 import {FieldModel} from './field.model';
@@ -8,14 +8,13 @@ import {FormifyGenerate} from './formify.generate';
 import {SubmitModel} from './submit.model';
 export interface ArrayState {
   controlName: string;
-  controls: ControlsType;
+  controls: ControlsType[];
   label?: string;
 }
-
 export class ArrayModel extends FormifyGenerate implements FormifyAccessibility{
   formArray: FormArray;
   controlName: string;
-  controls: ControlsType;
+  controls: ControlsType[];
   readonly controlType: ControlTypes;
   change: BehaviorSubject<any>;
   label: string;
@@ -30,7 +29,7 @@ export class ArrayModel extends FormifyGenerate implements FormifyAccessibility{
     this.label = '';
     Object.assign(this, config);
   }
-  get(path: string): FieldModel | GroupModel | ArrayModel | null {
+  get(path: string): ControlsType {
     for (const control of this.controls){
       if (path === control.controlName){
         return control;
@@ -63,7 +62,7 @@ export class ArrayModel extends FormifyGenerate implements FormifyAccessibility{
     this.controls.splice(index, 1);
     this.formArray.removeAt(index);
   }
-  insertAt(index: number , control: FieldModel | GroupModel | ArrayModel ): void {
+  insertAt(index: number , control: ControlsType ): void {
     if (control instanceof FieldModel){
       this.controls.splice(index, 0, control);
       this.formArray.insert( index, this.generateFormControl(control));
@@ -75,8 +74,7 @@ export class ArrayModel extends FormifyGenerate implements FormifyAccessibility{
       this.formArray.insert( index, this.generateFormArray(control));
     }
   }
-
-  push(control: FieldModel | GroupModel | ArrayModel ): void{
+  push(control: ControlsType ): void{
     if (control instanceof FieldModel){
       this.formArray.push(this.generateFormControl(control));
       this.controls.push(control);
@@ -88,7 +86,7 @@ export class ArrayModel extends FormifyGenerate implements FormifyAccessibility{
       this.controls.push(control);
     }
   }
-  unshift(control: FieldModel | GroupModel | ArrayModel ): void{
+  unshift(control: ControlsType ): void{
     if (control instanceof FieldModel){
       this.formArray.insert(0, this.generateFormControl(control));
       this.controls.unshift(control);

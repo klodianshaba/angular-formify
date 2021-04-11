@@ -5,9 +5,7 @@ import {ValidatorState} from './validator.model';
 import {ErrorStateMatcher, ThemePalette} from '@angular/material/core';
 import {OptionModel} from './option.model';
 import {MatFormFieldAppearance} from '@angular/material/form-field';
-import {MatAutocomplete} from '@angular/material/autocomplete';
 import {SubmitModel} from './submit.model';
-import {BehaviorSubject} from 'rxjs';
 import {FormifyAccessibility} from './accessibility.abstract';
 import {GroupModel} from './group.model';
 import {ArrayModel} from './array.model';
@@ -16,10 +14,10 @@ export enum FieldTypes {
   textarea = '[textarea] textarea field',
   select = '[SELECT] select field',
   radio = '[RADIO] radio field',
+  checkbox = '[CHECKBOX] checkbox field',
   toggle = '[TOGGLE] toggle field',
   inputPhone = '[RADIO] input phone field',
 }
-
 export interface FieldState{
   formControl?: FormControl;
   controlName?: string;
@@ -83,7 +81,7 @@ export class FieldModel extends FormifyAccessibility{
     this.errorStateMatcher = new MyErrorStateMatcher();
     this.validators = [];
     this.options = null;
-    this.appearance = 'standard';
+    this.appearance = 'legacy';
     this.useTranslation = false;
     this.prefix = null;
     this.dropDownInPrefix = false;

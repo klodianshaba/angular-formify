@@ -1,0 +1,17 @@
+
+<form [formGroup]="formGroup" #form="ngForm" *ngIf="groupModel">
+    <span class="label">
+      {{groupModel.label}}
+    </span>
+  <div class="exercises-header">
+    <formify-input formControlName="addExercise" [fieldModel]="groupModel.field('addExercise')" (keypress)="onKeyPressAddExercise($event)"></formify-input>
+    <span> Press enter to add &nbsp; -or- </span>
+    <button mat-icon-button (click)="addExercise()"><mat-icon>add</mat-icon></button>
+  </div>
+  <div class="exercises-content">
+    <div *ngFor="let control of groupModel.controls">
+      <formify-checkbox *ngIf="control.fieldType === fieldTypes.checkbox"  [formControlName]="control.controlName" [fieldModel]="control"></formify-checkbox>
+    </div>
+  </div>
+  <button hidden #submit></button>
+</form>
