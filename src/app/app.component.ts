@@ -61,17 +61,6 @@ export class AppComponent {
     console.log(this.formify);
   }
 
-  onKeyPressAddExercise(event: KeyboardEvent): void{
-    if (event.keyCode === 13){
-      const value = this.formify.formGroup.get('add-exercise').value;
-      if (value.length > 0){
-        this.formify.group('exercises').addControl( new FieldModel({controlName: value, label: value,  defaultValue: true}));
-        this.formify.formGroup.get('add-exercise').reset();
-      }
-    }
-  }
-
-
   onSubmit(): void{
     console.log(this.formify.formGroup.value);
     this.formify.loading(true);

@@ -4,7 +4,7 @@
     <span *ngIf="prefix" matPrefix  (click)="handlePrefix($event)" >
       {{prefix}}
       <mat-icon class="dropDownIconInPrefix" *ngIf="dropDownInPrefix" (click)="handlePrefix($event)">arrow_drop_down</mat-icon>
-      &nbsp;
+      &nbsp;&nbsp;
     </span>
     <label>
       <input matInput formControlName="control" (input)="emitValue()" [errorStateMatcher]="errorStateMatcher" [type]="type" [placeholder]="(!useTranslation) ? placeholder : placeholder | translate">

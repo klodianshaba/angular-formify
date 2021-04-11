@@ -1,0 +1,9 @@
+.exercises-header{
+  display: flex; align-items: center;
+  span{
+    padding-left: 10px;
+  }
+}
+.exercises-content{
+  display: flex; flex-wrap: wrap
+}

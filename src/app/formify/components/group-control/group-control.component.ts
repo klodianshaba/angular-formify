@@ -14,7 +14,7 @@ export class GroupControlComponent implements OnInit, OnChanges {
   get groupModel(): GroupModel{
     return this._groupModel;
   }
-  constructor(protected formBuilder: FormBuilder) { }
+  constructor() { }
   ngOnChanges(changes: SimpleChanges): void {}
   ngOnInit(): void {
     this.formGroup = this.groupModel.formGroup;
