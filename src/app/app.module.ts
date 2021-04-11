@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormifyModule } from './formify/formify.module';
 import {CustomModule} from './formify/custom/custom.module';
+import {MaterialModule} from './formify/material.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -15,6 +16,7 @@ import {CustomModule} from './formify/custom/custom.module';
     BrowserAnimationsModule,
     FormifyModule,
     CustomModule,
+    MaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
