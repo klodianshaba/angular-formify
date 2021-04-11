@@ -1,13 +1,12 @@
-import {Component, Input, OnInit, SimpleChanges, OnChanges, ChangeDetectorRef} from '@angular/core';
-import {ArrayModel, FieldModel, GroupModel} from '../../models';
-import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
-
+import {Component, Input, OnInit, SimpleChanges, OnChanges, ChangeDetectorRef, OnDestroy} from '@angular/core';
+import {GroupModel} from '../../models';
+import {FormGroup} from '@angular/forms';
 @Component({
   selector: 'formify-group',
   templateUrl: './group-control.component.html',
   styleUrls: ['./group-control.component.scss']
 })
-export class GroupControlComponent implements OnInit, OnChanges {
+export class GroupControlComponent implements OnInit, OnChanges, OnDestroy  {
   private _groupModel: GroupModel = new GroupModel({controlName: '' , controls: []});
   @Input('groupModel') set onArrayConfig( groupModel: GroupModel | any) {
     this._groupModel = groupModel;
@@ -25,4 +24,9 @@ export class GroupControlComponent implements OnInit, OnChanges {
   constructor() { }
   ngOnChanges(changes: SimpleChanges): void {}
   ngOnInit(): void {}
+  ngOnDestroy(): void {
+    if (this.groupModel){
+      this.groupModel.change.complete();
+    }
+  }
 }

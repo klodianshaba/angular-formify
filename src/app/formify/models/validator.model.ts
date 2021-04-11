@@ -1,5 +1,4 @@
 import {ValidatorFn} from '@angular/forms';
-
 export interface ValidatorState {
   validator?: ValidatorFn;
   errorCode?: string;
@@ -7,7 +6,6 @@ export interface ValidatorState {
   translationCode?: string;
   parameters?: any;
 }
-
 export class ValidatorModel {
   validator: ValidatorFn;
   errorCode: string;

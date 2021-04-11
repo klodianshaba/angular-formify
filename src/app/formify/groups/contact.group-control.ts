@@ -1,9 +1,6 @@
-import {FieldModel, FieldState, FieldTypes, GroupModel, GroupState, ValidatorModel} from '../models';
-import {Validators} from '@angular/forms';
-import {Email, Phone} from '../fields';
+import {FieldModel, GroupModel, GroupState} from '../models';
 import {EmailFieldControl} from '../fields/email.field-control';
 import {PhoneFieldControl} from '../fields/phone.field-control';
-
 export class ContactGroupControl extends GroupModel {
   constructor(overwrite: GroupState  = {}) {
     const  group: GroupModel = new GroupModel({

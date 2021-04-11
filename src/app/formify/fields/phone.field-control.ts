@@ -1,7 +1,6 @@
 import {FieldModel, FieldState, ValidatorModel} from '../models';
 import {Validators} from '@angular/forms';
 import {Phone} from './regex';
-
 export class PhoneFieldControl extends FieldModel {
   constructor(overwrite: FieldState = {}) {
     const field: FieldModel = new FieldModel({

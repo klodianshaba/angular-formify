@@ -2,7 +2,6 @@ import {FormifyModel, FormifyState} from './formify.model';
 import {FieldModel, FieldState} from './field.model';
 import {GroupModel} from './group.model';
 import {ArrayModel} from './array.model';
-
 export class FormifyBuilderModel {
   public form( config: FormifyState ) {
     return new FormifyModel( config );

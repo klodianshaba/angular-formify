@@ -1,5 +1,4 @@
 import {FieldModel, FieldState, FieldTypes} from '../models';
-
 export class AppearanceFieldControl extends FieldModel {
   constructor(overwrite: FieldState  = {}) {
     const  field: FieldModel =  new FieldModel({

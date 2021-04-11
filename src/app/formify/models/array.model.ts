@@ -1,5 +1,5 @@
 import {FormArray} from '@angular/forms';
-import {ControlsType, ControlTypes, FormifyModel} from './formify.model';
+import {ControlsType, ControlTypes} from './formify.model';
 import {BehaviorSubject} from 'rxjs';
 import {FormifyAccessibility} from './accessibility.abstract';
 import {FieldModel} from './field.model';
@@ -11,7 +11,6 @@ export interface ArrayState {
   controls: ControlsType[];
   label?: string;
 }
-
 export class ArrayModel extends FormifyGenerate implements FormifyAccessibility{
   formArray: FormArray;
   controlName: string;
@@ -75,7 +74,6 @@ export class ArrayModel extends FormifyGenerate implements FormifyAccessibility{
       this.formArray.insert( index, this.generateFormArray(control));
     }
   }
-
   push(control: ControlsType ): void{
     if (control instanceof FieldModel){
       this.formArray.push(this.generateFormControl(control));

@@ -5,9 +5,7 @@ import {ValidatorState} from './validator.model';
 import {ErrorStateMatcher, ThemePalette} from '@angular/material/core';
 import {OptionModel} from './option.model';
 import {MatFormFieldAppearance} from '@angular/material/form-field';
-import {MatAutocomplete} from '@angular/material/autocomplete';
 import {SubmitModel} from './submit.model';
-import {BehaviorSubject} from 'rxjs';
 import {FormifyAccessibility} from './accessibility.abstract';
 import {GroupModel} from './group.model';
 import {ArrayModel} from './array.model';
@@ -20,7 +18,6 @@ export enum FieldTypes {
   toggle = '[TOGGLE] toggle field',
   inputPhone = '[RADIO] input phone field',
 }
-
 export interface FieldState{
   formControl?: FormControl;
   controlName?: string;

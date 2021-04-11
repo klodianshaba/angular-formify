@@ -1,12 +1,10 @@
 
 <form [formGroup]="formGroup" #form="ngForm" *ngIf="groupModel">
-    <span>
+    <span class="label">
       {{groupModel.label}}
     </span>
   <div class="exercises-header">
-    <form [formGroup]="formifyAddExercise.formGroup">
-      <formify-input formControlName="AddExercise" [fieldModel]="formifyAddExercise.field('AddExercise')" (keypress)="onKeyPressAddExercise($event)"></formify-input>
-    </form>
+    <formify-input formControlName="addExercise" [fieldModel]="groupModel.field('addExercise')" (keypress)="onKeyPressAddExercise($event)"></formify-input>
     <span> Press enter to add &nbsp; -or- </span>
     <button mat-icon-button (click)="addExercise()"><mat-icon>add</mat-icon></button>
   </div>

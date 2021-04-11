@@ -1,7 +1,6 @@
 import {Component, forwardRef, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {FieldControlComponent} from '../field-control/field-control.component';
 import {FormBuilder, NG_VALUE_ACCESSOR} from '@angular/forms';
-
 @Component({
   selector: 'formify-checkbox',
   templateUrl: './checkbox.component.html',

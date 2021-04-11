@@ -1,6 +1,5 @@
 import {FieldModel, FieldState, ValidatorModel} from '../models';
 import {Validators} from '@angular/forms';
-
 export class NameFieldControl extends FieldModel {
   constructor(overwrite: FieldState  = {}) {
     const  field: FieldModel =  new FieldModel({

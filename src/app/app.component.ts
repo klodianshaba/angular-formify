@@ -1,16 +1,7 @@
 import {ChangeDetectorRef, Component} from '@angular/core';
-import {ArrayModel, FieldModel, FieldTypes, FormifyModel, GroupModel} from './formify/models';
-import {Validators} from '@angular/forms';
-import {NameFieldControl} from './formify/fields/name.field-control';
-import {LanguageFieldControl} from './formify/fields/language.field-control';
-import {BiographyFieldControl} from './formify/fields/biography.field-control';
-import {ColorFieldControl} from './formify/fields/color.field-control';
-import {ToggleFieldControl} from './formify/fields/toggle.field-control';
-import {AddressGroupControl} from './formify/groups/address.group-control';
-import {ExercisesGroupControl} from './formify/groups/exercises.group-control';
-import {ContactGroupControl} from './formify/groups/contact.group-control';
-import {AppearanceFieldControl} from './formify/fields/appearance.field-control';
-
+import {ArrayModel, FieldModel, FormifyModel} from './formify/models';
+import {NameFieldControl, LanguageFieldControl, BiographyFieldControl, ColorFieldControl , AppearanceFieldControl, ToggleFieldControl} from './formify/fields';
+import {ContactGroupControl, AddressGroupControl, ExercisesGroupControl} from './formify/groups';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -42,17 +33,16 @@ export class AppComponent {
       new LanguageFieldControl({}), // extends FieldModel
       new BiographyFieldControl({}), // extends FieldModel
       new ColorFieldControl({}), // extends FieldModel
-      new ToggleFieldControl({label: 'Show/Hidden choose color radios'}), // extends FieldModel
-      new FieldModel({controlName: 'checkbox', label: 'Checkbox',  defaultValue: 'sdf'}),
+      new AppearanceFieldControl(),
+      new ToggleFieldControl({controlName: 'toggleColor', label: 'Show/Hidden choose color radios'}), // extends FieldModel
       new ArrayModel({controlName: 'address', label: 'Address:', controls: [ // extends ArrayModel
         new AddressGroupControl(), // extends GroupModel
       ]}),
       new ExercisesGroupControl(), // extends GroupModel
       new ToggleFieldControl({controlName: 'toggleContact', label: 'Add/Remove fill contact group'}), // extends FieldModel
       new ContactGroupControl(),
-      new AppearanceFieldControl(),
     ],
-    submit: {text: 'Save Membership'}
+    submit: {text: 'Save Membership'},
   });
   constructor(private cd: ChangeDetectorRef) {
     this.formify.formGroup.get('color').valueChanges.subscribe(color => {
@@ -62,7 +52,7 @@ export class AppComponent {
     this.formify.formGroup.get('appearance').valueChanges.subscribe(appearance => {
       this.formify.updateFields({appearance});
     });
-    this.formify.formGroup.get('toggle').valueChanges.subscribe(toggle => {
+    this.formify.formGroup.get('toggleColor').valueChanges.subscribe(toggle => {
      if (toggle){
        this.formify.field('color').update({hidden: false });
      }else{
@@ -75,16 +65,13 @@ export class AppComponent {
       }else{
         this.formify.removeControl('contact');
       }
-      console.log(this.formify.formGroup.value);
       this.cd.detectChanges();
     });
     this.formify.formGroup.valueChanges.subscribe( value => {
      this.object = value;
     });
   }
-
   onSubmit(): void{
-    console.log(this.formify.formGroup.value);
     this.formify.loading(true);
     setTimeout(() => {
       this.formify.loading(false);

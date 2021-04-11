@@ -16,7 +16,7 @@ export enum ControlTypes {
   formGroup = '[FORMGROUP] formGroup direction',
   formArray = '[FORMARRAY] formArray direction',
 }
-export type ControlsType = (FieldModel | GroupModel | ArrayModel | null);
+export type ControlsType = (FieldModel | GroupModel | ArrayModel | any);
 export type  OptionsType = ValidatorFn | ValidatorFn[] | AbstractControlOptions;
 export  class FormifyModel extends FormifyGenerate implements FormifyAccessibility{
   public controls: ControlsType[];

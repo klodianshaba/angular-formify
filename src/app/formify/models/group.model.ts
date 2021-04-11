@@ -1,19 +1,15 @@
-import {FormArray, FormGroup} from '@angular/forms';
 import {ControlsType, ControlTypes} from './formify.model';
 import {BehaviorSubject} from 'rxjs';
 import {FieldModel} from './field.model';
 import {FormifyAccessibility} from './accessibility.abstract';
 import {ArrayModel, ArrayState} from './array.model';
 import {FormifyGenerate} from './formify.generate';
-import {FormifyManipulation} from './manipulation.abstract';
 import {SubmitModel} from './submit.model';
-
 export interface GroupState {
   controlName?: string;
   controls?: ControlsType[];
   label?: string;
 }
-
 export class GroupModel extends FormifyGenerate implements FormifyAccessibility{
   controlName: string;
   controls: ControlsType[];

@@ -1,7 +1,6 @@
 import {FieldModel, FieldState, FieldTypes, GroupModel, GroupState, ValidatorModel} from '../models';
 import {Validators} from '@angular/forms';
 import {CountryFieldControl} from '../fields/country.field-control';
-
 export class AddressGroupControl extends GroupModel {
   constructor(overwrite: GroupState  = {}) {
     const  group: GroupModel = new GroupModel({

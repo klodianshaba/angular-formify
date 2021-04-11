@@ -1,7 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormifyModel, SubmitModel} from '../../models';
-import {NgForm} from '@angular/forms';
-
+import {SubmitModel} from '../../models';
 @Component({
   selector: 'formify-submit',
   templateUrl: './submit.component.html',
