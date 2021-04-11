@@ -5,7 +5,6 @@ export class NameFieldControl extends FieldModel {
   constructor(overwrite: FieldState  = {}) {
     const  field: FieldModel =  new FieldModel({
       controlName: 'name',
-      icon: 'assignment',
       label: 'Enter your name',
       placeholder: 'name',
       autoComplete: 'off',

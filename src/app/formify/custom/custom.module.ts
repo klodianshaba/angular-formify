@@ -4,10 +4,11 @@ import { AddressComponent } from './components/address/address.component';
 import {FormifyModule} from '../formify.module';
 import {MaterialModule} from '../material.module';
 import { ExercisesComponent } from './components/exercises/exercises.component';
+import { ContactComponent } from './components/contact/contact.component';
 
 
 @NgModule({
-  declarations: [AddressComponent, ExercisesComponent],
+  declarations: [AddressComponent, ExercisesComponent, ContactComponent],
   imports: [
     CommonModule,
     FormifyModule,
@@ -15,7 +16,8 @@ import { ExercisesComponent } from './components/exercises/exercises.component';
   ],
   exports: [
     AddressComponent,
-    ExercisesComponent
+    ExercisesComponent,
+    ContactComponent
   ]
 })
 export class CustomModule { }

@@ -6,7 +6,7 @@ export class ToggleFieldControl extends FieldModel {
   constructor(overwrite: FieldState  = {}) {
     const  field: FieldModel = new FieldModel({
       controlName: 'toggle',
-      label: 'Show color',
+      label: 'Toggle',
       defaultValue: true
     });
     super(Object.assign(field , overwrite));

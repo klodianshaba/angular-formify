@@ -8,6 +8,7 @@ import {ColorFieldControl} from './formify/fields/color.field-control';
 import {ToggleFieldControl} from './formify/fields/toggle.field-control';
 import {AddressGroupControl} from './formify/groups/address.group-control';
 import {ExercisesGroupControl} from './formify/groups/exercises.group-control';
+import {ContactGroupControl} from './formify/groups/contact.group-control';
 
 @Component({
   selector: 'app-root',
@@ -18,31 +19,20 @@ export class AppComponent {
   title = 'form';
   public formify: FormifyModel = new FormifyModel({
     controls: [
-      new NameFieldControl({}),
-      new LanguageFieldControl({}),
-      new BiographyFieldControl({}),
-      new ColorFieldControl({}),
-      new ToggleFieldControl(),
+      new NameFieldControl({}), // extends FieldModel
+      new FieldModel({controlName: 'lastName', label: ' Enter last name', placeholder: 'last name'}),
+      new LanguageFieldControl({}), // extends FieldModel
+      new BiographyFieldControl({}), // extends FieldModel
+      new ColorFieldControl({}), // extends FieldModel
+      new ToggleFieldControl({label: 'Show/Hidden choose color radios'}), // extends FieldModel
       new FieldModel({controlName: 'checkbox', label: 'Checkbox',  defaultValue: 'sdf'}),
-      new ArrayModel({controlName: 'address', label: 'Address:', controls: [
-        new AddressGroupControl(),
+      new ArrayModel({controlName: 'address', label: 'Address:', controls: [ // extends ArrayModel
+        new AddressGroupControl(), // extends GroupModel
       ]}),
-      new ExercisesGroupControl(),
+      new ExercisesGroupControl(), // extends GroupModel
+      new ToggleFieldControl({controlName: 'toggleContact', label: 'Add/Remove fill contact group'}), // extends FieldModel
 
-      new GroupModel({ controlName: 'contact', controls: [
-        new FieldModel({
-          controlName: 'phone', label: 'number phone', placeholder: 'phone', autoComplete: 'off',
-          validators: [
-            {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
-          ]
-        }),
-        new FieldModel({
-          controlName: 'address', label: 'your address', placeholder: 'address', autoComplete: 'off',
-          validators: [
-            {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
-          ]
-        }),
-      ]}),
+      new ContactGroupControl(),
     ],
     submit: {text: 'Save it'}
   });

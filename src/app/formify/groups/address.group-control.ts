@@ -8,13 +8,13 @@ export class AddressGroupControl extends GroupModel {
       label: 'address:',
       controls: [
         new FieldModel({
-          controlName: 'address', label: 'Enter your address', placeholder: 'address', autoComplete: 'off',
+          controlName: 'street', label: 'Enter your street', placeholder: 'street', icon: 'add_road' , autoComplete: 'off',
           validators: [
             {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
           ]
         }),
         new FieldModel({
-          controlName: 'city', label: 'Enter city', placeholder: 'city', autoComplete: 'off',
+          controlName: 'city', label: 'Enter city', placeholder: 'city', icon: 'location_city' , autoComplete: 'off',
           validators: [
             {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
           ]
@@ -26,7 +26,7 @@ export class AddressGroupControl extends GroupModel {
           ]
         }),
         new FieldModel({
-          controlName: 'zip', label: 'Enter zip code', type: 'number' , placeholder: 'zip code', autoComplete: 'off',
+          controlName: 'zip', label: 'Enter zip code', type: 'number' , placeholder: 'zip code', icon: 'pin' , autoComplete: 'off',
           validators: [
             {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
           ]

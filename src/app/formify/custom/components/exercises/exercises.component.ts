@@ -11,7 +11,7 @@ import {AbstractControl} from '@angular/forms';
 export class ExercisesComponent extends GroupControlComponent implements OnInit {
   public formifyAddExercise: FormifyModel = new FormifyModel({
     controls: [
-      new FieldModel({controlName: 'AddExercise', label: 'Write your custom exercise', placeholder: 'exercise'})
+      new FieldModel({controlName: 'AddExercise', label: 'Write your custom exercise', icon: 'directions_run' , placeholder: 'exercise'})
     ]
   });
   constructor() { super(); }

@@ -31,20 +31,20 @@
       <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
     </a>
     <div class="form">
+      <div>Membership form</div>
       <form [formGroup]="formify.formGroup" #form="ngForm" (ngSubmit)="onSubmit()">
-        <formify-input formControlName="name" [fieldModel]="formify.field('name')"></formify-input>
+        <div class="full-name-content">
+          <formify-input formControlName="name" [fieldModel]="formify.field('name')"></formify-input>
+          <formify-input formControlName="lastName" [fieldModel]="formify.field('lastName')"></formify-input>
+        </div>
         <formify-select formControlName="language" [fieldModel]="formify.field('language')"></formify-select>
         <formify-textarea formControlName="biography" [fieldModel]="formify.field('biography')"></formify-textarea>
         <formify-toggle formControlName="toggle" [fieldModel]="formify.field('toggle')"></formify-toggle>
         <formify-radio formControlName="color" [fieldModel]="formify.field('color')"></formify-radio>
-
         <formify-exercises [groupModel]="formify.group('exercises')"></formify-exercises>
         <formify-address formArrayName="address" [arrayModel]="formify.array('address')"></formify-address>
-
-        <formify-group #group formGroupName="contact" [groupModel]="formify.group('contact')">
-          <formify-input formControlName="phone" [fieldModel]="group.groupModel.field('phone')"></formify-input>
-          <formify-input formControlName="address" [fieldModel]="group.groupModel.field('address')"></formify-input>
-        </formify-group>
+        <formify-toggle formControlName="toggleContact" [fieldModel]="formify.field('toggleContact')"></formify-toggle>
+        <formify-contact formGroupName="contact" [groupModel]="formify.group('contact')"></formify-contact>
         <formify-submit [submit]="formify.submit"></formify-submit>
       </form>
     </div>
