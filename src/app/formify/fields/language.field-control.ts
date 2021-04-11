@@ -10,7 +10,7 @@ export class LanguageFieldControl extends FieldModel {
       placeholder: 'language',
       autoComplete: 'off',
       defaultValue: 'en',
-      options: [{text: 'Al', value: 'al'}, {text: 'EN', value: 'en'}],
+      options: [{text: 'Shqip', value: 'al'}, {text: 'English', value: 'en'}, {text: 'Italiano', value: 'it'}, {text: 'Espanol', value: 'es'} , {text: 'Francais', value: 'fr'}],
       validators: [
         new ValidatorModel({validator: Validators.required, errorCode: 'required', description: 'language is required'}),
       ]

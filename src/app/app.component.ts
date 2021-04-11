@@ -24,7 +24,7 @@ export class AppComponent {
       new ColorFieldControl({}),
       new ToggleFieldControl(),
       new FieldModel({controlName: 'checkbox', label: 'Checkbox',  defaultValue: 'sdf'}),
-      new ArrayModel({controlName: 'array', label: 'Address:', controls: [
+      new ArrayModel({controlName: 'address', label: 'Address:', controls: [
         new AddressGroupControl(),
       ]}),
       new ExercisesGroupControl(),

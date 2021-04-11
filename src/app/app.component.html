@@ -20,14 +20,14 @@
   <p>Here are some examples to help you get started:</p>
   <div class="card-container">
     <a class="card" target="_blank" rel="noopener" href="https://angular.io/tutorial">
-      <span>First Example</span>
+      <span>Membership form</span>
       <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>    </a>
     <a class="card" target="_blank" rel="noopener" href="https://angular.io/cli">
-      <span>Second Example</span>
+      <span>Login form</span>
       <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
     </a>
     <a class="card" target="_blank" rel="noopener" href="https://blog.angular.io/">
-      <span>Third Example</span>
+      <span>Register form</span>
       <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
     </a>
     <div class="form">
@@ -37,25 +37,9 @@
         <formify-textarea formControlName="biography" [fieldModel]="formify.field('biography')"></formify-textarea>
         <formify-toggle formControlName="toggle" [fieldModel]="formify.field('toggle')"></formify-toggle>
         <formify-radio formControlName="color" [fieldModel]="formify.field('color')"></formify-radio>
-<!--        <formify-checkbox formControlName="checkbox" [fieldModel]="formify.field('checkbox')"> </formify-checkbox>-->
-<!--        <formify-input formControlName="add-exercise" (keypress)="onKeyPressAddExercise($event)" [fieldModel]="formify.field('add-exercise')"></formify-input>-->
 
-
-<!--        <formify-input formControlName="checkbox" [fieldModel]="formify.field('checkbox')"></formify-input>-->
-<!--        <formify-array #array [arrayModel]="formify.array('array')">-->
-<!--          <div [formArrayName]="array.arrayModel.controlName" *ngFor="let item of array.arrayModel['controls']; let i = index;">-->
-<!--          <formify-group [formGroupName]="i" [groupModel]="item">-->
-<!--            <div style="display: flex;">-->
-<!--              <formify-input formControlName="phone" [fieldModel]="item.field('phone')"></formify-input>-->
-<!--              <formify-input formControlName="address" [fieldModel]="item.field('address')"></formify-input>-->
-<!--            </div>-->
-<!--          </formify-group>-->
-<!--          </div>-->
-<!--        </formify-array>-->
-
-        <formify-exercises  [groupModel]="formify.group('exercises')"></formify-exercises>
-
-        <formify-address formArrayName="array" [arrayModel]="formify.array('array')"></formify-address>
+        <formify-exercises [groupModel]="formify.group('exercises')"></formify-exercises>
+        <formify-address formArrayName="address" [arrayModel]="formify.array('address')"></formify-address>
 
         <formify-group #group formGroupName="contact" [groupModel]="formify.group('contact')">
           <formify-input formControlName="phone" [fieldModel]="group.groupModel.field('phone')"></formify-input>
