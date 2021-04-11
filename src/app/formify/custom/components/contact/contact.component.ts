@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {GroupControlComponent} from '../../../components/group-control/group-control.component';
 
 @Component({
@@ -7,10 +7,8 @@ import {GroupControlComponent} from '../../../components/group-control/group-con
   styleUrls: ['./contact.component.scss']
 })
 export class ContactComponent extends GroupControlComponent implements OnInit {
-
   constructor() { super(); }
   ngOnInit(): void {
     super.ngOnInit();
   }
-
 }

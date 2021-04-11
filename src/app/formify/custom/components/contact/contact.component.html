@@ -1,5 +1,5 @@
 
-<form [formGroup]="formGroup" #form="ngForm">
+<form [formGroup]="formGroup" #form="ngForm" *ngIf="groupModel">
   <span>{{groupModel.label}}</span>
   <div class="contact-content">
     <formify-input formControlName="phone" [fieldModel]="groupModel.field('phone')"></formify-input>

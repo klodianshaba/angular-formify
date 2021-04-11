@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {ChangeDetectorRef, Component} from '@angular/core';
 import {ArrayModel, FieldModel, FieldTypes, FormifyModel, GroupModel} from './formify/models';
 import {Validators} from '@angular/forms';
 import {NameFieldControl} from './formify/fields/name.field-control';
@@ -17,6 +17,7 @@ import {ContactGroupControl} from './formify/groups/contact.group-control';
 })
 export class AppComponent {
   title = 'form';
+  public object: object;
   public formify: FormifyModel = new FormifyModel({
     controls: [
       new NameFieldControl({}), // extends FieldModel
@@ -31,12 +32,11 @@ export class AppComponent {
       ]}),
       new ExercisesGroupControl(), // extends GroupModel
       new ToggleFieldControl({controlName: 'toggleContact', label: 'Add/Remove fill contact group'}), // extends FieldModel
-
       new ContactGroupControl(),
     ],
     submit: {text: 'Save it'}
   });
-  constructor() {
+  constructor(private cd: ChangeDetectorRef) {
     this.formify.formGroup.get('color').valueChanges.subscribe(color => {
       this.formify.updateFields({color});
       this.formify.updateSubmit({color});
@@ -48,7 +48,18 @@ export class AppComponent {
        this.formify.field('color').update({hidden: true });
       }
     });
-    console.log(this.formify);
+    this.formify.formGroup.get('toggleContact').valueChanges.subscribe(contact => {
+      if (contact){
+        this.formify.addControl( new ContactGroupControl());
+      }else{
+        this.formify.removeControl('contact');
+      }
+      console.log(this.formify.formGroup.value);
+      this.cd.detectChanges();
+    });
+    this.formify.formGroup.valueChanges.subscribe( value => {
+     this.object = value;
+    });
   }
 
   onSubmit(): void{
