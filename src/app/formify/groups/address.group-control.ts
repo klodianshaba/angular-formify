@@ -1,5 +1,6 @@
 import {FieldModel, FieldState, FieldTypes, GroupModel, GroupState, ValidatorModel} from '../models';
 import {Validators} from '@angular/forms';
+import {CountryFieldControl} from '../fields/country.field-control';
 
 export class AddressGroupControl extends GroupModel {
   constructor(overwrite: GroupState  = {}) {
@@ -10,7 +11,7 @@ export class AddressGroupControl extends GroupModel {
         new FieldModel({
           controlName: 'street', label: 'Enter your street', placeholder: 'street', icon: 'add_road' , autoComplete: 'off',
           validators: [
-            {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
+            new ValidatorModel({validator: Validators.required, errorCode: 'required', description: 'identity is required'}),
           ]
         }),
         new FieldModel({
@@ -19,12 +20,7 @@ export class AddressGroupControl extends GroupModel {
             {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
           ]
         }),
-        new FieldModel({
-          controlName: 'country', fieldType: FieldTypes.select, label: 'Choose country', placeholder: 'country', autoComplete: 'off', options: [{text: 'Albania', value: 'Al'}, {text: 'England', value: 'En'}, {text: 'Germany', value: 'Gr'}],
-          validators: [
-            {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
-          ]
-        }),
+        new CountryFieldControl(),
         new FieldModel({
           controlName: 'zip', label: 'Enter zip code', type: 'number' , placeholder: 'zip code', icon: 'pin' , autoComplete: 'off',
           validators: [
