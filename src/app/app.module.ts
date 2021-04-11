@@ -6,6 +6,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormifyModule } from './formify/formify.module';
 import {CustomModule} from './formify/custom/custom.module';
 import {MaterialModule} from './formify/material.module';
+import { NgxJsonViewerModule } from 'ngx-json-viewer';
+import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
+import { HighlightPlusModule } from 'ngx-highlightjs/plus';
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,8 +20,19 @@ import {MaterialModule} from './formify/material.module';
     FormifyModule,
     CustomModule,
     MaterialModule,
+    NgxJsonViewerModule,
+    HighlightModule,
+    HighlightPlusModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HIGHLIGHT_OPTIONS,
+      useValue: {
+        fullLibraryLoader: () => import('highlight.js'),
+      }
+    }
+  ],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

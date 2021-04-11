@@ -11,6 +11,10 @@ export class ExercisesGroupControl extends GroupModel {
         new FieldModel({controlName: 'skipping', label: 'Skipping',  defaultValue: false}),
         new FieldModel({controlName: 'cycling', label: 'Cycling',  defaultValue: false}),
         new FieldModel({controlName: 'burpee', label: 'Burpee',  defaultValue: false}),
+        new FieldModel({controlName: 'pool', label: 'Pool',  defaultValue: false}),
+        new FieldModel({controlName: 'surfing', label: 'Surfing',  defaultValue: false}),
+        new FieldModel({controlName: 'sledding', label: 'Sledding',  defaultValue: false}),
+        new FieldModel({controlName: 'skateboarding', label: 'Skateboarding',  defaultValue: false}),
       ]
     });
     super(Object.assign(group , overwrite));

@@ -1,5 +1,5 @@
 
-<form [formGroup]="formGroup" #form="ngForm">
+<form [formGroup]="formGroup" #form="ngForm" *ngIf="arrayModel">
   <div>
     {{arrayModel.label}}
     <button mat-icon-button (click)="addAddress()"><mat-icon>add</mat-icon></button>

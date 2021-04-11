@@ -1,4 +1,4 @@
-<p>
+<div class="submit-content">
   <button (click)="onHandleSubmit()" [disabled]="submit.disabled" mat-raised-button class="submit" color="{{submit.color}}" >
     <span *ngIf="!submit.loading; else loading_spinner_login"> {{submit.text}}</span>
     <ng-template #loading_spinner_login>
@@ -7,4 +7,5 @@
       </mat-icon>
     </ng-template>
   </button>
-</p>
+</div>
+

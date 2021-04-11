@@ -18,6 +18,22 @@ import {ContactGroupControl} from './formify/groups/contact.group-control';
 export class AppComponent {
   title = 'form';
   public object: object;
+  code = `<form [formGroup]="formify.formGroup" #form="ngForm" (ngSubmit)="onSubmit()">
+  <div class="full-name-content">
+    <formify-input formControlName="name" [fieldModel]="formify.field('name')"></formify-input>
+    <formify-input formControlName="lastName" [fieldModel]="formify.field('lastName')"></formify-input>
+    </div>
+    <formify-select formControlName="language" [fieldModel]="formify.field('language')"></formify-select>
+    <formify-textarea formControlName="biography" [fieldModel]="formify.field('biography')"></formify-textarea>
+    <formify-toggle formControlName="toggle" [fieldModel]="formify.field('toggle')"></formify-toggle>
+    <formify-radio formControlName="color" [fieldModel]="formify.field('color')"></formify-radio>
+  <formify-exercises [groupModel]="formify.group('exercises')"></formify-exercises>
+    <formify-address formArrayName="address" [arrayModel]="formify.array('address')"></formify-address>
+    <formify-toggle formControlName="toggleContact" [fieldModel]="formify.field('toggleContact')"></formify-toggle>
+    <formify-contact formGroupName="contact" [groupModel]="formify.group('contact')"></formify-contact>
+  <formify-submit [submit]="formify.submit"></formify-submit>
+</form>`;
+
   public formify: FormifyModel = new FormifyModel({
     controls: [
       new NameFieldControl({}), // extends FieldModel

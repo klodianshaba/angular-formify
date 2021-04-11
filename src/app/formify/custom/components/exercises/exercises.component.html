@@ -1,5 +1,5 @@
 
-<form [formGroup]="formGroup" #form="ngForm">
+<form [formGroup]="formGroup" #form="ngForm" *ngIf="groupModel">
     <span>
       {{groupModel.label}}
     </span>
