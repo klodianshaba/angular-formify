@@ -1,5 +1,6 @@
 
 <form [formGroup]="formGroup" #form="ngForm">
+  {{groupModel.label}}
   <ng-content></ng-content>
   <button hidden #submit></button>
 </form>

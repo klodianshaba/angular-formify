@@ -11,7 +11,7 @@ import {BehaviorSubject} from 'rxjs';
 })
 export class FieldControlComponent implements ControlValueAccessor, OnInit , OnChanges, AfterViewInit {
   private _fieldModel: FieldModel = new FieldModel({controlName: null});
-  @Input('fieldModel') set noFieldConfig( fieldModel: FieldModel) {this._fieldModel = fieldModel; }
+  @Input('fieldModel') set noFieldConfig( fieldModel: FieldModel | any) {this._fieldModel = fieldModel; }
   @Output('onPrefix') onPrefix: EventEmitter<boolean> = new EventEmitter<boolean>();
   constructor(protected formBuilder: FormBuilder) {}
   @ViewChild('submit', {static: false}) submit: ElementRef;

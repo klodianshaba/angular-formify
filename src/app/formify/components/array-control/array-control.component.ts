@@ -13,6 +13,7 @@ export class ArrayControlComponent implements OnInit, OnChanges {
     this._arrayModel = arrayModel;
     this.formGroup = new FormGroup( {[this.arrayModel.controlName]: this.arrayModel.formArray});
     this.formGroup.statusChanges.subscribe(status => {
+      console.log(this.arrayModel.controlName + ': ' + this.formGroup.value);
       this.arrayModel.change.next(this.formGroup.value);
     });
   }

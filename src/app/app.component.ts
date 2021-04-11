@@ -7,6 +7,7 @@ import {BiographyFieldControl} from './formify/fields/biography.field-control';
 import {ColorFieldControl} from './formify/fields/color.field-control';
 import {ToggleFieldControl} from './formify/fields/toggle.field-control';
 import {AddressGroupControl} from './formify/groups/address.group-control';
+import {ExercisesGroupControl} from './formify/groups/exercises.group-control';
 
 @Component({
   selector: 'app-root',
@@ -26,6 +27,7 @@ export class AppComponent {
       new ArrayModel({controlName: 'array', label: 'Address:', controls: [
         new AddressGroupControl(),
       ]}),
+      new ExercisesGroupControl(),
 
       new GroupModel({ controlName: 'contact', controls: [
         new FieldModel({
@@ -56,8 +58,17 @@ export class AppComponent {
        this.formify.field('color').update({hidden: true });
       }
     });
-
     console.log(this.formify);
+  }
+
+  onKeyPressAddExercise(event: KeyboardEvent): void{
+    if (event.keyCode === 13){
+      const value = this.formify.formGroup.get('add-exercise').value;
+      if (value.length > 0){
+        this.formify.group('exercises').addControl( new FieldModel({controlName: value, label: value,  defaultValue: true}));
+        this.formify.formGroup.get('add-exercise').reset();
+      }
+    }
   }
 
 

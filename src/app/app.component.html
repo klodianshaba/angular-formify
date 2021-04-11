@@ -37,7 +37,16 @@
         <formify-textarea formControlName="biography" [fieldModel]="formify.field('biography')"></formify-textarea>
         <formify-toggle formControlName="toggle" [fieldModel]="formify.field('toggle')"></formify-toggle>
         <formify-radio formControlName="color" [fieldModel]="formify.field('color')"></formify-radio>
-        <formify-checkbox formControlName="checkbox" [fieldModel]="formify.field('checkbox')"> </formify-checkbox>
+<!--        <formify-checkbox formControlName="checkbox" [fieldModel]="formify.field('checkbox')"> </formify-checkbox>-->
+<!--        <formify-input formControlName="add-exercise" (keypress)="onKeyPressAddExercise($event)" [fieldModel]="formify.field('add-exercise')"></formify-input>-->
+
+        <formify-group formGroupName="exercises" #checkboxes [groupModel]="formify.group('exercises')">
+
+          <div style="display: flex; flex-wrap: wrap">
+            <formify-checkbox *ngFor="let check of checkboxes.groupModel.controls" [formControlName]="check.controlName" [fieldModel]="check"></formify-checkbox>
+          </div>
+
+        </formify-group>
 
 <!--        <formify-input formControlName="checkbox" [fieldModel]="formify.field('checkbox')"></formify-input>-->
 <!--        <formify-array #array [arrayModel]="formify.array('array')">-->
