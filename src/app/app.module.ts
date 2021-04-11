@@ -8,10 +8,15 @@ import {CustomModule} from './formify/custom/custom.module';
 import {MaterialModule} from './formify/material.module';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
-import { HighlightPlusModule } from 'ngx-highlightjs/plus';
+import {MembershipComponent} from './examples/membership/membership.component';
+import { RegisterComponent } from './examples/register/register.component';
+import { LoginComponent } from './examples/login/login.component';
 @NgModule({
   declarations: [
     AppComponent,
+    MembershipComponent,
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +27,6 @@ import { HighlightPlusModule } from 'ngx-highlightjs/plus';
     MaterialModule,
     NgxJsonViewerModule,
     HighlightModule,
-    HighlightPlusModule,
   ],
   providers: [
     {

@@ -267,19 +267,6 @@ svg#clouds {
 .form{
   width: 722px;
   max-width: 722px;
-  > div{
-    padding-top: 16px;
-    font-size: 18px;
-    font-weight: bold;
-    text-align: center;
-  }
-}
-.full-name-content{
-  display: flex;
-  justify-content: space-between;
-  > * {
-    width: calc(50% - 5px);
-  }
 }
 
 /* Responsive Styles */
