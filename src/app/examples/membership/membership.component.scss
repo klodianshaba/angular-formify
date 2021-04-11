@@ -1,10 +1,16 @@
 
 .form-content {
+  position: relative;
   > div {
     margin: 16px;
     font-size: 18px;
     font-weight: bold;
     text-align: center;
+    button{
+      position: absolute;
+      right: 0;
+      top: -10px;
+    }
   }
   .full-name-content {
     display: flex;
@@ -13,5 +19,8 @@
     > * {
       width: calc(50% - 5px);
     }
+  }
+  .result{
+    text-align: left; display: flex;flex-wrap: wrap; overflow: hidden
   }
 }

@@ -11,12 +11,14 @@ import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 import {MembershipComponent} from './examples/membership/membership.component';
 import { RegisterComponent } from './examples/register/register.component';
 import { LoginComponent } from './examples/login/login.component';
+import { HighlightsComponent } from './examples/highlights/highlights.component';
 @NgModule({
   declarations: [
     AppComponent,
     MembershipComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    HighlightsComponent
   ],
   imports: [
     BrowserModule,

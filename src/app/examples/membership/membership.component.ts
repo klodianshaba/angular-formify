@@ -15,6 +15,7 @@ import {AddressGroupControl, ContactGroupControl, ExercisesGroupControl} from '.
   styleUrls: ['./membership.component.scss']
 })
 export class MembershipComponent implements OnInit {
+  public collapse: boolean = false;
   public formify: FormifyModel = new FormifyModel({
     controls: [
       new NameFieldControl({}), // extends FieldModel
@@ -64,5 +65,8 @@ export class MembershipComponent implements OnInit {
     setTimeout(() => {
       this.formify.loading(false);
     }, 1000);
+  }
+  onToggleCollapse(): void{
+    this.collapse = !this.collapse;
   }
 }
