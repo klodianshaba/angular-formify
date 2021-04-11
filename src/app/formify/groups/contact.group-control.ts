@@ -2,6 +2,7 @@ import {FieldModel, FieldState, FieldTypes, GroupModel, GroupState, ValidatorMod
 import {Validators} from '@angular/forms';
 import {Email, Phone} from '../fields';
 import {EmailFieldControl} from '../fields/email.field-control';
+import {PhoneFieldControl} from '../fields/phone.field-control';
 
 export class ContactGroupControl extends GroupModel {
   constructor(overwrite: GroupState  = {}) {
@@ -9,14 +10,7 @@ export class ContactGroupControl extends GroupModel {
       controlName: 'contact',
       label: 'Contact:',
       controls: [
-        new FieldModel({
-          controlName: 'phone', prefix: '+355', type: 'tel', label: 'Number phone', placeholder: 'phone', icon: 'phone' , autoComplete: 'off',
-          validators: [
-            {validator: Validators.required, errorCode: 'required', description: 'identity is required'},
-            {validator: Validators.pattern(Phone) , errorCode: 'pattern' , description: 'Phone number is incorrect'},
-            {validator: null, errorCode: 'exist' , description: 'This phone exist in server'},
-          ]
-        }),
+        new PhoneFieldControl(),
         new EmailFieldControl(),
         new FieldModel({
           controlName: 'location', label: 'Enter your location', placeholder: 'location', icon: 'location_on', autoComplete: 'off',
