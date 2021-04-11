@@ -84,7 +84,7 @@ export class FieldModel extends FormifyAccessibility{
     this.errorStateMatcher = new MyErrorStateMatcher();
     this.validators = [];
     this.options = null;
-    this.appearance = 'standard';
+    this.appearance = 'legacy';
     this.useTranslation = false;
     this.prefix = null;
     this.dropDownInPrefix = false;

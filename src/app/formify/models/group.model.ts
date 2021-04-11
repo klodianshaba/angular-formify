@@ -10,13 +10,13 @@ import {SubmitModel} from './submit.model';
 
 export interface GroupState {
   controlName?: string;
-  controls?: ControlsType;
+  controls?: ControlsType[];
   label?: string;
 }
 
 export class GroupModel extends FormifyGenerate implements FormifyAccessibility{
   controlName: string;
-  controls: ControlsType;
+  controls: ControlsType[];
   readonly controlType: ControlTypes;
   change: BehaviorSubject<any>;
   label: string;
@@ -30,7 +30,7 @@ export class GroupModel extends FormifyGenerate implements FormifyAccessibility{
     this.label = '';
     Object.assign(this, config);
   }
-  get(path: string): FieldModel | GroupModel | ArrayModel | null {
+  get(path: string): ControlsType {
     for (const control of this.controls){
       if (path === control.controlName){
         return control;
@@ -59,7 +59,7 @@ export class GroupModel extends FormifyGenerate implements FormifyAccessibility{
     }
     return null;
   }
-  addControl(control: FieldModel | GroupModel | ArrayModel): void{
+  addControl(control: ControlsType): void{
     if (control instanceof FieldModel){
       this.controls.push(control);
       this.formGroup.addControl(control.controlName, this.generateFormControl(control));

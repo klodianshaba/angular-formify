@@ -1,5 +1,4 @@
-import {FieldModel, FieldState, FieldTypes, GroupModel, GroupState, ValidatorModel} from '../models';
-import {Validators} from '@angular/forms';
+import {FieldModel, FieldTypes, GroupModel, GroupState} from '../models';
 
 export class ExercisesGroupControl extends GroupModel {
   constructor(overwrite: GroupState  = {}) {
@@ -7,14 +6,15 @@ export class ExercisesGroupControl extends GroupModel {
       controlName: 'exercises',
       label: 'Exercises:',
       controls: [
-        new FieldModel({controlName: 'running', label: 'Running',  defaultValue: true}),
-        new FieldModel({controlName: 'skipping', label: 'Skipping',  defaultValue: false}),
-        new FieldModel({controlName: 'cycling', label: 'Cycling',  defaultValue: false}),
-        new FieldModel({controlName: 'burpee', label: 'Burpee',  defaultValue: false}),
-        new FieldModel({controlName: 'pool', label: 'Pool',  defaultValue: false}),
-        new FieldModel({controlName: 'surfing', label: 'Surfing',  defaultValue: false}),
-        new FieldModel({controlName: 'sledding', label: 'Sledding',  defaultValue: false}),
-        new FieldModel({controlName: 'skateboarding', label: 'Skateboarding',  defaultValue: false}),
+        new FieldModel({controlName: 'AddExercise', label: 'Write your custom exercise', icon: 'directions_run' , placeholder: 'exercise'}),
+        new FieldModel({controlName: 'running', label: 'Running', fieldType: FieldTypes.checkbox,  defaultValue: true}),
+        new FieldModel({controlName: 'skipping', label: 'Skipping', fieldType: FieldTypes.checkbox, defaultValue: false}),
+        new FieldModel({controlName: 'cycling', label: 'Cycling', fieldType: FieldTypes.checkbox,  defaultValue: false}),
+        new FieldModel({controlName: 'burpee', label: 'Burpee', fieldType: FieldTypes.checkbox,  defaultValue: false}),
+        new FieldModel({controlName: 'pool', label: 'Pool', fieldType: FieldTypes.checkbox,  defaultValue: false}),
+        new FieldModel({controlName: 'surfing', label: 'Surfing', fieldType: FieldTypes.checkbox,  defaultValue: true}),
+        new FieldModel({controlName: 'sledding', label: 'Sledding', fieldType: FieldTypes.checkbox,  defaultValue: false}),
+        new FieldModel({controlName: 'skateboarding', label: 'Skateboarding', fieldType: FieldTypes.checkbox,  defaultValue: true}),
       ]
     });
     super(Object.assign(group , overwrite));

@@ -14,7 +14,7 @@ export class FormifyGenerate {
   constructor() {
     this.formGroup = null;
   }
-  protected generateFormControls(controls: ControlsType): { [controlId: string]: AbstractControl; } {
+  protected generateFormControls(controls: ControlsType[]): { [controlId: string]: AbstractControl; } {
     const formControls: { [controlId: string]: AbstractControl; } = {};
     for (const control of controls) {
       if (control instanceof FieldModel) {

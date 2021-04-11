@@ -11,7 +11,9 @@
     <button mat-icon-button (click)="addExercise()"><mat-icon>add</mat-icon></button>
   </div>
   <div class="exercises-content">
-    <formify-checkbox *ngFor="let control of groupModel.controls" [formControlName]="control.controlName" [fieldModel]="control"></formify-checkbox>
+    <div *ngFor="let control of groupModel.controls">
+      <formify-checkbox *ngIf="control.fieldType === fieldTypes.checkbox"  [formControlName]="control.controlName" [fieldModel]="control"></formify-checkbox>
+    </div>
   </div>
   <button hidden #submit></button>
 </form>

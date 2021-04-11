@@ -4,29 +4,22 @@ import {GroupModel} from './group.model';
 import {ArrayModel} from './array.model';
 import {SubmitModel} from './submit.model';
 import {FormifyAccessibility} from './accessibility.abstract';
-import {BehaviorSubject} from 'rxjs';
-import {FormifyManipulation} from './manipulation.abstract';
 import {FormifyGenerate} from './formify.generate';
 import {ThemePalette} from '@angular/material/core';
-
 export interface FormifyState {
-  controls: (FieldModel | GroupModel | ArrayModel)[];
+  controls: ControlsType[];
   submit?: SubmitModel;
   options?: OptionsType;
 }
-
 export enum ControlTypes {
   formField = '[FORMFIELD] formField direction',
   formGroup = '[FORMGROUP] formGroup direction',
   formArray = '[FORMARRAY] formArray direction',
 }
-
-export type ControlsType = (FieldModel | GroupModel | ArrayModel)[];
-
+export type ControlsType = (FieldModel | GroupModel | ArrayModel | null);
 export type  OptionsType = ValidatorFn | ValidatorFn[] | AbstractControlOptions;
-
 export  class FormifyModel extends FormifyGenerate implements FormifyAccessibility{
-  public controls: ControlsType;
+  public controls: ControlsType[];
   public options?: OptionsType;
   public color: ThemePalette;
   constructor( config: FormifyState ) {
@@ -69,7 +62,7 @@ export  class FormifyModel extends FormifyGenerate implements FormifyAccessibili
     }
     return null;
   }
-  addControl(control: FieldModel | GroupModel | ArrayModel): void{
+  addControl(control: ControlsType): void{
     if (control instanceof FieldModel){
       this.controls.push(control);
       this.formGroup.addControl(control.controlName, this.generateFormControl(control));
@@ -85,11 +78,9 @@ export  class FormifyModel extends FormifyGenerate implements FormifyAccessibili
     this.controls = this.controls.filter(control => control.controlName !== name);
     this.formGroup.removeControl(name);
   }
-
   public checkDisabledSubmit(): void {
     this.submit.disabled = ( this.formGroup.invalid && this.submit.status.value || this.submit.loading );
   }
-
   public loading(loading: boolean): void{
     this.submit.loading = loading;
     this.checkDisabledSubmit();
@@ -105,8 +96,7 @@ export  class FormifyModel extends FormifyGenerate implements FormifyAccessibili
     Object.assign(this.submit , overwrite);
   }
   updateFields(overwrite: FieldState): void{ this.overwriteFields(overwrite, this.controls); }
-
-  private overwriteFields(overwrite: FieldState, controls: (FieldModel | GroupModel | ArrayModel)[]): void{
+  private overwriteFields(overwrite: FieldState, controls: ControlsType[]): void{
     controls.forEach(control => {
       if (control instanceof FieldModel){
          Object.assign(control , overwrite);

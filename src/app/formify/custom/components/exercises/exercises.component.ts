@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {GroupControlComponent} from '../../../components/group-control/group-control.component';
-import {FieldModel, FormifyModel} from '../../../models';
+import {FieldModel, FieldTypes, FormifyModel} from '../../../models';
 import {AbstractControl} from '@angular/forms';
 
 @Component({
@@ -9,6 +9,7 @@ import {AbstractControl} from '@angular/forms';
   styleUrls: ['./exercises.component.scss']
 })
 export class ExercisesComponent extends GroupControlComponent implements OnInit {
+  public  fieldTypes = FieldTypes;
   public formifyAddExercise: FormifyModel = new FormifyModel({
     controls: [
       new FieldModel({controlName: 'AddExercise', label: 'Write your custom exercise', icon: 'directions_run' , placeholder: 'exercise'})

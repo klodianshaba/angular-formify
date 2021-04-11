@@ -9,6 +9,7 @@ import {ToggleFieldControl} from './formify/fields/toggle.field-control';
 import {AddressGroupControl} from './formify/groups/address.group-control';
 import {ExercisesGroupControl} from './formify/groups/exercises.group-control';
 import {ContactGroupControl} from './formify/groups/contact.group-control';
+import {AppearanceFieldControl} from './formify/fields/appearance.field-control';
 
 @Component({
   selector: 'app-root',
@@ -49,13 +50,17 @@ export class AppComponent {
       new ExercisesGroupControl(), // extends GroupModel
       new ToggleFieldControl({controlName: 'toggleContact', label: 'Add/Remove fill contact group'}), // extends FieldModel
       new ContactGroupControl(),
+      new AppearanceFieldControl(),
     ],
-    submit: {text: 'Save it'}
+    submit: {text: 'Save Membership'}
   });
   constructor(private cd: ChangeDetectorRef) {
     this.formify.formGroup.get('color').valueChanges.subscribe(color => {
       this.formify.updateFields({color});
       this.formify.updateSubmit({color});
+    });
+    this.formify.formGroup.get('appearance').valueChanges.subscribe(appearance => {
+      this.formify.updateFields({appearance});
     });
     this.formify.formGroup.get('toggle').valueChanges.subscribe(toggle => {
      if (toggle){
