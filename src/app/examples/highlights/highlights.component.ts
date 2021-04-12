@@ -71,8 +71,28 @@ export class HighlightsComponent implements OnInit {
     ],
     submit: {text: 'Save Membership'},
   });
-  constructor() {}
-  ngOnInit(): void {
+  constructor() {
+     this.formify.formGroup.get('color').valueChanges.subscribe(color => { // handle color change
+      this.formify.updateFields({color});
+      this.formify.updateSubmit({color});
+    });
+    this.formify.formGroup.get('appearance').valueChanges.subscribe(appearance => { // handle appearance change
+      this.formify.updateFields({appearance});
+    });
+    this.formify.formGroup.get('toggleColor').valueChanges.subscribe(toggle => { // handle show/hide color radios
+      if (toggle){
+        this.formify.field('color').update({hidden: false });
+      }else{
+        this.formify.field('color').update({hidden: true });
+      }
+    });
+    this.formify.formGroup.get('toggleContact').valueChanges.subscribe(contact => { // handle add/remove contact group
+      if (contact){
+        this.formify.addControl( new ContactGroupControl());
+      }else{
+        this.formify.removeControl('contact');
+      }
+    });
   }
   ngOnDestroy(): void {
     this.formify.unSubscribe();

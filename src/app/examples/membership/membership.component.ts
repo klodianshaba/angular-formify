@@ -35,21 +35,21 @@ export class MembershipComponent implements OnInit , OnDestroy {
     submit: {text: 'Save Membership'},
   });
   constructor(private cd: ChangeDetectorRef) {
-    this.formify.formGroup.get('color').valueChanges.subscribe(color => {
+    this.formify.formGroup.get('color').valueChanges.subscribe(color => { // handle color change
       this.formify.updateFields({color});
       this.formify.updateSubmit({color});
     });
-    this.formify.formGroup.get('appearance').valueChanges.subscribe(appearance => {
+    this.formify.formGroup.get('appearance').valueChanges.subscribe(appearance => { // handle appearance change
       this.formify.updateFields({appearance});
     });
-    this.formify.formGroup.get('toggleColor').valueChanges.subscribe(toggle => {
+    this.formify.formGroup.get('toggleColor').valueChanges.subscribe(toggle => { // handle show/hide color radios
       if (toggle){
         this.formify.field('color').update({hidden: false });
       }else{
         this.formify.field('color').update({hidden: true });
       }
     });
-    this.formify.formGroup.get('toggleContact').valueChanges.subscribe(contact => {
+    this.formify.formGroup.get('toggleContact').valueChanges.subscribe(contact => { // handle add/remove contact group
       if (contact){
         this.formify.addControl( new ContactGroupControl());
       }else{

@@ -1,5 +1,5 @@
 <div class="code-content" *ngIf="!collapse">
-  <mat-tab-group mat-align-tabs="start" [selectedIndex]="1" >
+  <mat-tab-group mat-align-tabs="start">
     <mat-tab *ngFor="let highlight of highlight.items" [label]="highlight.label">
       <pre><code [highlight]="highlight.code"></code></pre>
     </mat-tab>

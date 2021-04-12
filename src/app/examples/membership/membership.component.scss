@@ -1,4 +1,4 @@
-
+@import "src/app/scss/mixins";
 .form-content {
   position: relative;
   > div {
@@ -20,4 +20,8 @@
       width: calc(50% - 5px);
     }
   }
+}
+.loading-form{
+  @include disabled-content;
+  opacity: 0.7;
 }

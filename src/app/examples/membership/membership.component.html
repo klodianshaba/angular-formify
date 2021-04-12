@@ -4,7 +4,7 @@
   <button mat-icon-button (click)="onToggleCollapse()"> <mat-icon>code</mat-icon></button>
 </div>
   <formify-highlights [collapse]="collapse" [json]="formify.formGroup.value"></formify-highlights>
-  <form [formGroup]="formify.formGroup" #form="ngForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="formify.formGroup" #form="ngForm" (ngSubmit)="onSubmit()" [ngClass]="{'loading-form': formify.submit.loading}">
     <div class="full-name">
       <formify-input formControlName="firstName" [fieldModel]="formify.field('firstName')"></formify-input>
       <formify-input formControlName="lastName" [fieldModel]="formify.field('lastName')"></formify-input>

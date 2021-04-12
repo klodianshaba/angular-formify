@@ -1,8 +1,10 @@
-<div class="form-content">
+<div class="register-content">
   <div>
     <span>Login formify</span>
     <button mat-icon-button (click)="onToggleCollapse()"> <mat-icon>code</mat-icon></button>
   </div>
   <formify-highlights [highlightType]="Highlights.login" [collapse]="collapse" [json]="formify.formGroup.value"></formify-highlights>
-  <formify [formify]="formify" (submit)="onSubmit()"></formify>
+  <div class="form-content">
+    <formify [formify]="formify" (submit)="onSubmit()"></formify>
+  </div>
 </div>

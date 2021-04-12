@@ -1,7 +1,9 @@
-
-.form-content {
+.register-content {
   position: relative;
-  > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  > div:first-child {
     margin: 16px;
     font-size: 18px;
     font-weight: bold;
@@ -9,7 +11,21 @@
     button{
       position: absolute;
       right: 0;
-      top: -10px;
+      top: 8px;
+    }
+  }
+  .form-content{
+    width: 300px;
+  }
+  formify-highlights{
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .register-content {
+    .form-content {
+      width: 100%;
     }
   }
 }
