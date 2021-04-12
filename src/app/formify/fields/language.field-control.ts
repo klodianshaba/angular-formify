@@ -5,10 +5,11 @@ export class LanguageFieldControl extends FieldModel {
     const  field: FieldModel = new FieldModel({
       controlName: 'language',
       fieldType : FieldTypes.select,
-      label: 'Choose your language',
+      label: 'Choose languages',
       placeholder: 'language',
       autoComplete: 'off',
       defaultValue: 'en',
+      multiple: true,
       options: [{text: 'Shqip', value: 'al'}, {text: 'English', value: 'en'}, {text: 'Italiano', value: 'it'}, {text: 'Espanol', value: 'es'} , {text: 'Francais', value: 'fr'}],
       validators: [
         new ValidatorModel({validator: Validators.required, errorCode: 'required', description: 'language is required'}),
