@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit , OnDestroy} from '@angular/core';
 import {ArrayModel, FieldModel, FormifyModel} from '../../formify/models';
 import {
   AppearanceFieldControl,
@@ -14,7 +14,7 @@ import {AddressGroupControl, ContactGroupControl, ExercisesGroupControl} from '.
   templateUrl: './membership.component.html',
   styleUrls: ['./membership.component.scss']
 })
-export class MembershipComponent implements OnInit {
+export class MembershipComponent implements OnInit , OnDestroy {
   public collapse: boolean = false;
   public formify: FormifyModel = new FormifyModel({
     controls: [
@@ -60,6 +60,10 @@ export class MembershipComponent implements OnInit {
   }
   ngOnInit(): void {
   }
+  ngOnDestroy(): void {
+    this.formify.unSubscribe();
+  }
+
   onSubmit(): void{
     this.formify.loading(true);
     setTimeout(() => {

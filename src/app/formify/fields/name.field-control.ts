@@ -3,9 +3,9 @@ import {Validators} from '@angular/forms';
 export class NameFieldControl extends FieldModel {
   constructor(overwrite: FieldState  = {}) {
     const  field: FieldModel =  new FieldModel({
-      controlName: 'name',
-      label: 'Enter your name',
-      placeholder: 'name',
+      controlName: 'firstName',
+      label: 'Enter first name',
+      placeholder: 'first name',
       autoComplete: 'off',
       validators: [
         new ValidatorModel({validator: Validators.required, errorCode: 'required', description: 'Name is required'}),

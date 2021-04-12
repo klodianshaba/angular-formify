@@ -12,15 +12,12 @@
       top: -10px;
     }
   }
-  .full-name-content {
+  .full-name{
     display: flex;
     justify-content: space-between;
 
     > * {
       width: calc(50% - 5px);
     }
-  }
-  .result{
-    text-align: left; display: flex;flex-wrap: wrap; overflow: hidden
   }
 }
