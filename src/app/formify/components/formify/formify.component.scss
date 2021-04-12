@@ -1,4 +1,4 @@
-
+@import "src/app/scss/mixins";
 form{
   position: relative;
   border-radius: 4px;
@@ -17,7 +17,7 @@ p{
     text-decoration: none;
   }
 }
-
 .loading-form{
+  @include disabled-content;
   opacity: 0.7;
 }
