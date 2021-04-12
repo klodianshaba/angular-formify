@@ -7,7 +7,7 @@ export enum Highlights {
 export type HighlightType = Highlights.membership | Highlights.register | Highlights.login;
 export class HighlightState {
   type: HighlightType;
-  highlights: {
+  items: {
     label: string;
     language: string;
     code: string;
@@ -19,20 +19,18 @@ export class HighlightState {
   styleUrls: ['./highlights.component.scss']
 })
 export class HighlightsComponent implements OnInit {
-  code = `export class HighlightsComponent implements OnInit {
-  @Input() highlight: HighlightType = Highlights.membership;
+  @Input('highlightType') set onHighlight(highlightType: HighlightType){
+    this.highlightType = highlightType;
+    this.initCurrentHighlight();
+  }
   @Input() collapse: boolean = true;
   @Input() json: object = {};
-  constructor() { }
-  ngOnInit(): void {}
-}`;
-  @Input() highlightType: HighlightType = Highlights.membership;
-  @Input() collapse: boolean = true;
-  @Input() json: object = {};
+  public highlight: HighlightState;
+  public highlightType: HighlightType =  Highlights.membership;
   public highlights: HighlightState[] = [
     {
       type: Highlights.membership,
-      highlights: [
+      items: [
         {
         label: 'HTML',
         language: 'html',
@@ -58,7 +56,7 @@ export class HighlightsComponent implements OnInit {
   public formify: FormifyModel = new FormifyModel({
     controls: [
       new NameFieldControl({}), // extends FieldModel
-      new FieldModel({controlName: 'lastName', label: ' Enter last name', placeholder: 'last name'}),
+      new FieldModel({controlName: 'lastName', label: 'Enter last name', placeholder: 'last name'}),
       new LanguageFieldControl({}), // extends FieldModel
       new BiographyFieldControl({}), // extends FieldModel
       new ColorFieldControl({}), // extends FieldModel
@@ -85,14 +83,66 @@ export class HighlightsComponent implements OnInit {
     },
     {
       type: Highlights.register,
-      highlights: []
+      items: [{
+        label: 'HTML',
+        language: 'html',
+        code: ` <formify [formify]="formify" (submit)="onSubmit()"></formify>`
+      },
+        {
+          label: 'TS',
+          language: 'ts',
+          code: `public formify = new FormifyModel({
+    controls: [
+      new NameFieldControl({ controlName: 'fullName' , label: 'Enter your full name'}), // extends FieldModel and overwrite
+      new EmailFieldControl(),
+      new ToggleFieldControl({ // extends FieldModel, overwrite by given optional FieldState
+        fieldType: FieldTypes.radio, label: 'Account Type', defaultValue: 'visitor',
+        controlName: 'accountType', options: [ {text: 'Business', value: 'business'},  {text: 'Visitor', value: 'visitor'}]
+      }),
+      new LanguageFieldControl(), // extends FieldModel
+      new PasswordFieldControl(), // extends FieldModel
+      new FieldModel({ // FieldModel
+        controlName: 'confirmPassword', icon: 'check', type: 'password', label: 'Confirm password', placeholder: 'password',
+        validators: [
+          new ValidatorModel( {validator: Validators.required , errorCode: 'required', description: 'Confirm password is required'} ),
+          new ValidatorModel( {validator: Validators.minLength(8), errorCode: 'minlength', description: 'Confirm password must have 8 characters'}),
+          {validator: null, errorCode: 'notMatch', description: 'Confirm password not match'},
+        ]
+      }),
+    ],
+    submit: {text: 'Register' , color: 'warn'}, // submit button
+    options: MatchConfirmPassword  // options: ValidatorFn | ValidatorFn[] | AbstractControlOptions
+ });`
+        }
+      ]
     },
     {
       type: Highlights.login,
-      highlights: []
+      items: [
+        {
+          label: 'HTML',
+          language: 'html',
+          code: ` <formify [formify]="formify" (submit)="onSubmit()"></formify>`
+        },
+        {
+          label: 'TS',
+          language: 'ts',
+          code: `public formify = new FormifyModel({
+    controls: [
+      new EmailFieldControl(), // extends FieldModel
+      new PasswordFieldControl(), // extends FieldModel
+    ],
+    submit: {text: 'Login'}
+});`
+        }
+      ]
     }
   ];
-  public get currentHighlight(): HighlightState{ return  this.highlights.find(highlight => highlight.type === this.highlightType); }
-  constructor() { }
-  ngOnInit(): void {}
+  public initCurrentHighlight(): void{
+    this.highlight = this.highlights.find(highlight => highlight.type === this.highlightType);
+  }
+  constructor() {}
+  ngOnInit(): void {
+    this.initCurrentHighlight();
+  }
 }

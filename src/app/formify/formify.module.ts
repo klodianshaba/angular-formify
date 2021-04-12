@@ -60,6 +60,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     ToggleComponent,
     RadioComponent,
     CheckboxComponent,
+    FormifyComponent,
   ],
 })
 export class FormifyModule { }

@@ -15,22 +15,22 @@ import {AddressGroupControl, ContactGroupControl, ExercisesGroupControl} from '.
   styleUrls: ['./membership.component.scss']
 })
 export class MembershipComponent implements OnInit , OnDestroy {
-  public collapse: boolean = false;
+  public collapse: boolean = true;
   public formify: FormifyModel = new FormifyModel({
     controls: [
       new NameFieldControl({}), // extends FieldModel
-      new FieldModel({controlName: 'lastName', label: ' Enter last name', placeholder: 'last name'}),
+      new FieldModel({controlName: 'lastName', label: 'Enter last name', placeholder: 'last name'}),
       new LanguageFieldControl({}), // extends FieldModel
       new BiographyFieldControl({}), // extends FieldModel
       new ColorFieldControl({}), // extends FieldModel
-      new AppearanceFieldControl(),
+      new AppearanceFieldControl({}),
       new ToggleFieldControl({controlName: 'toggleColor', label: 'Show/Hidden choose color radios'}), // extends FieldModel
       new ArrayModel({controlName: 'address', label: 'Address:', controls: [ // extends ArrayModel
-          new AddressGroupControl(), // extends GroupModel
+          new AddressGroupControl({}), // extends GroupModel
         ]}),
-      new ExercisesGroupControl(), // extends GroupModel
+      new ExercisesGroupControl({}), // extends GroupModel
       new ToggleFieldControl({controlName: 'toggleContact', label: 'Add/Remove fill contact group'}), // extends FieldModel
-      new ContactGroupControl(),
+      new ContactGroupControl({}),
     ],
     submit: {text: 'Save Membership'},
   });
@@ -63,7 +63,6 @@ export class MembershipComponent implements OnInit , OnDestroy {
   ngOnDestroy(): void {
     this.formify.unSubscribe();
   }
-
   onSubmit(): void{
     this.formify.loading(true);
     setTimeout(() => {

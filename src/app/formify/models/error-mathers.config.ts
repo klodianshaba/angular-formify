@@ -1,4 +1,4 @@
-import {FormControl, FormGroup, FormGroupDirective, NgForm, ValidationErrors, ValidatorFn} from '@angular/forms';
+import {AbstractControl, FormControl, FormGroup, FormGroupDirective, NgForm, ValidationErrors, ValidatorFn} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -8,18 +8,21 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   }
 }
 
-// export const MatchPassword: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
-//   const password = control.get('password');
-//   const confirmPassword = control.get('confirmPassword');
-//   if (password.value !== confirmPassword.value && confirmPassword.value) {
-//     confirmPassword.setErrors({notMatch: true});
-//   } else {
-//     if (confirmPassword.hasError('notMatch')) {
-//       delete  confirmPassword.errors['notMatch'];
-//       confirmPassword.updateValueAndValidity();
-//     }
-//   }
-// };
+export const MatchConfirmPassword: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+  const password = control.get('password');
+  const confirmPassword = control.get('confirmPassword');
+  if (password.value !== confirmPassword.value && confirmPassword.value) {
+    console.log('not match');
+    confirmPassword.setErrors({notMatch: true});
+  } else {
+    if (confirmPassword.hasError('notMatch')) {
+      delete confirmPassword.errors['notMatch'];
+      confirmPassword.updateValueAndValidity();
+      console.log('match');
+    }
+  }
+  return null;
+};
 
 export class MyErrorStatePasswordMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
