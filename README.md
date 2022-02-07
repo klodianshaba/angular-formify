@@ -2,7 +2,7 @@
 
 Angular library to generate forms dynamically by having the ability to customize, manipulate and scale it easy.
 
-##Quick Links
+## Quick Links
 
 [Demo](https://klodianshaba.github.io/angular-formify/)
 
@@ -47,7 +47,7 @@ this.formify.reset();
 this.formify.unSubscribe();
 ```
 
-##Control Models
+## Control Models
 
 Make it possible to configure and generate from controls as you need.
 Offers accessibility and manipulation.\
@@ -99,17 +99,17 @@ const AdressArrayModel = new ArrayModel({
 });
 ```
 
-##Control Components
+## Control Components
 
 Supporting ControlValueAccessor for using nested forms.\
 Getting control model and generating nested formGroup.\
 Offering functions for accessing datasource and validation errors.
 
-##Reusable Components
+## Reusable Components
 
 Input, Textarea, Select, Radio, Toggle and Checkbox that are extends from FieldControlComponent. So easy you can create another reusable component by extending one of Control Components
 
-##Creating Custom Components
+## Creating Custom Components
 
 ```Typescript
 export class CustomFieldComponent extends FieldControlComponent implements OnInit , OnChanges{
@@ -128,7 +128,7 @@ export class CustomGroupComponent extends GroupControlComponent implements OnIni
 }
 ```
 
-##Creating Custom Controls
+## Creating Custom Controls
 
 ```Typescript
 export class ColorFieldControl extends FieldModel {
@@ -158,7 +158,7 @@ export class ContactGroupControl extends GroupModel {
 }
 ```
 
-##Displaying in Template
+## Displaying in Template
 Support two ways to displaying the form in template.
 
 1. Using Formify component and passing FormifyModel.
@@ -188,7 +188,7 @@ Support two ways to displaying the form in template.
 </form>
 ```
 
-##Running Demo
+## Running Demo
 
 ```
 npm install
