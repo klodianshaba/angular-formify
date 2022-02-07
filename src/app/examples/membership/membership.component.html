@@ -1,8 +1,5 @@
 <div class="form-content">
-<div>
-  <span>Membership formify</span>
-  <button mat-icon-button (click)="onToggleCollapse()"> <mat-icon>code</mat-icon></button>
-</div>
+  <formify-header style="width: 100%" label="Membership Formify" (toggleCollapse)="collapse = $event"></formify-header>
   <formify-highlights [collapse]="collapse" [json]="formify.formGroup.value"></formify-highlights>
   <form [formGroup]="formify.formGroup" #form="ngForm" (ngSubmit)="onSubmit()" [ngClass]="{'loading-form': formify.submit.loading}">
     <div class="full-name">

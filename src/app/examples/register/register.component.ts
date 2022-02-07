@@ -32,7 +32,7 @@ export class RegisterComponent implements OnInit {
         ]
       }),
     ],
-    submit: {text: 'Register' , color: 'warn'}, // submit button
+    submit: {text: 'Register'}, // submit button
     options: MatchConfirmPassword  // options: ValidatorFn | ValidatorFn[] | AbstractControlOptions
   });
   constructor() { }

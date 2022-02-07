@@ -34,8 +34,8 @@ Accessibility and manipulation by calling functions and instance variables.
 
 ``` Typescript
 this.formify.field('color').update({hidden: false });
-this.formify.group('contact')
-this.formify.array('addresses')
+this.formify.group('contact');
+this.formify.array('addresses');
 this.formify.loading(true);
 this.formify.formGroup.get('color').valueChanges.subscribe(color => { // handle color change
   this.formify.updateFields({color});

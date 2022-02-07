@@ -1,0 +1,13 @@
+.form-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  #github-svg{
+    font-size: 30px;
+  }
+  .label{
+    font-size: 18px;
+    font-weight: bold;
+  }
+}
