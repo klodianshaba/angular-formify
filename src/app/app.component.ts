@@ -1,12 +1,12 @@
 import {Component} from '@angular/core';
-import {roll} from 'ngxa';
+import {zoomIn} from 'ngxa';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   animations: [
-    roll({direction: 'In'})
+    zoomIn({direction: 'Left', timings: '1000ms'}),
   ]
 })
 export class AppComponent {
